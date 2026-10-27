@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Radar Lucía</title>
+<style>
+  :root{
+    --bg:#f6f4f1; --card:#ffffff; --text:#1f1d1b; --muted:#6f6a64; --line:#e6e1da;
+    --accent:#c2410c; --accent-bg:#fdeee6; --ok:#15803d; --ok-bg:#e3f4e8;
+    --warn:#b45309; --warn-bg:#fdf0d8; --bad:#b91c1c; --bad-bg:#fbe4e4;
+    --t-cuentas:#1d4ed8; --t-cuentas-bg:#e3ebfd;
+    --t-eventos:#7e22ce; --t-eventos-bg:#f1e5fb;
+    --t-marketing:#0f766e; --t-marketing-bg:#dff3f0;
+    --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 14px rgba(0,0,0,.05);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#161412; --card:#201d1a; --text:#f0ece7; --muted:#a39d95; --line:#33302b;
+      --accent:#fb923c; --accent-bg:#3a2415; --ok:#4ade80; --ok-bg:#16301f;
+      --warn:#fbbf24; --warn-bg:#3a2d12; --bad:#f87171; --bad-bg:#3a1a1a;
+      --t-cuentas:#8ab4ff; --t-cuentas-bg:#1b2a4a;
+      --t-eventos:#d3a5f7; --t-eventos-bg:#2e1d44;
+      --t-marketing:#5fd3c6; --t-marketing-bg:#143733;
+      --shadow:none;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:1000px;margin:0 auto;padding:24px 16px 80px}
+  header.top{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-bottom:20px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .radar-mark{width:38px;height:38px;border-radius:50%;border:2px solid var(--accent);position:relative;flex:none;
+    background:radial-gradient(circle,var(--accent) 0 3px,transparent 4px),radial-gradient(circle,transparent 0 9px,var(--accent-bg) 10px 11px,transparent 12px)}
+  .radar-mark::after{content:"";position:absolute;left:50%;top:50%;width:46%;height:2px;background:var(--accent);transform-origin:0 50%;transform:rotate(-40deg)}
+  .eyebrow{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  h1{margin:0;font-size:24px;line-height:1.1}
+  .actions{display:flex;flex-wrap:wrap;gap:8px}
+  button,.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--text);padding:8px 14px;border-radius:10px}
+  button:hover{border-color:var(--accent)}
+  button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  button.small{padding:5px 10px;font-size:13px}
+  button.danger:hover{border-color:var(--bad);color:var(--bad)}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  input,select,textarea{font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px;width:100%}
+  textarea{resize:vertical;line-height:1.45}
+  label{display:block;font-size:13px;color:var(--muted);margin:12px 0 4px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow)}
+  .stat .n{display:block;font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
+  .stat .l{font-size:12px;color:var(--muted)}
+  .stat.hot .n{color:var(--accent)}
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .toolbar input{flex:1 1 220px;width:auto}
+  .toolbar select{width:auto}
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+  .tabs button{border-radius:999px;padding:5px 13px;font-size:13px}
+  .tabs button.active{background:var(--accent-bg);border-color:var(--accent);color:var(--accent);font-weight:600}
+  .lead{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px;box-shadow:var(--shadow);
+    display:grid;grid-template-columns:1fr auto;gap:10px 16px;align-items:center}
+  .lead h3{margin:0;font-size:16px}
+  .meta{font-size:13px;color:var(--muted);margin-top:2px;word-break:break-word}
+  .notes{font-size:13px;margin-top:6px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .chip{font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--bg);color:var(--muted)}
+  .chip.cuentas{background:var(--t-cuentas-bg);color:var(--t-cuentas)}
+  .chip.eventos{background:var(--t-eventos-bg);color:var(--t-eventos)}
+  .chip.marketing{background:var(--t-marketing-bg);color:var(--t-marketing)}
+  .chip.due{background:var(--warn-bg);color:var(--warn)}
+  .chip.ok{background:var(--ok-bg);color:var(--ok)}
+  .chip.bad{background:var(--bad-bg);color:var(--bad)}
+  .lead .btns{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+  .lead select{width:auto;padding:5px 8px;font-size:13px}
+  .views button{font-weight:600;padding:7px 18px}
+  .offbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+  .offbar input[type=search]{flex:1 1 200px;width:auto}
+  .offbar select{width:auto}
+  .offbar label.chk{display:flex;align-items:center;gap:6px;margin:0;font-size:13px;color:var(--text)}
+  .offbar label.chk input{width:auto}
+  .offmeta{font-size:12px;color:var(--muted);margin-bottom:12px}
+  .empty{text-align:center;color:var(--muted);padding:48px 16px}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:flex-start;justify-content:center;padding:24px 12px;overflow:auto;z-index:10}
+  .overlay[hidden]{display:none}
+  .modal{background:var(--card);border-radius:16px;max-width:640px;width:100%;padding:20px;border:1px solid var(--line)}
+  .modal h2{margin:0 0 4px;font-size:19px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .modal .foot{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin-top:18px}
+  .alert{border-radius:10px;padding:9px 12px;font-size:13px;margin-top:12px}
+  .alert.bad{background:var(--bad-bg);color:var(--bad)}
+  .alert.warn{background:var(--warn-bg);color:var(--warn)}
+  .alert.ok{background:var(--ok-bg);color:var(--ok)}
+  table.prev{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px}
+  table.prev td,table.prev th{border-bottom:1px solid var(--line);padding:4px 6px;text-align:left;word-break:break-word}
+  .hint{font-size:12px;color:var(--muted);margin-top:4px}
+  @media (max-width:640px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .row{grid-template-columns:1fr}
+    .lead{grid-template-columns:1fr}
+    .lead .btns{justify-content:flex-start}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="radar-mark" aria-hidden="true"></div>
+      <div>
+        <span class="eyebrow">Lucía Gómez · Búsqueda de empleo</span>
+        <h1>Radar Lucía</h1>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="btnSettings">Ajustes</button>
+      <button id="btnImport">Importar empresas</button>
+      <button id="btnSearch">Buscar en portales</button>
+      <button class="primary" id="btnNew">+ Añadir oferta o empresa</button>
+    </div>
+  </header>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="tabs views" id="views">
+    <button data-view="empresas" class="active">Mis empresas</button>
+    <button data-view="ofertas" id="btnViewOfertas">Ofertas</button>
+  </div>
+
+  <div id="viewEmpresas">
+    <div class="toolbar">
+      <input type="search" id="search" placeholder="Buscar por empresa, contacto o email…">
+      <select id="fTipo">
+        <option value="">Todos los puestos</option>
+        <option value="cuentas">Cuentas</option>
+        <option value="eventos">Eventos</option>
+        <option value="marketing">Marketing en empresa</option>
+      </select>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <div id="list"></div>
+  </div>
+
+  <div id="viewOfertas" hidden></div>
+</div>
+
+<div class="overlay" id="overlay" hidden><div class="modal" id="modal"></div></div>
+
+<script>
+(function(){
+  var LS_LEADS = 'radarLucia.leads.v1';
+  var LS_SET = 'radarLucia.settings.v1';
+
+  var ESTADOS = [
+    {key:'contacto', label:'Falta contacto'},
+    {key:'pendiente', label:'Pendiente'},
+    {key:'enviado', label:'Enviado'},
+    {key:'respondio', label:'Respondió'},
+    {key:'entrevista', label:'Entrevista'},
+    {key:'descartado', label:'Descartado'}
+  ];
+  var TIPOS = {cuentas:'Cuentas', eventos:'Eventos', marketing:'Marketing en empresa'};
+  var TPL_LABEL = {cuentas:'Cuentas', eventos:'Eventos', marketing:'Marketing en empresa', oferta:'Respuesta a una oferta', seguimiento:'Seguimiento'};
+  var TPL_KEYS = ['oferta','cuentas','eventos','marketing','seguimiento'];
+  var PRESETS = ['ejecutivo de cuentas junior','asistente de cuentas agencia publicidad','coordinador de eventos','producción de eventos','asistente de marketing','marketing junior','comunicación y marketing'];
+
+  var DEFAULT_SETTINGS = {
+    gmail:'', cv:'', telefono:'', diasSeguimiento:6,
+    tpl:{
+      cuentas:{
+        asunto:'Candidatura a cuentas junior · Lucía Gómez',
+        cuerpo:'{saludo}\n\nSoy Lucía Gómez, técnico superior en Marketing y Publicidad, y me gustaría incorporarme al área de cuentas de {empresa}.\n\nHe trabajado en el departamento de cuentas de 4foreverything, una agencia de marketing experiencial y eventos, donde empecé en prácticas y continué con contrato temporal. Allí coordiné eventos corporativos y la comunicación con proveedores, y gestioné pedidos de merchandising, incluida la negociación de márgenes con el equipo.\n\nAdemás estoy cursando un máster en IA aplicada a negocios, para automatizar tareas repetitivas y dedicar más tiempo al cliente.\n\n{cv_linea}\n\n¿Tendrías 15 minutos para una llamada esta semana o la próxima?\n\nUn saludo,\nLucía Gómez Barragán\n{telefono}'
+      },
+      eventos:{
+        asunto:'Coordinación de eventos · Lucía Gómez',
+        cuerpo:'{saludo}\n\nSoy Lucía Gómez, técnico superior en Marketing y Publicidad. Escribo a {empresa} porque me gustaría incorporarme al equipo de eventos.\n\nEn 4foreverything, agencia de marketing experiencial, coordiné eventos corporativos en Zaragoza y uno infantil en Gerona: montaje, briefing, ejecución y comunicación con proveedores. También he sido azafata en congresos y graduaciones, así que conozco el evento desde los dos lados.\n\n{cv_linea}\n\n¿Podríamos hablar unos minutos? Me adapto a vuestra disponibilidad.\n\nUn saludo,\nLucía Gómez Barragán\n{telefono}'
+      },
+      marketing:{
+        asunto:'Marketing junior · Lucía Gómez',
+        cuerpo:'{saludo}\n\nSoy Lucía Gómez, técnico superior en Marketing y Publicidad, y me gustaría colaborar con el equipo de marketing de {empresa}.\n\nMi trabajo final de grado fue un plan de marketing completo para una marca de moda (investigación comercial, DAFO y PESTEL, público objetivo, plan de medios y presupuesto), y en 4foreverything lo llevé a la práctica coordinando eventos y gestionando pedidos de merchandising. Manejo Canva, Photoshop e Illustrator, y estoy cursando un máster en IA aplicada a negocios.\n\n{cv_linea}\n\nSi hay hueco para una conversación corta, encantada.\n\nUn saludo,\nLucía Gómez Barragán\n{telefono}'
+      },
+      oferta:{
+        asunto:'Candidatura: {puesto} · Lucía Gómez',
+        cuerpo:'{saludo}\n\nMe llamo Lucía Gómez y he visto vuestra oferta de {puesto} en {portal}. Soy técnico superior en Marketing y Publicidad y creo que mi perfil encaja con lo que buscáis en {empresa}.\n\nHe trabajado en el departamento de cuentas de 4foreverything, una agencia de marketing experiencial y eventos, donde empecé en prácticas y continué con contrato temporal: coordiné eventos corporativos, la comunicación con proveedores y pedidos de merchandising. Además estoy cursando un máster en IA aplicada a negocios.\n\n{cv_linea}\n\nQuedo a vuestra disposición para una entrevista.\n\nUn saludo,\nLucía Gómez Barragán\n{telefono}'
+      },
+      seguimiento:{
+        asunto:'Seguimiento · Candidatura de Lucía Gómez',
+        cuerpo:'{saludo}\n\nTe escribí hace unos días sobre mi candidatura en {empresa} y quería asegurarme de que no se perdió entre tantos correos. Sigo muy interesada en el puesto.\n\n{cv_linea}\n\nGracias por tu tiempo.\n\nUn saludo,\nLucía Gómez Barragán\n{telefono}'
+      }
+    }
+  };
+
+  var leads = load(LS_LEADS, []);
+  var settings = mergeSettings(load(LS_SET, {}));
+  var tab = 'pendiente', q = '', fTipo = '';
+  var pendingImport = [];
+
+  // ofertas recogidas automáticamente (docs/offers.json) y lo que Lucía hizo con cada una
+  var LS_OFF = 'radarLucia.offers.v1';
+  var view = 'empresas', offers = [], offersMeta = null, offersErr = '';
+  var offState = load(LS_OFF, {});
+  var oF = {portal:'', q:'', soloEmail:false, ocultas:true, min:50};
+
+  var el = {
+    stats:document.getElementById('stats'), tabs:document.getElementById('tabs'),
+    list:document.getElementById('list'), overlay:document.getElementById('overlay'),
+    modal:document.getElementById('modal'), search:document.getElementById('search'),
+    fTipo:document.getElementById('fTipo')
+  };
+
+  function load(k, def){ try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : def; }catch(e){ return def; } }
+  function save(){
+    try{ localStorage.setItem(LS_LEADS, JSON.stringify(leads)); localStorage.setItem(LS_SET, JSON.stringify(settings)); }
+    catch(e){ alert('No se pudo guardar en este navegador. Exporta una copia de seguridad.'); }
+  }
+  function mergeSettings(s){
+    var out = JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
+    Object.keys(s||{}).forEach(function(k){
+      if(k==='tpl'){ Object.keys(s.tpl||{}).forEach(function(t){ if(out.tpl[t]) out.tpl[t] = Object.assign(out.tpl[t], s.tpl[t]); }); }
+      else out[k] = s[k];
+    });
+    return out;
+  }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+  function nowISO(){ return new Date().toISOString(); }
+  function daysSince(iso){ return iso ? Math.floor((Date.now()-new Date(iso).getTime())/86400000) : 0; }
+  function fmt(iso){ return iso ? new Date(iso).toLocaleDateString('es-ES',{day:'numeric',month:'short'}) : ''; }
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function followupDue(l){
+    return l.estado==='enviado' && !l.seguimiento_at && daysSince(l.enviado_at) >= Number(settings.diasSeguimiento||6);
+  }
+
+  // ---------- validación (evita emails con datos mal parseados) ----------
+  function problemasBase(l){
+    var p = [];
+    if(!l.empresa || l.empresa.trim().length<2 || /^[\d\s.,]+$/.test(l.empresa)) p.push('El nombre de la empresa no parece válido: "'+(l.empresa||'')+'".');
+    if(l.email && !EMAIL_RE.test(l.email)) p.push('El email no es válido: "'+l.email+'".');
+    if(l.contacto && /\d/.test(l.contacto)) p.push('El contacto lleva números, revisa que sea un nombre: "'+l.contacto+'".');
+    if(l.oferta_url && !/^https?:\/\//i.test(l.oferta_url)) p.push('El enlace de la oferta debe empezar por http:// o https://.');
+    return p;
+  }
+  function problemasEnvio(l){
+    var p = problemasBase(l);
+    if(!l.email) p.push('Falta el email de contacto.');
+    return p;
+  }
+
+  // ---------- ofertas y portales ----------
+  function detectPortal(url){
+    var h = ''; try{ h = new URL(url).hostname.replace(/^www\./,''); }catch(e){ return ''; }
+    if(/linkedin\./.test(h)) return 'LinkedIn';
+    if(/infojobs\./.test(h)) return 'InfoJobs';
+    if(/indeed\./.test(h)) return 'Indeed';
+    if(/google\./.test(h)) return 'Google Empleo';
+    if(/jobtoday|tecnoempleo|glassdoor|jooble|trabajos\.com/.test(h)) return h.split('.')[0].replace(/^./,function(c){return c.toUpperCase();});
+    return h;
+  }
+  function guessTipo(puesto){
+    var s = String(puesto||'').toLowerCase();
+    if(/event|producci|congres|azafat/.test(s)) return 'eventos';
+    if(/marketing|comunic|social|content|contenido|brand|publicid/.test(s)) return 'marketing';
+    return 'cuentas';
+  }
+  function portalUrl(p, kw, loc){
+    var k = encodeURIComponent(kw), l = encodeURIComponent(loc);
+    if(p==='linkedin') return 'https://www.linkedin.com/jobs/search/?keywords='+k+'&location='+l+'&f_TPR=r604800';
+    if(p==='infojobs') return 'https://www.infojobs.net/jobsearch/search-results/list.xhtml?keyword='+k+(/madrid/i.test(loc)?'&provinceIds=33':'')+'&sinceDate=_7_DAYS';
+    if(p==='indeed') return 'https://es.indeed.com/jobs?q='+k+'&l='+l+'&fromage=7';
+    return 'https://www.google.com/search?q='+encodeURIComponent(kw+' empleo '+loc)+'&ibp=htl;jobs';
+  }
+  function fromCapture(d){
+    var portal = detectPortal(d.url), titulo = String(d.titulo||'').replace(/^\(\d+\)\s*/,'').trim();
+    var puesto = String(d.h1||'').trim(), empresa = String(d.sel||'').trim();
+    if(portal==='LinkedIn' && titulo){
+      var pr = titulo.split(' | ');
+      if(pr.length>=3){ puesto = puesto || pr[0].trim(); empresa = empresa || pr[1].trim(); }
+    }
+    if(!puesto) puesto = titulo;
+    return {oferta_url:d.url, portal:portal, puesto_oferta:puesto.slice(0,140), empresa:empresa.slice(0,100), tipo:guessTipo(puesto)};
+  }
+  function bookmarkletCode(){
+    var base = location.href.split('#')[0];
+    var js = "(function(){var h=document.querySelector('h1');var d={url:location.href,titulo:document.title,h1:h?h.innerText:'',sel:String(getSelection()).trim()};window.open("+JSON.stringify(base)+"+'#add='+encodeURIComponent(JSON.stringify(d)));})();";
+    return 'javascript:'+js;
+  }
+  function contactLinks(l){
+    var e = encodeURIComponent(l.empresa);
+    var out = '<a class="btn small" target="_blank" rel="noopener" href="https://www.linkedin.com/search/results/people/?keywords='+e+'%20recursos%20humanos">Personas en LinkedIn</a>'+
+      '<a class="btn small" target="_blank" rel="noopener" href="https://www.google.com/search?q='+encodeURIComponent('"'+l.empresa+'" selección recursos humanos email contacto')+'">Email en Google</a>';
+    if(l.web) out += '<a class="btn small" target="_blank" rel="noopener" href="'+esc(/^https?:/i.test(l.web)?l.web:'https://'+l.web)+'">Su web</a>';
+    return out;
+  }
+  function saludo(l){
+    var nombre = (l.contacto||'').trim().split(/\s+/)[0];
+    return nombre ? 'Hola '+nombre+',' : 'Hola, equipo de '+l.empresa.trim()+',';
+  }
+  function render_tpl(txt, l){
+    var cvLinea = settings.cv ? 'Te dejo mi CV aquí: '+settings.cv : 'Te adjunto mi CV.';
+    return txt.replace(/\{saludo\}/g, saludo(l)).replace(/\{empresa\}/g, l.empresa.trim())
+      .replace(/\{puesto\}/g, (l.puesto_oferta||'').trim() || 'este puesto')
+      .replace(/\{portal\}/g, l.portal || 'vuestra web')
+      .replace(/\{cv_linea\}/g, cvLinea).replace(/\{telefono\}/g, settings.telefono||'').replace(/\s+$/, '');
+  }
+
+  // ---------- render ----------
+  function render(){ renderStats(); renderTabs(); renderList(); if(view==='ofertas') renderOfList(); updateOffBadge(); }
+
+  // ---------- ofertas automáticas ----------
+  function saveOff(){ try{ localStorage.setItem(LS_OFF, JSON.stringify(offState)); }catch(e){} }
+  function isLeadUrl(url){ return leads.some(function(l){return l.oferta_url===url;}); }
+
+  function loadOffers(){
+    return fetch('offers.json', {cache:'no-cache'})
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(function(d){ offers = d.offers || []; offersMeta = d; offersErr = ''; })
+      .catch(function(){
+        offers = [];
+        offersErr = location.protocol==='file:'
+          ? 'Las ofertas se leen desde la web publicada; abierta como archivo local no se pueden cargar.'
+          : 'No se pudo cargar la lista de ofertas.';
+      })
+      .then(function(){ if(view==='ofertas') renderOfList(); updateOffBadge(); });
+  }
+
+  function offerList(){
+    var s = oF.q.trim().toLowerCase();
+    return offers.filter(function(o){
+      if(oF.ocultas && (offState[o.id] || isLeadUrl(o.url))) return false;
+      if(oF.portal && o.portal!==oF.portal) return false;
+      if(oF.soloEmail && !(o.emails && o.emails.length)) return false;
+      if(o.encaje < oF.min) return false;
+      if(!s) return true;
+      return [o.puesto,o.empresa,o.ciudad].join(' ').toLowerCase().indexOf(s)!==-1;
+    });
+  }
+
+  function updateOffBadge(){
+    var n = offers.filter(function(o){ return !offState[o.id] && !isLeadUrl(o.url) && o.encaje>=50; }).length;
+    document.getElementById('btnViewOfertas').textContent = 'Ofertas' + (n ? ' · '+n : '');
+  }
+
+  function setView(v){
+    view = v;
+    document.getElementById('viewEmpresas').hidden = v!=='empresas';
+    document.getElementById('viewOfertas').hidden = v!=='ofertas';
+    Array.prototype.forEach.call(document.querySelectorAll('#views button'), function(b){ b.classList.toggle('active', b.dataset.view===v); });
+    if(v==='ofertas') renderOfertas();
+  }
+
+  function renderOfertas(){
+    var v = document.getElementById('viewOfertas');
+    if(!v.dataset.ready){
+      v.innerHTML = '<div class="offbar">'+
+        '<input type="search" id="o_q" placeholder="Buscar puesto o empresa…">'+
+        '<select id="o_portal"><option value="">Todos los portales</option><option>InfoJobs</option><option>Indeed</option><option>LinkedIn</option></select>'+
+        '<select id="o_min"><option value="0">Cualquier encaje</option><option value="50" selected>Encaje medio o más</option><option value="70">Encaje alto</option></select>'+
+        '<label class="chk"><input type="checkbox" id="o_email"> Solo con email</label>'+
+        '<label class="chk"><input type="checkbox" id="o_hide" checked> Ocultar ya vistas</label></div>'+
+        '<div class="offmeta" id="o_meta"></div><div id="offList"></div>';
+      v.dataset.ready = '1';
+    }
+    renderOfList();
+  }
+
+  function renderOfList(){
+    var box = document.getElementById('offList'), meta = document.getElementById('o_meta');
+    if(!box) return;
+    if(offersErr){ box.innerHTML = '<div class="empty">'+esc(offersErr)+'</div>'; meta.textContent = ''; return; }
+    if(!offers.length){
+      box.innerHTML = '<div class="empty"><strong>Todavía no hay ofertas recogidas.</strong><br>Se actualizan solas cada lunes, o lanzando «Recoger ofertas» en GitHub Actions.</div>';
+      meta.textContent = ''; return;
+    }
+    var list = offerList();
+    var conMail = list.filter(function(o){ return o.emails && o.emails.length; });
+    meta.innerHTML = 'Actualizadas el '+fmt(offersMeta.updated)+' · '+list.length+' ofertas visibles'+
+      (conMail.length ? ' · <button class="small" data-act="offSaveMail">Guardar las '+conMail.length+' que traen email</button>' : '');
+    box.innerHTML = list.length ? list.slice(0,150).map(offerCard).join('') : '<div class="empty">Ninguna oferta con estos filtros.</div>';
+  }
+
+  function offerCard(o){
+    var href = /^https?:\/\//i.test(o.url) ? o.url : '#';
+    var chips = '<span class="chip '+esc(o.tipo)+'">'+esc(TIPOS[o.tipo]||o.tipo)+'</span><span class="chip">'+esc(o.portal)+'</span>'+
+      '<span class="chip '+(o.encaje>=70?'ok':'')+'">Encaje '+esc(o.encaje)+'</span>';
+    if(o.emails && o.emails.length) chips += '<span class="chip ok">Email en la oferta</span>';
+    if(o.salario) chips += '<span class="chip">'+esc(o.salario)+'</span>';
+    if(o.modalidad) chips += '<span class="chip">'+esc(o.modalidad)+'</span>';
+    var meta = [o.empresa, o.ciudad, o.fecha ? fmt(o.fecha) : ''].filter(Boolean).join(' · ');
+    var res = o.resumen || '';
+    return '<div class="lead"><div><h3>'+esc(o.puesto)+'</h3><div class="meta">'+esc(meta)+'</div>'+
+      (res ? '<div class="notes">'+esc(res.slice(0,180))+(res.length>180?'…':'')+'</div>' : '')+
+      '<div class="chips">'+chips+'</div></div>'+
+      '<div class="btns"><a class="btn small" href="'+esc(href)+'" target="_blank" rel="noopener">Ver oferta</a>'+
+      '<button class="small primary" data-act="offSave" data-id="'+esc(o.id)+'">Guardar</button>'+
+      '<button class="small" data-act="offHide" data-id="'+esc(o.id)+'">Descartar</button></div></div>';
+  }
+
+  // devuelve 'ok', 'dup' (mismo email que otra empresa) o 'bad' (datos no válidos)
+  function saveOffer(o){
+    if(isLeadUrl(o.url)){ offState[o.id] = 'guardada'; return 'ok'; }
+    var email = (o.emails && o.emails[0]) || '';
+    var l = {id:uid(), estado:email?'pendiente':'contacto', created_at:nowISO(), empresa:o.empresa, contacto:'', cargo:'',
+      email:email, tipo:o.tipo, web:o.web||'', fuente:'Ofertas', notas:'', oferta_url:o.url, puesto_oferta:o.puesto, portal:o.portal};
+    if(problemasBase(l).length) return 'bad';
+    if(email && leads.some(function(x){ return x.email===email; })) return 'dup';
+    leads.unshift(l); offState[o.id] = 'guardada';
+    return 'ok';
+  }
+  function offerById(id){ return offers.filter(function(o){return o.id===id;})[0]; }
+
+  function renderStats(){
+    var enviados = leads.filter(function(l){return l.enviado_at;}).length;
+    var resp = leads.filter(function(l){return l.estado==='respondio'||l.estado==='entrevista';}).length;
+    var ent = leads.filter(function(l){return l.estado==='entrevista';}).length;
+    var due = leads.filter(followupDue).length;
+    el.stats.innerHTML =
+      '<div class="stat"><span class="n">'+enviados+'</span><span class="l">Enviados</span></div>'+
+      '<div class="stat"><span class="n">'+resp+'</span><span class="l">Respuestas</span></div>'+
+      '<div class="stat"><span class="n">'+ent+'</span><span class="l">Entrevistas</span></div>'+
+      '<div class="stat '+(due?'hot':'')+'"><span class="n">'+due+'</span><span class="l">Seguimientos por enviar</span></div>';
+  }
+
+  function renderTabs(){
+    el.tabs.innerHTML = ESTADOS.map(function(e){
+      var n = leads.filter(function(l){return l.estado===e.key;}).length;
+      return '<button data-tab="'+e.key+'" class="'+(tab===e.key?'active':'')+'">'+e.label+' · '+n+'</button>';
+    }).join('');
+  }
+
+  function visible(){
+    var s = q.trim().toLowerCase();
+    return leads.filter(function(l){
+      if(l.estado!==tab) return false;
+      if(fTipo && l.tipo!==fTipo) return false;
+      if(!s) return true;
+      return [l.empresa,l.contacto,l.email,l.cargo,l.puesto_oferta].join(' ').toLowerCase().indexOf(s)!==-1;
+    }).sort(function(a,b){
+      return (followupDue(b)?1:0)-(followupDue(a)?1:0) || String(b.created_at).localeCompare(String(a.created_at));
+    });
+  }
+
+  function renderList(){
+    if(!leads.length){
+      el.list.innerHTML = '<div class="empty"><strong>Todavía no hay empresas.</strong><br>Añade la primera a mano o impórtalas pegando una lista.</div>';
+      return;
+    }
+    var list = visible();
+    if(!list.length){ el.list.innerHTML = '<div class="empty">No hay empresas en este estado.</div>'; return; }
+    el.list.innerHTML = list.map(cardHtml).join('');
+  }
+
+  function cardHtml(l){
+    var chips = '<span class="chip '+esc(l.tipo)+'">'+esc(TIPOS[l.tipo]||l.tipo)+'</span>';
+    if(l.enviado_at) chips += '<span class="chip">Enviado '+fmt(l.enviado_at)+'</span>';
+    if(l.seguimiento_at) chips += '<span class="chip ok">Seguimiento '+fmt(l.seguimiento_at)+'</span>';
+    if(followupDue(l)) chips += '<span class="chip due">Toca seguimiento ('+daysSince(l.enviado_at)+' días)</span>';
+    if(l.portal) chips += '<span class="chip">'+esc(l.portal)+'</span>';
+    if(l.fuente) chips += '<span class="chip">'+esc(l.fuente)+'</span>';
+    var quien = [l.contacto,l.cargo].filter(Boolean).join(' · ');
+    var oferta = '';
+    if(l.oferta_url || l.puesto_oferta){
+      oferta = '<div class="notes"><strong>Oferta:</strong> '+(l.oferta_url?'<a href="'+esc(l.oferta_url)+'" target="_blank" rel="noopener">'+esc(l.puesto_oferta||'ver oferta')+'</a>':esc(l.puesto_oferta))+'</div>';
+    }
+    var main = '';
+    if(l.estado==='contacto') main = contactLinks(l)+'<button class="small primary" data-act="edit" data-id="'+l.id+'">Añadir email</button>';
+    else if(l.estado==='pendiente') main = '<button class="small primary" data-act="mail" data-id="'+l.id+'">Redactar email</button>';
+    else if(followupDue(l)) main = '<button class="small primary" data-act="follow" data-id="'+l.id+'">Seguimiento</button>';
+    var opts = ESTADOS.map(function(e){return '<option value="'+e.key+'"'+(e.key===l.estado?' selected':'')+'>'+e.label+'</option>';}).join('');
+    return '<div class="lead"><div>'+
+      '<h3>'+esc(l.empresa)+'</h3>'+
+      '<div class="meta">'+esc(quien||'Sin contacto')+' · '+esc(l.email||'sin email')+(l.web?' · <a href="'+esc(/^https?:/i.test(l.web)?l.web:'https://'+l.web)+'" target="_blank" rel="noopener">web</a>':'')+'</div>'+
+      oferta+
+      (l.notas?'<div class="notes">'+esc(l.notas)+'</div>':'')+
+      '<div class="chips">'+chips+'</div></div>'+
+      '<div class="btns">'+main+
+      '<select data-act="estado" data-id="'+l.id+'" aria-label="Estado">'+opts+'</select>'+
+      '<button class="small" data-act="edit" data-id="'+l.id+'">Editar</button>'+
+      '<button class="small danger" data-act="del" data-id="'+l.id+'">Borrar</button></div></div>';
+  }
+
+  // ---------- modales ----------
+  function openModal(html){ el.modal.innerHTML = html; el.overlay.hidden = false; }
+  function closeModal(){ el.overlay.hidden = true; el.modal.innerHTML = ''; }
+  function byId(id){ return leads.filter(function(l){return l.id===id;})[0]; }
+  function $(id){ return document.getElementById(id); }
+
+  function leadForm(l){
+    l = l || {tipo:'cuentas'};
+    var tipos = Object.keys(TIPOS).map(function(k){return '<option value="'+k+'"'+(l.tipo===k?' selected':'')+'>'+TIPOS[k]+'</option>';}).join('');
+    openModal('<h2>'+(l.id?'Editar':'Añadir oferta o empresa')+'</h2>'+
+      '<div class="row"><div><label>Enlace de la oferta (LinkedIn, InfoJobs…)</label><input id="f_url" placeholder="https://" value="'+esc(l.oferta_url)+'"></div>'+
+      '<div><label>Puesto de la oferta</label><input id="f_puesto" value="'+esc(l.puesto_oferta)+'"></div></div>'+
+      '<label>Empresa</label><input id="f_empresa" value="'+esc(l.empresa)+'">'+
+      '<div class="row"><div><label>Contacto (nombre)</label><input id="f_contacto" value="'+esc(l.contacto)+'"></div>'+
+      '<div><label>Cargo</label><input id="f_cargo" value="'+esc(l.cargo)+'"></div></div>'+
+      '<div class="row"><div><label>Email</label><input id="f_email" type="email" value="'+esc(l.email)+'"></div>'+
+      '<div><label>Puesto al que aplica</label><select id="f_tipo">'+tipos+'</select></div></div>'+
+      '<div class="row"><div><label>Web</label><input id="f_web" value="'+esc(l.web)+'"></div>'+
+      '<div><label>Fuente</label><input id="f_fuente" placeholder="LinkedIn, oferta, contacto…" value="'+esc(l.fuente)+'"></div></div>'+
+      '<label>Notas</label><textarea id="f_notas" rows="3">'+esc(l.notas)+'</textarea>'+
+      '<div class="hint">Sin email, la empresa queda en «Falta contacto» con atajos para encontrar a la persona de RRHH.</div>'+
+      '<div id="f_err"></div>'+
+      '<div class="foot"><button data-act="close">Cancelar</button><button class="primary" data-act="saveLead" data-id="'+esc(l.id||'')+'">Guardar</button></div>');
+  }
+
+  function saveLead(id){
+    var data = {
+      empresa:$('f_empresa').value.trim(), contacto:$('f_contacto').value.trim(), cargo:$('f_cargo').value.trim(),
+      email:$('f_email').value.trim().toLowerCase(), tipo:$('f_tipo').value, web:$('f_web').value.trim(),
+      fuente:$('f_fuente').value.trim(), notas:$('f_notas').value.trim(),
+      oferta_url:$('f_url').value.trim(), puesto_oferta:$('f_puesto').value.trim()
+    };
+    data.portal = detectPortal(data.oferta_url);
+    var p = problemasBase(data);
+    if(p.length){ $('f_err').innerHTML = '<div class="alert bad">'+p.map(esc).join('<br>')+'</div>'; return; }
+    var dup = data.email ? leads.filter(function(l){return l.email===data.email && l.id!==id;})[0] : null;
+    if(dup){ $('f_err').innerHTML = '<div class="alert bad">Ya existe una empresa con ese email: '+esc(dup.empresa)+'.</div>'; return; }
+    var dupUrl = data.oferta_url ? leads.filter(function(l){return l.oferta_url===data.oferta_url && l.id!==id;})[0] : null;
+    if(dupUrl){ $('f_err').innerHTML = '<div class="alert bad">Esta oferta ya está guardada ('+esc(dupUrl.empresa)+').</div>'; return; }
+    if(id){
+      var cur = byId(id); Object.assign(cur, data);
+      if(cur.estado==='contacto' && data.email) cur.estado = 'pendiente';
+      else if(cur.estado==='pendiente' && !data.email) cur.estado = 'contacto';
+      tab = cur.estado;
+    } else {
+      var estado = data.email ? 'pendiente' : 'contacto';
+      leads.unshift(Object.assign({id:uid(), estado:estado, created_at:nowISO()}, data)); tab = estado;
+    }
+    save(); closeModal(); render();
+  }
+
+  function composeModal(l, esSeguimiento){
+    var p = problemasEnvio(l);
+    if(p.length){
+      openModal('<h2>No se puede redactar</h2><div class="alert bad">'+p.map(esc).join('<br>')+'</div>'+
+        '<div class="foot"><button data-act="close">Cerrar</button><button class="primary" data-act="edit" data-id="'+l.id+'">Corregir datos</button></div>');
+      return;
+    }
+    var t = settings.tpl[esSeguimiento ? 'seguimiento' : ((l.oferta_url || l.puesto_oferta) ? 'oferta' : l.tipo)];
+    var warn = '';
+    if(!settings.gmail) warn += '<div class="alert warn">Falta el Gmail de Lucía en Ajustes: Gmail podría abrirse con otra cuenta.</div>';
+    if(!settings.cv) warn += '<div class="alert warn">No hay enlace al CV en Ajustes. El email dirá "Te adjunto mi CV": acuérdate de adjuntar el PDF.</div>';
+    if(!settings.telefono) warn += '<div class="alert warn">Falta el teléfono en Ajustes: la firma saldrá sin él.</div>';
+    if(!esSeguimiento && l.enviado_at) warn += '<div class="alert warn">Ya se envió un email a esta empresa el '+fmt(l.enviado_at)+'.</div>';
+    openModal('<h2>'+(esSeguimiento?'Seguimiento a ':'Email para ')+esc(l.empresa)+'</h2>'+
+      '<div class="hint">Revisa el texto antes de enviar. Se abre en Gmail como borrador y lo envías tú.</div>'+warn+
+      '<label>Para</label><input id="c_to" value="'+esc(l.email)+'" readonly>'+
+      '<label>Asunto</label><input id="c_asunto" value="'+esc(render_tpl(t.asunto,l))+'">'+
+      '<label>Mensaje</label><textarea id="c_cuerpo" rows="16">'+esc(render_tpl(t.cuerpo,l))+'</textarea>'+
+      '<div id="c_after"></div>'+
+      '<div class="foot"><button data-act="close">Cerrar</button><button data-act="copy">Copiar texto</button>'+
+      '<button class="primary" data-act="gmail" data-id="'+l.id+'" data-seg="'+(esSeguimiento?1:0)+'">Abrir en Gmail</button></div>');
+  }
+
+  function gmailUrl(l){
+    var u = 'https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(l.email)+
+      '&su='+encodeURIComponent($('c_asunto').value)+'&body='+encodeURIComponent($('c_cuerpo').value);
+    if(settings.gmail) u += '&authuser='+encodeURIComponent(settings.gmail);
+    return u;
+  }
+
+  function settingsModal(){
+    var tpls = TPL_KEYS.map(function(k){
+      return '<label>Plantilla: '+TPL_LABEL[k]+' — asunto</label><input id="s_'+k+'_a" value="'+esc(settings.tpl[k].asunto)+'">'+
+        '<label>Mensaje</label><textarea id="s_'+k+'_c" rows="9">'+esc(settings.tpl[k].cuerpo)+'</textarea>';
+    }).join('');
+    openModal('<h2>Ajustes</h2>'+
+      '<label>Gmail de Lucía</label><input id="s_gmail" type="email" value="'+esc(settings.gmail)+'">'+
+      '<label>Enlace al CV (Drive, público con enlace)</label><input id="s_cv" value="'+esc(settings.cv)+'">'+
+      '<div class="row"><div><label>Teléfono en la firma</label><input id="s_tel" value="'+esc(settings.telefono)+'"></div>'+
+      '<div><label>Días hasta el seguimiento</label><input id="s_dias" type="number" min="2" max="30" value="'+esc(settings.diasSeguimiento)+'"></div></div>'+
+      '<label>Marcador para capturar ofertas</label>'+
+      '<div class="hint" id="s_bm_hint"></div>'+
+      '<div style="margin-top:8px"><a id="s_bm" class="btn small" style="display:inline-block;text-decoration:none;color:var(--accent);border-color:var(--accent)" draggable="true">+ Añadir a Radar Lucía</a></div>'+
+      '<div class="hint" style="margin-top:14px">Variables de las plantillas: {saludo} {empresa} {puesto} {portal} {cv_linea} {telefono}</div>'+tpls+
+      '<div class="foot"><button data-act="export">Exportar copia</button><button data-act="importJson">Restaurar copia</button>'+
+      '<button data-act="close">Cancelar</button><button class="primary" data-act="saveSettings">Guardar</button></div>'+
+      '<input type="file" id="s_file" accept=".json" hidden>');
+    $('s_bm').setAttribute('href', bookmarkletCode());
+    $('s_bm_hint').textContent = location.protocol==='file:'
+      ? 'Arrastra el botón a la barra de marcadores; en una oferta, púlsalo y se añade aquí. OJO: solo funciona si esta app está publicada en una web; abierta como archivo local, los navegadores lo bloquean. Mientras tanto, pega el enlace de la oferta en «Añadir oferta».'
+      : 'Arrastra el botón a la barra de marcadores. En una oferta de LinkedIn, InfoJobs, etc., púlsalo y se abre esta app con la oferta rellenada. Si seleccionas antes el nombre de la empresa, también lo recoge.';
+  }
+
+  function saveSettings(){
+    settings.gmail = $('s_gmail').value.trim();
+    settings.cv = $('s_cv').value.trim();
+    settings.telefono = $('s_tel').value.trim();
+    settings.diasSeguimiento = Math.max(2, Number($('s_dias').value)||6);
+    TPL_KEYS.forEach(function(k){
+      settings.tpl[k] = {asunto:$('s_'+k+'_a').value, cuerpo:$('s_'+k+'_c').value};
+    });
+    save(); closeModal(); render();
+  }
+
+  function importModal(msg){
+    var prev = '';
+    if(pendingImport.length){
+      prev = '<div class="alert ok">'+pendingImport.length+' empresas válidas. Revisa las primeras antes de importar:</div>'+
+        '<table class="prev"><tr><th>Empresa</th><th>Contacto</th><th>Email</th><th>Puesto</th></tr>'+
+        pendingImport.slice(0,5).map(function(r){return '<tr><td>'+esc(r.empresa)+'</td><td>'+esc(r.contacto)+'</td><td>'+esc(r.email)+'</td><td>'+esc(TIPOS[r.tipo])+'</td></tr>';}).join('')+'</table>';
+    }
+    openModal('<h2>Importar empresas</h2>'+
+      '<div class="hint">Pega filas con columnas: empresa; contacto; cargo; email; puesto (cuentas, eventos o marketing); web. Vale separar con tabulador, ; o coma. Puedes copiarlas desde Excel.</div>'+
+      '<textarea id="i_text" rows="9" placeholder="Agencia X; Ana López; Directora de cuentas; ana@agenciax.com; cuentas; agenciax.com"></textarea>'+
+      (msg?'<div class="alert bad">'+msg+'</div>':'')+prev+
+      '<div class="foot"><button data-act="close">Cancelar</button><button data-act="parse">Revisar</button>'+
+      '<button class="primary" data-act="doImport"'+(pendingImport.length?'':' disabled')+'>Importar</button></div>');
+  }
+
+  function parseImport(){
+    var txt = $('i_text').value.trim(), rows = [], bad = [];
+    pendingImport = [];
+    if(!txt){ importModal('Pega al menos una fila.'); return; }
+    txt.split(/\r?\n/).forEach(function(line, i){
+      if(!line.trim()) return;
+      var d = line.indexOf('\t')>-1 ? '\t' : (line.indexOf(';')>-1 ? ';' : ',');
+      var c = line.split(d).map(function(x){return x.trim();});
+      if(i===0 && /^empresa$/i.test(c[0])) return;
+      var tipo = (c[4]||'').toLowerCase(); if(!TIPOS[tipo]) tipo = 'cuentas';
+      var r = {empresa:c[0]||'', contacto:c[1]||'', cargo:c[2]||'', email:(c[3]||'').toLowerCase(), tipo:tipo, web:c[5]||''};
+      var p = problemasEnvio(r);
+      if(p.length) bad.push('Fila '+(i+1)+': '+p[0]); else rows.push(r);
+    });
+    var seen = {}; leads.forEach(function(l){seen[l.email]=1;});
+    pendingImport = rows.filter(function(r){ if(seen[r.email]) return false; seen[r.email]=1; return true; });
+    var skipped = rows.length - pendingImport.length;
+    var msg = '';
+    if(bad.length) msg += 'Filas descartadas:<br>'+bad.slice(0,6).map(esc).join('<br>');
+    if(skipped) msg += (msg?'<br>':'')+skipped+' repetidas (mismo email).';
+    importModal(msg);
+    if(pendingImport.length===0 && !msg) importModal('No se encontró ninguna fila válida.');
+  }
+
+  function doImport(){
+    pendingImport.forEach(function(r){ leads.unshift(Object.assign({id:uid(), estado:'pendiente', created_at:nowISO(), fuente:'Importación'}, r)); });
+    pendingImport = []; tab = 'pendiente'; save(); closeModal(); render();
+  }
+
+  function searchModal(){
+    var opts = PRESETS.map(function(p){return '<option>'+esc(p)+'</option>';}).join('');
+    openModal('<h2>Buscar ofertas</h2>'+
+      '<div class="hint">Abre la búsqueda en cada portal, en pestaña nueva y con las ofertas de la última semana. Cuando veas una buena, vuelve y pulsa «Añadir oferta» (o usa el marcador de Ajustes).</div>'+
+      '<label>Puesto</label><select id="q_pre">'+opts+'</select>'+
+      '<label>O escribe otro</label><input id="q_custom" placeholder="p. ej. coordinadora de producción">'+
+      '<label>Ubicación</label><input id="q_loc" value="Madrid">'+
+      '<div class="row" style="margin-top:16px">'+
+      '<button class="primary" data-act="portal" data-p="linkedin">LinkedIn</button>'+
+      '<button class="primary" data-act="portal" data-p="infojobs">InfoJobs</button>'+
+      '<button class="primary" data-act="portal" data-p="indeed">Indeed</button>'+
+      '<button class="primary" data-act="portal" data-p="google">Google Empleo</button></div>'+
+      '<div class="foot"><button data-act="close">Cerrar</button></div>');
+  }
+
+  function download(name, text){
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text],{type:'application/json'}));
+    a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  // ---------- eventos ----------
+  document.getElementById('btnNew').onclick = function(){ leadForm(); };
+  document.getElementById('btnSettings').onclick = settingsModal;
+  document.getElementById('btnImport').onclick = function(){ pendingImport = []; importModal(); };
+  document.getElementById('btnSearch').onclick = searchModal;
+  el.search.oninput = function(){ q = el.search.value; renderList(); };
+  el.fTipo.onchange = function(){ fTipo = el.fTipo.value; renderList(); };
+  el.overlay.addEventListener('mousedown', function(e){ if(e.target===el.overlay) closeModal(); });
+
+  el.tabs.addEventListener('click', function(e){
+    var b = e.target.closest('[data-tab]'); if(!b) return;
+    tab = b.dataset.tab; render();
+  });
+
+  el.list.addEventListener('change', function(e){
+    if(e.target.dataset.act!=='estado') return;
+    var l = byId(e.target.dataset.id); if(!l) return;
+    l.estado = e.target.value;
+    if(l.estado==='pendiente'){ l.enviado_at = null; l.seguimiento_at = null; }
+    save(); render();
+  });
+
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-act]'); if(!b || b.tagName==='SELECT') return;
+    var act = b.dataset.act, id = b.dataset.id, l = id ? byId(id) : null;
+    if(act==='close') closeModal();
+    else if(act==='edit' && l) leadForm(l);
+    else if(act==='del' && l){
+      if(confirm('¿Borrar '+l.empresa+'?')){
+        leads = leads.filter(function(x){return x.id!==id;});
+        offers.forEach(function(x){ if(x.url===l.oferta_url) delete offState[x.id]; });
+        save(); saveOff(); render();
+      }
+    }
+    else if(act==='mail' && l) composeModal(l, false);
+    else if(act==='follow' && l) composeModal(l, true);
+    else if(act==='saveLead') saveLead(id);
+    else if(act==='saveSettings') saveSettings();
+    else if(act==='copy'){
+      var txt = 'Asunto: '+$('c_asunto').value+'\n\n'+$('c_cuerpo').value;
+      (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function(){ b.textContent='Copiado'; }, function(){ $('c_cuerpo').select(); });
+    }
+    else if(act==='gmail' && l){
+      window.open(gmailUrl(l), '_blank', 'noopener');
+      var seg = b.dataset.seg==='1';
+      $('c_after').innerHTML = '<div class="alert warn">Cuando lo hayas enviado desde Gmail, márcalo aquí: <button class="small primary" data-act="sent" data-id="'+l.id+'" data-seg="'+(seg?1:0)+'">Ya lo he enviado</button></div>';
+    }
+    else if(act==='sent' && l){
+      if(b.dataset.seg==='1') l.seguimiento_at = nowISO();
+      else { l.estado = 'enviado'; l.enviado_at = nowISO(); l.seguimiento_at = null; tab = 'enviado'; }
+      save(); closeModal(); render();
+    }
+    else if(act==='export') download('radar-lucia-'+new Date().toISOString().slice(0,10)+'.json', JSON.stringify({leads:leads,settings:settings},null,2));
+    else if(act==='importJson') $('s_file').click();
+    else if(act==='portal'){
+      var kw = $('q_custom').value.trim() || $('q_pre').value, loc = $('q_loc').value.trim() || 'Madrid';
+      window.open(portalUrl(b.dataset.p, kw, loc), '_blank', 'noopener');
+    }
+    else if(act==='offSave'){
+      var o = offerById(id); if(!o) return;
+      var r = saveOffer(o);
+      if(r==='ok'){ save(); saveOff(); render(); }
+      else alert(r==='dup' ? 'Ya tienes otra empresa con ese mismo email. Revísala en «Mis empresas».' : 'Los datos de esta oferta no son válidos para guardarla.');
+    }
+    else if(act==='offHide'){ offState[id] = 'descartada'; saveOff(); renderOfList(); updateOffBadge(); }
+    else if(act==='offSaveMail'){
+      var cand = offerList().filter(function(x){ return x.emails && x.emails.length; });
+      if(!cand.length || !confirm('Guardar '+cand.length+' ofertas con email en «Pendiente»? No se envía nada: tú revisas y envías cada una.')) return;
+      var okN = 0, skipN = 0;
+      cand.forEach(function(x){ if(saveOffer(x)==='ok') okN++; else skipN++; });
+      save(); saveOff(); render();
+      alert(okN+' guardadas'+(skipN ? ', '+skipN+' omitidas (email repetido o datos no válidos).' : '.'));
+    }
+    else if(act==='parse') parseImport();
+    else if(act==='doImport') doImport();
+  });
+
+  document.getElementById('views').addEventListener('click', function(e){
+    var b = e.target.closest('[data-view]'); if(b) setView(b.dataset.view);
+  });
+  function onOfferFilter(e){
+    var id = e.target.id;
+    if(id==='o_q') oF.q = e.target.value;
+    else if(id==='o_portal') oF.portal = e.target.value;
+    else if(id==='o_min') oF.min = Number(e.target.value);
+    else if(id==='o_email') oF.soloEmail = e.target.checked;
+    else if(id==='o_hide') oF.ocultas = e.target.checked;
+    else return;
+    renderOfList();
+  }
+  document.addEventListener('input', onOfferFilter);
+  document.addEventListener('change', onOfferFilter);
+
+  document.addEventListener('change', function(e){
+    if(e.target.id!=='s_file') return;
+    var f = e.target.files[0]; if(!f) return;
+    var r = new FileReader();
+    r.onload = function(){
+      try{
+        var d = JSON.parse(r.result);
+        if(!Array.isArray(d.leads)) throw new Error();
+        if(!confirm('Esto reemplaza los datos actuales por la copia ('+d.leads.length+' empresas). ¿Seguir?')) return;
+        leads = d.leads; settings = mergeSettings(d.settings); save(); closeModal(); render();
+      }catch(err){ alert('El archivo no es una copia válida.'); }
+    };
+    r.readAsText(f);
+  });
+
+  render();
+  loadOffers();
+
+  // oferta enviada desde el marcador: #add=<json>
+  if(location.hash.indexOf('#add=')===0){
+    try{
+      var d = JSON.parse(decodeURIComponent(location.hash.slice(5)));
+      history.replaceState(null, '', location.pathname + location.search);
+      if(d && /^https?:\/\//i.test(d.url||'')) leadForm(fromCapture(d));
+    }catch(err){}
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "location": "Madrid",
+  "linkedinLocation": "Madrid, Spain",
+  "infojobsProvince": "33",
+  "postedDays": 7,
+  "maxPerQuery": 25,
+  "keepDays": 45,
+  "minScore": 35,
+  "queries": [
+    "ejecutivo de cuentas junior",
+    "asistente de cuentas publicidad",
+    "coordinador de eventos",
+    "producción de eventos",
+    "asistente de marketing",
+    "marketing junior",
+    "comunicación y marketing"
+  ],
+  "sources": { "infojobs": true, "indeed": true, "linkedin": true }
+}
