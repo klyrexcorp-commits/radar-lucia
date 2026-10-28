@@ -6,7 +6,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { companyKey, applyCompanies } from './lib.mjs';
+import { companyKey, applyCompanies, domainMatches } from './lib.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const docs = process.env.RADAR_DOCS || path.join(root, 'docs');
@@ -43,22 +43,31 @@ async function searchWebs(queries) {
 // Portales, directorios y prensa: nunca son la web de la empresa
 const BLOCK = /(^|\.)(linkedin|infojobs|indeed|glassdoor|facebook|instagram|twitter|x|youtube|tiktok|pinterest|wikipedia|einforma|empresite|paginasamarillas|axesor|informa|cylex|kompass|expansion|google|tripadvisor|yelp|borme|iberinform|infoempresa|datoscif|cif|opencorporates|crunchbase|jooble|tecnoempleo|computrabajo|infoempleo|opcionempleo|jobtoday|bumeran|randstad|adecco|manpower|michaelpage|hays|elpais|elmundo|abc|europapress|lavanguardia|cincodias|eleconomista|medium)\.[a-z.]+$/i;
 
+// Solo se acepta un resultado si su dominio contiene el nombre de la empresa
 function pickWebsite(empresa, results) {
-  const key = companyKey(empresa);
-  const first = key.split(' ').filter((t) => t.length >= 3)[0];
-  for (const r of (results ?? []).slice(0, 5)) {
+  for (const r of (results ?? []).slice(0, 8)) {
     let u; try { u = new URL(r.url); } catch { continue; }
     const host = u.hostname.replace(/^www\./, '');
     if (BLOCK.test(host)) continue;
-    const flat = host.replace(/[^a-z0-9]/g, '');
-    const title = companyKey(r.title);
-    if ((first && flat.includes(first)) || (key && title.includes(key))) return u.origin;
+    if (domainMatches(empresa, host)) return u.origin;
   }
   return '';
 }
 
 // ---------- lectura de la web de la empresa ----------
-const PAGES = ['/', '/contacto', '/contact', '/aviso-legal', '/politica-de-privacidad', '/trabaja-con-nosotros'];
+// Enlaces de la portada que suelen llevar un email: contacto, aviso legal, privacidad, empleo
+function linkCandidates(html, origin) {
+  const out = [];
+  for (const m of html.matchAll(/<a\b[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
+    const text = `${m[1]} ${m[2].replace(/<[^>]+>/g, ' ')}`;
+    if (!/contact|legal|privacidad|privacy|aviso|empleo|trabaja|careers|quienes|about/i.test(text)) continue;
+    try {
+      const u = new URL(m[1], `${origin}/`);
+      if (u.origin === origin && !/\.(pdf|jpe?g|png|zip)$/i.test(u.pathname)) out.push(u.origin + u.pathname);
+    } catch { /* enlace no válido */ }
+  }
+  return [...new Set(out)].slice(0, 5);
+}
 
 async function getPage(url) {
   if (fixtures) {
@@ -110,10 +119,19 @@ async function findEmails(origin) {
   if (!(await robotsAllows(origin))) return [];
   const host = new URL(origin).hostname.replace(/^www\./, '');
   const found = new Set();
-  for (const p of PAGES) {
-    const html = await getPage(origin + p);
+  const tried = new Set();
+  const take = async (url) => {
+    if (tried.has(url) || tried.size >= 8) return null;
+    tried.add(url);
+    const html = await getPage(url);
     if (html) emailsFrom(html, host).forEach((e) => found.add(e));
+    return html;
+  };
+  const home = await take(`${origin}/`);
+  const extra = [...(home ? linkCandidates(home, origin) : []), `${origin}/contacto`, `${origin}/aviso-legal`];
+  for (const url of extra) {
     if ([...found].some((e) => PREFERRED.test(e.split('@')[0]))) break;
+    await take(url);
   }
   return [...found]
     .sort((a, b) => Number(PREFERRED.test(b.split('@')[0])) - Number(PREFERRED.test(a.split('@')[0])))
@@ -133,7 +151,27 @@ let companies = {};
 try { companies = JSON.parse(await readFile(COMPANIES, 'utf8')); } catch { /* primera vez */ }
 const now = new Date().toISOString();
 
-const fresh = (c) => c && (Date.now() - new Date(c.checked_at).getTime()) < (c.status === 'ok' ? 60 : 14) * DAY;
+// Versión del criterio de búsqueda. Las entradas guardadas con otra versión se revisan sin repetir búsquedas:
+// si su web no coincide con el nombre de la empresa se descartan, y las que no tenían email se vuelven a leer.
+const VERSION = 2;
+const recrawl = [];
+for (const [k, c] of Object.entries(companies)) {
+  if (c.v === VERSION) continue;
+  let hostOk = false;
+  try { hostOk = !!c.web && domainMatches(c.nombre, new URL(c.web).hostname); } catch { /* web no válida */ }
+  if (c.web && !hostOk) { delete companies[k]; continue; }
+  if (c.status === 'sin_email') recrawl.push(k);
+  c.v = VERSION;
+}
+if (recrawl.length) {
+  await pool(recrawl, 5, async (k) => {
+    const emails = await findEmails(companies[k].web);
+    companies[k] = { ...companies[k], emails, status: emails.length ? 'ok' : 'sin_email', checked_at: now };
+  });
+  console.log(`Webs ya conocidas releídas: ${recrawl.length} · con email ahora: ${recrawl.filter((k) => companies[k].emails.length).length}`);
+}
+
+const fresh = (c) => c && c.v === VERSION && (Date.now() - new Date(c.checked_at).getTime()) < (c.status === 'ok' ? 60 : 14) * DAY;
 
 // una entrada por empresa, la de mejor encaje; se salta las que ya traen email en la oferta
 const seen = new Map();
@@ -157,7 +195,7 @@ if (todo.length) {
     const [k, o] = entry;
     const web = pickWebsite(o.empresa, byTerm.get(clean(queryOf(entry))));
     const emails = web ? await findEmails(web) : [];
-    companies[k] = { nombre: o.empresa, web, emails, status: !web ? 'sin_web' : emails.length ? 'ok' : 'sin_email', checked_at: now };
+    companies[k] = { nombre: o.empresa, web, emails, status: !web ? 'sin_web' : emails.length ? 'ok' : 'sin_email', checked_at: now, v: VERSION };
     if (web) conWeb++;
     if (emails.length) conEmail++;
   });

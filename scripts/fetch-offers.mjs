@@ -79,7 +79,7 @@ function finalize(o, portal) {
     fecha: o.fecha || null,
     salario: clean(o.salario),
     modalidad: clean(o.modalidad),
-    web: /^https?:\/\//i.test(o.web || '') ? o.web : '',
+    webFuente: /^https?:\/\//i.test(o.web || '') ? o.web : '',
     emails: extractEmails(o.descripcion),
     tipo: guessTipo(puesto),
     encaje: score(puesto, descripcion),
