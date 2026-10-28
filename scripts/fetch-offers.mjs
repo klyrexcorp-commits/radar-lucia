@@ -5,6 +5,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { applyCompanies } from './lib.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cfg = JSON.parse(await readFile(path.join(root, 'config/search.json'), 'utf8'));
@@ -190,6 +191,11 @@ const offers = [...byId.values()]
     return true;
   })
   .sort((a, b) => b.encaje - a.encaje || String(b.fecha).localeCompare(String(a.fecha)));
+
+// conservar las webs y emails ya encontrados en docs/companies.json
+let companies = {};
+try { companies = JSON.parse(await readFile(path.join(root, 'docs/companies.json'), 'utf8')); } catch { /* aún no existe */ }
+applyCompanies(offers, companies);
 
 await writeFile(OUT, JSON.stringify({ updated: now, status, total: offers.length, offers }, null, 1) + '\n');
 console.log(`offers.json: ${offers.length} ofertas (${offers.filter((o) => o.emails.length).length} con email)`);
