@@ -1,0 +1,41 @@
+name: Buscar emails de empresas
+
+on:
+  workflow_dispatch:
+    inputs:
+      max:
+        description: 'Máximo de empresas a buscar'
+        default: '60'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: radar-datos
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Buscar webs y emails de contacto
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: node scripts/enrich-contacts.mjs --max "${{ inputs.max }}"
+      - name: Guardar resultados
+        run: |
+          git config user.name "radar-lucia-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/offers.json docs/companies.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios"
+          else
+            git commit -m "Actualizar emails de empresas"
+            git pull --rebase
+            git push
+          fi
