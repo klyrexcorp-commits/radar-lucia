@@ -1,0 +1,442 @@
+{
+ "mccann": {
+  "nombre": "McCann",
+  "web": "https://www.eude.es",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "we are social": {
+  "nombre": "We Are Social",
+  "web": "https://es.jobrapido.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "manpowergroup": {
+  "nombre": "ManpowerGroup",
+  "web": "",
+  "emails": [],
+  "status": "sin_web",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "winchannel": {
+  "nombre": "WinChannel",
+  "web": "https://www.winchannel.net",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "weguest": {
+  "nombre": "Weguest",
+  "web": "https://www.weguest.com",
+  "emails": [
+   "contacto@weguest.com"
+  ],
+  "status": "ok",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "vivofacil": {
+  "nombre": "Vivofácil",
+  "web": "https://empleo.vivofacil.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "gamma recruitment": {
+  "nombre": "Gamma Recruitment",
+  "web": "https://bebee.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "epsa": {
+  "nombre": "EPSA SPAIN CONSULTING SERVICES SL.",
+  "web": "https://be.epsa.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "loom": {
+  "nombre": "LOOM",
+  "web": "https://coworkingspain.es",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "grenergy": {
+  "nombre": "Grenergy",
+  "web": "https://grenergy.eu",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "smartness": {
+  "nombre": "Smartness",
+  "web": "https://www.smartness.online",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "intercontinental madrid": {
+  "nombre": "InterContinental Madrid",
+  "web": "https://madrid.intercontinental.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "prosegur": {
+  "nombre": "Prosegur",
+  "web": "",
+  "emails": [],
+  "status": "sin_web",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "inforges": {
+  "nombre": "Inforges",
+  "web": "https://inforges.es",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "sporty": {
+  "nombre": "Sporty Group",
+  "web": "https://sportygroup.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "ogilvy": {
+  "nombre": "Ogilvy",
+  "web": "https://www.ogilvy.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "publicis groupe": {
+  "nombre": "Publicis Groupe España",
+  "web": "https://www.marketingdirecto.com",
+  "emails": [
+   "info@marketingdirecto.com"
+  ],
+  "status": "ok",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "knowmad mood": {
+  "nombre": "knowmad mood",
+  "web": "https://www.knowmadmood.com",
+  "emails": [
+   "marketing@knowmadmood.com"
+  ],
+  "status": "ok",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "kaizen coaching y team building": {
+  "nombre": "KAIZEN COACHING Y TEAM BUILDING SL.",
+  "web": "",
+  "emails": [],
+  "status": "sin_web",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "vision healthcare nv": {
+  "nombre": "Vision Healthcare NV",
+  "web": "https://www.visionhealthcare.eu",
+  "emails": [
+   "info@visionhealthcare.eu"
+  ],
+  "status": "ok",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "doofinder": {
+  "nombre": "Doofinder",
+  "web": "https://prestashop.es",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "julio gil agueda e hijos": {
+  "nombre": "JULIO GIL AGUEDA E HIJOS, S.L",
+  "web": "",
+  "emails": [],
+  "status": "sin_web",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "first hunting recursos humanos": {
+  "nombre": "FIRST HUNTING RECURSOS HUMANOS",
+  "web": "",
+  "emails": [],
+  "status": "sin_web",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "elanco": {
+  "nombre": "Elanco",
+  "web": "https://www.diarioveterinario.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "bbva": {
+  "nombre": "BBVA",
+  "web": "https://wemadrid.es",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "netlavanda": {
+  "nombre": "NETLAVANDA SL",
+  "web": "",
+  "emails": [],
+  "status": "sin_web",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "elena hernandez comunicacion": {
+  "nombre": "elena hernandez comunicacion",
+  "web": "https://www.elenahernandez.es",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "cognita hastings holdings": {
+  "nombre": "Cognita Hastings Holdings S.L.",
+  "web": "",
+  "emails": [],
+  "status": "sin_web",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "wow cars 22": {
+  "nombre": "WOW CARS 22 SL.",
+  "web": "",
+  "emails": [],
+  "status": "sin_web",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "rodiokronsa": {
+  "nombre": "RODIOKRONSA",
+  "web": "https://www.rodiokronsa.es",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "sagarbe xxi": {
+  "nombre": "SAGARBE XXI, S.L.",
+  "web": "",
+  "emails": [],
+  "status": "sin_web",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "daro media": {
+  "nombre": "Daró Media Group S.L.",
+  "web": "https://www.mapquest.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "jobgether": {
+  "nombre": "Jobgether",
+  "web": "https://es.trabajo.org",
+  "emails": [
+   "info@trabajo.org"
+  ],
+  "status": "ok",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "sebastian consultores": {
+  "nombre": "SEBASTIÁN CONSULTORES",
+  "web": "https://www.asesoriasebastian.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "pib": {
+  "nombre": "PIB Group España",
+  "web": "https://pibgroupiberia.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "chubb fire security": {
+  "nombre": "CHUBB FIRE&SECURITY GROUP",
+  "web": "https://careers.chubbfs.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "michael page": {
+  "nombre": "Michael Page",
+  "web": "",
+  "emails": [],
+  "status": "sin_web",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "gamboa": {
+  "nombre": "GRUPO GAMBOA S.A.",
+  "web": "https://www.grupogamboa.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "affidea": {
+  "nombre": "Affidea",
+  "web": "https://www.saludonnet.com",
+  "emails": [
+   "info@saludonnet.com"
+  ],
+  "status": "ok",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "parques reunidos servicios centrales": {
+  "nombre": "PARQUES REUNIDOS SERVICIOS CENTRALES, S.A.",
+  "web": "https://es.marketscreener.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "chubb": {
+  "nombre": "Chubb",
+  "web": "https://www2.chubb.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "autentic ai": {
+  "nombre": "Autentic AI",
+  "web": "https://www.larazon.es",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "gamboa automoviles": {
+  "nombre": "Grupo Gamboa Automóviles",
+  "web": "https://www.grupogamboa.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "crambo rental": {
+  "nombre": "Crambo Rental",
+  "web": "https://cramborental.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "leeters recruiting": {
+  "nombre": "Leeters Recruiting",
+  "web": "https://www.leeters.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "gomez acebo pombo": {
+  "nombre": "Gómez-Acebo & Pombo",
+  "web": "https://ga-p.com",
+  "emails": [
+   "comunicacion@ga-p.com"
+  ],
+  "status": "ok",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "delama y llorente": {
+  "nombre": "DELAMA Y LLORENTE,S.L",
+  "web": "https://delamallorente.com",
+  "emails": [
+   "administracion@delamallorente.com"
+  ],
+  "status": "ok",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "temps ett madrid": {
+  "nombre": "TEMPS ETT S.L.- Madrid",
+  "web": "",
+  "emails": [],
+  "status": "sin_web",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "oliver the brandtech": {
+  "nombre": "OLIVER | The Brandtech Group",
+  "web": "https://bebee.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "confidencial": {
+  "nombre": "Confidencial",
+  "web": "https://www.elconfidencialdigital.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "hyatt centric": {
+  "nombre": "Hyatt Centric",
+  "web": "https://www.hyatt.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "instant purchase solutions": {
+  "nombre": "Instant Purchase Solutions",
+  "web": "https://www.pmdpremier.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "abb": {
+  "nombre": "ABB",
+  "web": "https://abbmaquinas.com",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "sindicato de enfermeria satse": {
+  "nombre": "Sindicato de Enfermeria SATSE",
+  "web": "",
+  "emails": [],
+  "status": "sin_web",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "continental": {
+  "nombre": "Continental",
+  "web": "https://www.continental-neumaticos.es",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "celling 5g network": {
+  "nombre": "CELLING 5G NETWORK SL.",
+  "web": "",
+  "emails": [],
+  "status": "sin_web",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "pentaweb pentasys": {
+  "nombre": "PENTAWEB - PENTASYS",
+  "web": "https://www.pentaweb.es",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "crit trabajemos juntos": {
+  "nombre": "Grupo Crit: Trabajemos juntos",
+  "web": "https://www.grupo-crit.com",
+  "emails": [
+   "info@grupo-crit.com"
+  ],
+  "status": "ok",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "miele": {
+  "nombre": "Miele España",
+  "web": "https://www.miele.es",
+  "emails": [],
+  "status": "sin_email",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ },
+ "tecnotron": {
+  "nombre": "TECNOTRON",
+  "web": "https://www.tecnotron.es",
+  "emails": [
+   "info@tecnotron.es"
+  ],
+  "status": "ok",
+  "checked_at": "2026-10-28T09:35:19.942Z"
+ }
+}

@@ -26,13 +26,14 @@
    "fecha": null,
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://es.jobrapido.com",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:da8a8d7e1e488a80ed24646dc47678",
@@ -44,13 +45,14 @@
    "fecha": "2026-10-27T10:19:13.000Z",
    "salario": "18,000 - 20,000 EUR / year (gross)",
    "modalidad": "Híbrido",
-   "web": "",
+   "web": "https://www.winchannel.net",
    "emails": [],
    "tipo": "eventos",
    "encaje": 80,
    "resumen": "Desde Winchannel, estamos buscado a un/a Junior Event Coordinator, en las Rozas, Madrid. Principales responsabilidades Gestión integral de proyectos de eventos desde la recepción del briefing hasta el cierre final. Coordinación de proveedores, espacios, audiovisuales, catering, personal y servicios asociados. Búsqueda y negociación con venues, proveedores y colaboradores. Elaboración y seguimiento",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4483552804",
@@ -62,13 +64,14 @@
    "fecha": "2026-10-26",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://madrid.intercontinental.com",
    "emails": [],
    "tipo": "eventos",
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4481690151",
@@ -80,13 +83,14 @@
    "fecha": "2026-10-23",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.eude.es",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:3371a2bfb0427999453930f819d64d",
@@ -98,13 +102,14 @@
    "fecha": "2026-10-22T13:00:07.000Z",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://be.epsa.com",
    "emails": [],
    "tipo": "marketing",
    "encaje": 80,
    "resumen": "Junior Marketing Executive Buscamos incorporar un/a Junior Marketing Executive a nuestro equipo, con una primera experiencia en marketing digital y un perfil especialmente orientado a la ejecución. Buscamos una persona organizada, proactiva y autónoma, que se sienta cómoda trabajando directamente con diferentes herramientas y canales digitales y gestionando varias acciones de marketing de forma si",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4482478380",
@@ -116,13 +121,16 @@
    "fecha": "2026-10-22",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.weguest.com",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": [
+    "contacto@weguest.com"
+   ]
   },
   {
    "id": "linkedin:4482705239",
@@ -140,7 +148,8 @@
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:f0f62a84d44f9da434cb156f2b9ff0",
@@ -152,13 +161,14 @@
    "fecha": "2026-10-21T11:54:01.000Z",
    "salario": "",
    "modalidad": "Híbrido",
-   "web": "",
+   "web": "https://empleo.vivofacil.com",
    "emails": [],
    "tipo": "marketing",
    "encaje": 80,
    "resumen": "¡En Vivofácil seguimos creciendo! Buscamos un perfil junior para realizar prácticas y colaborar activamente en el dentro del Departamento de Marketing: Darás apoyo transversal al equipo de Marketing y Comunicación, participando en proyectos de distintas áreas y adquiriendo experiencia en marketing B2B y B2C, gestión de campañas, análisis de mercado y coordinación de proyectos. Si quieres poner en ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4482125459",
@@ -170,13 +180,14 @@
    "fecha": "2026-10-21",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://coworkingspain.es",
    "emails": [],
    "tipo": "eventos",
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4478982831",
@@ -188,13 +199,14 @@
    "fecha": "2026-10-21",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://bebee.com",
    "emails": [],
    "tipo": "eventos",
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4467846381",
@@ -206,13 +218,14 @@
    "fecha": "2026-10-20",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.smartness.online",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4477398294",
@@ -224,13 +237,14 @@
    "fecha": "2026-10-16",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://grenergy.eu",
    "emails": [],
    "tipo": "marketing",
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4475660404",
@@ -242,13 +256,14 @@
    "fecha": "2026-10-11",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://inforges.es",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4460341114",
@@ -260,13 +275,14 @@
    "fecha": "2026-10-09",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://sportygroup.com",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4476303325",
@@ -278,13 +294,16 @@
    "fecha": "2026-10-06",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.visionhealthcare.eu",
    "emails": [],
    "tipo": "marketing",
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": [
+    "info@visionhealthcare.eu"
+   ]
   },
   {
    "id": "linkedin:4481321791",
@@ -296,13 +315,14 @@
    "fecha": "2026-09-27",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://prestashop.es",
    "emails": [],
    "tipo": "marketing",
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4463912786",
@@ -320,7 +340,8 @@
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4452258677",
@@ -332,13 +353,14 @@
    "fecha": "2026-08-17",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.ogilvy.com",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 80,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4438315785",
@@ -350,13 +372,16 @@
    "fecha": null,
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.marketingdirecto.com",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": [
+    "info@marketingdirecto.com"
+   ]
   },
   {
    "id": "linkedin:4483843011",
@@ -368,13 +393,16 @@
    "fecha": null,
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.knowmadmood.com",
    "emails": [],
    "tipo": "eventos",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": [
+    "marketing@knowmadmood.com"
+   ]
   },
   {
    "id": "linkedin:4484216228",
@@ -386,13 +414,14 @@
    "fecha": null,
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.diarioveterinario.com",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4484206138",
@@ -404,13 +433,14 @@
    "fecha": null,
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://wemadrid.es",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:4ad07fb07943ef81b0172c34a2dd1f",
@@ -428,7 +458,8 @@
    "encaje": 65,
    "resumen": "En Kaizen Team Building buscamos una persona que disfrute haciendo que las cosas sucedan: preparar un evento con cuidado, reunir al equipo que lo llevará a cabo, conectar con los participantes y responder con criterio cuando el plan cambia. Qué harás Te harás cargo del recorrido completo de un evento. Antes, revisarás con antelación lo acordado con el cliente, el espacio, los horarios, los materia",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:e303f6112d43ae9402bc84d3f8b202",
@@ -440,13 +471,14 @@
    "fecha": "2026-10-27T15:47:54.000Z",
    "salario": "",
    "modalidad": "Híbrido",
-   "web": "",
+   "web": "https://www.rodiokronsa.es",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "¿Quiénes somos? Buscamos un/a profesional creativo/a y orientado/a a resultados para liderar iniciativas de marketing y comunicación, reforzar nuestra presencia digital y apoyar el crecimiento del negocio. Funciones principales Diseño, ejecución y seguimiento de campañas de marketing. Gestión de la presencia digital corporativa. Desarrollo de estrategias de marketing digital B2B. Gestión y actuali",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:c9a4d58b9e4c2fbe3628c2d0f9c17e",
@@ -458,13 +490,14 @@
    "fecha": "2026-10-27T15:31:58.000Z",
    "salario": "",
    "modalidad": "Híbrido",
-   "web": "",
+   "web": "https://careers.chubbfs.com",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "Únete al equipo que protege nuestro mundo En Chubb Iberia, formamos parte de uno de los mayores proveedores mundiales de soluciones de protección contra incendios y seguridad. Buscamos incorporar a un/a estudiante en prácticas curriculares que quiera desarrollarse en el área de Marketing participando en un proyecto de ámbito internacional del Grupo, con especial foco en CRM, campañas de marketing ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:68e5a0894c4757ad3e8d968ba206f4",
@@ -482,7 +515,8 @@
    "encaje": 65,
    "resumen": "Sobre GIL GIL es una empresa referente en el diseño y fabricación de maquinaria agrícola de alta calidad, con más de 70 años de trayectoria en el sector y una amplia red de concesionarios. Ofrecemos soluciones innovadoras al campo y trabajamos con una filosofía basada en la fiabilidad, la mejora continua y el compromiso con el cliente. Formar parte de nuestro equipo significa incorporarse a una em",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:4dec7c62a64575b8fcc83a7bb86fc3",
@@ -500,7 +534,8 @@
    "encaje": 65,
    "resumen": "Empresa especializada en el diseño, fabricación y montaje de stands y espacios expositivos busca incorporar a su centro de trabajo de Parla un/a Técnico/a de Coordinación Operativa, Montajes y PRL con un rol polivalente. Tu misión principal será coordinar el cumplimiento del día a día de PRL y el orden operativo interno en taller, además de prestar apoyo al departamento técnico en la fase inicial ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:e230eefc18477494d74f93eb10dae2",
@@ -512,13 +547,14 @@
    "fecha": "2026-10-27T12:30:07.000Z",
    "salario": "",
    "modalidad": "Presencial",
-   "web": "",
+   "web": "https://www.pentaweb.es",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "PentaWeb es división de PentaSys, empresa consolidada en el sector de Diseño Web y Marketing online con más de 25 años de trayectoria desarrollando proyectos web para empresas y proyectos propios, como por ejemplo el portal de TusCasasRurales.com, una de las webs más visitadas del sector del turismo rural en España y donde desempeñaría la mayor parte del trabajo. Buscamos una persona para incorpor",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:b4e5f5c84b4dd5af703c8d23e7d9b3",
@@ -530,13 +566,14 @@
    "fecha": "2026-10-27T12:02:11.000Z",
    "salario": "20,000 - 22,000 EUR / year (gross)",
    "modalidad": "Presencial",
-   "web": "",
+   "web": "https://www.winchannel.net",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "Descripción Desde Winchannel, estamos a la búsqueda de un Técnico en telemarketing para cliente. Funciones principales Realizar llamadas a empresas para la captación de potenciales clientes. Identificar decisores y generar oportunidades comerciales. Concertar reuniones para el equipo de ventas. Detectar necesidades y presentar de forma atractiva los productos o servicios de la compañía. Gestionar ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:89031088a74b1690cbcd35b444c3fb",
@@ -548,13 +585,14 @@
    "fecha": "2026-10-27T11:30:07.000Z",
    "salario": "18,000 - 20,000 EUR / year (gross)",
    "modalidad": "Presencial",
-   "web": "",
+   "web": "https://www.elenahernandez.es",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "Communication executive en Agencia de comunicación y relaciones públicas Relación con la prensa online y offline Realización y envío de notas de prensa Traducción, maquetación y envío de notas de prensa Control y envío de apariciones en prensa escrita, online y redes sociales Registro interno del Clipping generado por marcas en diferentes medios Desarrollo de informes con apariciones y valor econó",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:5759bde2c1433cba78f31ede5b5c69",
@@ -572,7 +610,8 @@
    "encaje": 65,
    "resumen": "Como Gestor/a de cuentas de clientes y soporte. Serás un punto de contacto entre nuestra empresa y nuestros clientes, asegurando que su experiencia sea óptima desde la primera interacción hasta la resolución de cualquier necesidad técnica o comercial. Realizarás demostraciones de nuestro software informático para clientes potenciales, así como las puestas en marcha y formación (trabajo 100% online",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4483298716",
@@ -584,13 +623,16 @@
    "fecha": "2026-10-27",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://es.trabajo.org",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": [
+    "info@trabajo.org"
+   ]
   },
   {
    "id": "infojobs:6a78965543488eba75e6ff074ad904",
@@ -608,7 +650,8 @@
    "encaje": 65,
    "resumen": "Como Marketing Intern, formarás parte de un equipo dinámico y orientado a resultados, donde tu contribución directa impactará en el crecimiento de nuestras campañas digitales y en la experiencia del cliente. Trabajarás en estrecha colaboración con especialistas en marketing digital y e-commerce, ayudando a planificar, ejecutar y medir estrategias que impulsan el tráfico, las conversiones y la fide",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:100b9150ae41eca1f99b73d47c0306",
@@ -626,7 +669,8 @@
    "encaje": 65,
    "resumen": "Sobre nosotros En WOW CARS 22 S.L llevamos más de 25 años en el sector de la automoción, con talleres de reparación propios y un modelo de venta basado en la transparencia: mostramos cada vehículo tal y como es, con fotografía y contenido de primer nivel. Vendemos vehículos propios y gestionamos la venta de coches de particulares. Nuestra diferencia está en cómo presentamos el producto: fichas cui",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:c2b3545a63438ebac9b9b6c53bf7ab",
@@ -638,13 +682,14 @@
    "fecha": "2026-10-26T17:30:04.000Z",
    "salario": "20,000 - 30,000 EUR / year (gross)",
    "modalidad": "Presencial",
-   "web": "",
+   "web": "https://www.mapquest.com",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 65,
    "resumen": "Si eres un/a excelente comercial, tenemos algo que te va a interesar. No buscamos a alguien que empiece desde cero. Buscamos un/a Ejecutivo/a de Cuentas con experiencia para incorporarse a nuestro equipo comercial y hacerse cargo de una cartera de clientes consolidada, con un objetivo claro: mantenerla, hacerla crecer y generar nuevo negocio. Somos un grupo de comunicación con más de 30 años de tr",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:f3509ec55448ac8a7453f933a7bc93",
@@ -662,7 +707,8 @@
    "encaje": 65,
    "resumen": "Buscamos incorporar un/a Gestor/a de Cuentas de Mantenimiento que actúe como enlace entre nuestros clientes, los técnicos de campo y el departamento de operaciones, garantizando una gestión eficaz de las incidencias y de los contratos de mantenimiento. Funciones principales • Recepción y gestión de avisos e incidencias de clientes. • Coordinación con el departamento de planificación para la asigna",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:4347edb86a4286a5b6e4500048b5e2",
@@ -674,13 +720,14 @@
    "fecha": "2026-10-26T12:06:52.000Z",
    "salario": "",
    "modalidad": "Presencial",
-   "web": "",
+   "web": "https://www.grupogamboa.com",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "Grupo Gamboa¿es un grupo de empresas líder que aporta soluciones de movilidad sostenible y a la vanguardia de la conducción del futuro. Somos concesionarios y servicios oficiales de las marcas¿Toyota, Nissan, Hyundai, KIA, Subaru, KGM, MG, Omoda, Jaecoo y BYD. ¿Qué buscamos? Precisamos incorporar al equipo un/a Marketing Specialist que no le dé miedo afrontar decisiones y gestiones relacionadas co",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:c85666ba1d4f1eaa56bcc2ecc8a173",
@@ -692,13 +739,14 @@
    "fecha": "2026-10-26T10:39:02.000Z",
    "salario": "40,000 - 45,000 EUR / year (gross)",
    "modalidad": "Híbrido",
-   "web": "",
+   "web": "https://www.asesoriasebastian.com",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 65,
    "resumen": "Sebastián Consultores selecciona para importante empresa, referente en implantación de soluciones ERP con core Microsoft y especializadas en áreas de RRHH, gestión de personas, despachos y asesorías, un ACCOUNT EXECUTIVE para reforzar su departamento comercial B2B. La persona que se incorpore tratará de abrir mercado y acelerar el crecimiento de la empresa a través de venta directa B2B. La persona",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:c84f9dd6f84978a0ff130bfbd78ef7",
@@ -710,13 +758,14 @@
    "fecha": "2026-10-26T09:57:12.000Z",
    "salario": "25,000 - 33,000 EUR / year (gross)",
    "modalidad": "Híbrido",
-   "web": "",
+   "web": "https://pibgroupiberia.com",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 65,
    "resumen": "En PIB pasan muchas cosas. Estamos creciendo, evolucionando y reconstruyendo una forma de trabajar cada vez mejor. Nadie dijo que sería fácil unir más de 30 corredurías en una y aquí estamos. Nos hemos convertido en el 5o broker en España, intermediando más de 500 millones de primas en un proyecto de primer nivel en España y en Europa, en poco más de 2 años. Ahora es el momento de demostrar que el",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:9d7d16c093487c92892029cc5d3c9e",
@@ -728,13 +777,14 @@
    "fecha": "2026-10-26T09:36:13.000Z",
    "salario": "24,000 - 26,000 EUR / year (gross)",
    "modalidad": "Presencial",
-   "web": "",
+   "web": "https://es.marketscreener.com",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "Objetivos: Gestionar y desarrollar el contenido digital de Parque de Atracciones de Madrid, trabajando de forma transversal en los diferentes canales digitales de la marca. Combinar la gestión y creación de contenidos, e-Commerce, CRM, redes sociales, analítica digital, apoyo a campañas de publicidad digital y producción de contenido creativo. Trabajar tanto en la parte estratégica como en la ejec",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4481441168",
@@ -746,13 +796,16 @@
    "fecha": "2026-10-26",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.saludonnet.com",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": [
+    "info@saludonnet.com"
+   ]
   },
   {
    "id": "linkedin:4481461505",
@@ -770,7 +823,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4481470793",
@@ -782,13 +836,14 @@
    "fecha": "2026-10-26",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www2.chubb.com",
    "emails": [],
    "tipo": "eventos",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4481420554",
@@ -800,13 +855,14 @@
    "fecha": "2026-10-26",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://cramborental.com",
    "emails": [],
    "tipo": "eventos",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4481448975",
@@ -818,13 +874,16 @@
    "fecha": "2026-10-26",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://ga-p.com",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": [
+    "comunicacion@ga-p.com"
+   ]
   },
   {
    "id": "linkedin:4483537994",
@@ -836,13 +895,14 @@
    "fecha": "2026-10-26",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.larazon.es",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4482945870",
@@ -854,13 +914,14 @@
    "fecha": "2026-10-26",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.grupogamboa.com",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4483558565",
@@ -872,13 +933,14 @@
    "fecha": "2026-10-26",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.miele.es",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4483748726",
@@ -890,13 +952,14 @@
    "fecha": "2026-10-26",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://abbmaquinas.com",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:af5730d9e44d35a4e799892cb13a59",
@@ -908,13 +971,14 @@
    "fecha": "2026-10-24T17:42:22.000Z",
    "salario": "28,000 - 30,000 EUR / year (gross)",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.leeters.com",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "Para nuestro cliente Refrival, buscamos incorporar un/a Communications & CSR Executive que se integre en el departamento de Communications & CSR, reportando directamente al/a la Communications & CSR Manager. La posición está ubicada en Madrid y está dirigida a profesionales con 2-4 años de experiencia, tanto en agencia como en compañía, que combinen experiencia en comunicación y creación de conten",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:00ad65df5a40469d5d9bc602184ccd",
@@ -926,13 +990,16 @@
    "fecha": "2026-10-23T14:31:12.000Z",
    "salario": "18,000 - 24,000 EUR / year (gross)",
    "modalidad": "Híbrido",
-   "web": "",
+   "web": "https://delamallorente.com",
    "emails": [],
    "tipo": "eventos",
    "encaje": 65,
    "resumen": "Buscamos una persona organizada, resolutiva y con experiencia en plataformas de Coordinación de Actividades Empresariales (CAE) para integrarse en nuestro equipo de operaciones. Tu misión principal será la gestión y validación documental en materia de Prevención de Riesgos Laborales para clientes y contratas del ámbito de la gestión de eventos, espectáculos y control de accesos a centros comercial",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": [
+    "administracion@delamallorente.com"
+   ]
   },
   {
    "id": "infojobs:72bb69907b427c8de86944aec0bb3b",
@@ -944,13 +1011,14 @@
    "fecha": "2026-10-23T09:27:31.000Z",
    "salario": "25,000 - 36,000 EUR / year (gross)",
    "modalidad": "Híbrido",
-   "web": "",
+   "web": "https://www.elconfidencialdigital.com",
    "emails": [],
    "tipo": "eventos",
    "encaje": 65,
    "resumen": "Dar soporte en la organización y coordinación integral de convenciones, congresos y eventos, acompañando al cliente durante todo el proceso y asegurando la correcta gestión de los servicios y necesidades asociados al evento. Principales funciones Gestionar y coordinar eventos, convenciones y congresos de principio a fin, realizando el seguimiento de las distintas fases hasta su finalización. Atend",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:69f3aa112c44c7b037b88b32d53519",
@@ -968,7 +1036,8 @@
    "encaje": 65,
    "resumen": "En TEMPS llevamos 30 años encontrando oportunidades profesionales para la gente que busca trabajo. Tenemos experiencia, somos solventes y estamos comprometidos, en especial contigo. Ahora mismo contamos con esta vacante, ¿te encaja? Importante operador de Telecomunicaciones, líder en el mercado, que presta servicios de acceso a Internet de alta velocidad basados en Fibra Óptica, Telefonía fija y m",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4481669573",
@@ -980,13 +1049,14 @@
    "fecha": "2026-10-23",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://bebee.com",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4482880654",
@@ -998,13 +1068,14 @@
    "fecha": "2026-10-23",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.continental-neumaticos.es",
    "emails": [],
    "tipo": "eventos",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4482877831",
@@ -1016,13 +1087,14 @@
    "fecha": "2026-10-23",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.hyatt.com",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:4faf6f4f004abbad22c1d3f9f8eda2",
@@ -1034,13 +1106,14 @@
    "fecha": "2026-10-22T14:00:06.000Z",
    "salario": "",
    "modalidad": "Presencial",
-   "web": "",
+   "web": "https://www.pmdpremier.com",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "Funciones: Se responsabilizará y coordinará su propia cartera de clientes. Se ofrece: Sueldo fijo + incentivos Se requiere: Experiencia demostrable en puesto similar Dinamismo, espíritu de superación, habituado a trabajar por objetivos",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:86c67af6d14367869d63b99b1f62ec",
@@ -1052,13 +1125,16 @@
    "fecha": "2026-10-22T14:00:05.000Z",
    "salario": "25,000 - 27,000 EUR / year (gross)",
    "modalidad": "Presencial",
-   "web": "",
+   "web": "https://www.tecnotron.es",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "Empresa internacional líder en la comercialización de maquinaria industrial de alta tecnología para prototipado y producción, con presencia en 5 países y 15 sedes, busca una persona para el puesto de Marketing Specialist para la región de Iberia ( España y Portugal ) que contribuya al desarrollo y la implementación de las actividades de marketing locales, trabajando en estrecha colaboración con lo",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": [
+    "info@tecnotron.es"
+   ]
   },
   {
    "id": "infojobs:68a5dd314a4dd99701ed9232d046e2",
@@ -1076,7 +1152,8 @@
    "encaje": 65,
    "resumen": "El Sindicato de Enfermería, SATSE desea incorporar a su equipo de Comunicación de la Secretaría Autonómica de Madrid a una persona con formación universitaria en Periodismo, Comunicación Audiovisual, Comunicación Corporativa u otras titulaciones afines, para la gestión y desarrollo de la comunicación interna y externa de la organización. Buscamos una persona creativa, proactiva y polivalente, con ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4480067063",
@@ -1094,7 +1171,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:2351ca02a246cdacd1ecd37ac7f32f",
@@ -1106,13 +1184,16 @@
    "fecha": "2026-10-21T15:09:10.000Z",
    "salario": "20,000 - 30,000 EUR / year (gross)",
    "modalidad": "Híbrido",
-   "web": "",
+   "web": "https://www.grupo-crit.com",
    "emails": [],
    "tipo": "marketing",
    "encaje": 65,
    "resumen": "En Grupo Crit trabajamos con un propósito claro: ayudar a personas y empresas a crecer. Creemos en la ética, la excelencia, el compromiso, la cercanía y la pasión como pilares fundamentales de nuestra compañía. Nos encontramos en un momento de evolución constante, donde la digitalización, la innovación y la Inteligencia Artificial están transformando la manera en la que trabajamos y generamos valo",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": [
+    "info@grupo-crit.com"
+   ]
   },
   {
    "id": "infojobs:eb1c58ed0541ff97a9f1c9bb2b3cf4",
@@ -1130,7 +1211,8 @@
    "encaje": 65,
    "resumen": "Como Gestor/a de Cuentas, Clientes y Soporte a Proyectos, serás el punto de contacto estratégico entre nuestros clientes y el equipo interno, asegurando que sus necesidades se traduzcan en soluciones efectivas y sostenibles. Trabajarás en estrecha colaboración con los equipos comerciales y de proyecto para alinear expectativas, gestionar riesgos y potenciar el valor entregado. Tu labor impactará d",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:18055420594762acf39db321c31d2e",
@@ -1148,7 +1230,8 @@
    "encaje": 65,
    "resumen": "Nuestro cliente que opera dentro del sector de las subastas está en búsqueda de un perfil analítico, orientado a negocio y con excelente capacidad relacional para impulsar el crecimiento de su marketplace internacional. Contacto internacional Inglés bilingüe Nuestro cliente está liderando un ambicioso proyecto de crecimiento internacional e innovación dentro del sector de las subastas, el arte y l",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:ca4334ce514a5daebb9aef441d8340",
@@ -1166,7 +1249,8 @@
    "encaje": 65,
    "resumen": "¡Buscamos Supervisor/a de Catering y Eventos en Do Eat! En Do Eat, compañía especializada en restauración saludable y organizada buscamos incorporar un/a Supervisor/a de Catering y Eventos para un de nuestros clientes más exclusivos. Buscamos una persona dinámica, proactiva y con visión de negocio, capaz de combinar la gestión operativa con la atención al cliente, el liderazgo de equipos y el cont",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4467107875",
@@ -1184,7 +1268,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4479414876",
@@ -1196,13 +1281,14 @@
    "fecha": "2026-10-21",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://cramborental.com",
    "emails": [],
    "tipo": "eventos",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4482045674",
@@ -1220,7 +1306,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4471721415",
@@ -1238,7 +1325,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4481130340",
@@ -1256,7 +1344,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4481140864",
@@ -1274,7 +1363,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4478673333",
@@ -1292,7 +1382,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4480951906",
@@ -1310,7 +1401,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4480340734",
@@ -1328,7 +1420,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4480970001",
@@ -1346,7 +1439,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4461198498",
@@ -1364,7 +1458,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4478209467",
@@ -1382,7 +1477,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4479143702",
@@ -1400,7 +1496,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4479562252",
@@ -1418,7 +1515,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4479295829",
@@ -1436,7 +1534,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4466847337",
@@ -1454,7 +1553,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4449220942",
@@ -1472,7 +1572,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4468014667",
@@ -1490,7 +1591,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4478062574",
@@ -1502,13 +1604,14 @@
    "fecha": "2026-10-10",
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://www.hyatt.com",
    "emails": [],
    "tipo": "eventos",
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4466928638",
@@ -1526,7 +1629,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4475220249",
@@ -1544,7 +1648,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4477132654",
@@ -1562,7 +1667,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4477105787",
@@ -1580,7 +1686,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4476742877",
@@ -1598,7 +1705,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4476713380",
@@ -1616,7 +1724,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4476340242",
@@ -1634,7 +1743,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4476182331",
@@ -1652,7 +1762,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4473174143",
@@ -1670,7 +1781,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4474310936",
@@ -1688,7 +1800,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4474311343",
@@ -1706,7 +1819,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4473216804",
@@ -1724,7 +1838,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4477131179",
@@ -1742,7 +1857,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4470290480",
@@ -1760,7 +1876,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4463343713",
@@ -1778,7 +1895,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4457477551",
@@ -1796,7 +1914,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4451025120",
@@ -1814,7 +1933,8 @@
    "encaje": 65,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:760e5667d0499991b7b25d494afb31",
@@ -1832,7 +1952,8 @@
    "encaje": 55,
    "resumen": "Durante este invierno podrás vivir una experiencia formativa única en una de las entidades pioneras en transformar la relación con sus clientes, trabajando de la mano de profesionales referentes en el sector. En Deutsche Bank fomentamos un entorno de trabajo inclusivo y accesible, donde todas las personas puedan desarrollarse plenamente. En línea con nuestro compromiso con la diversidad y de confo",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:2c59a4415e45b7877f4bc59a4a565b",
@@ -1850,7 +1971,8 @@
    "encaje": 55,
    "resumen": "¡Hola!¡Queremos conocerte! ¿Te apasiona el mundo del comercio? ¿Te preocupas por los detalles? ¿Te consideras una persona dinámica? ¡Te estábamos esperando! Carrefour es una empresa líder en comercio de alimentación y distribución y queremos que inicies una carrera profesional llena de posibilidades con nuestros mejores profesionales. Pretendemos que todos los días sean un aprendizaje, que crezcas",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:30b4a97a6049f1b94f478a80a04e57",
@@ -1868,7 +1990,8 @@
    "encaje": 55,
    "resumen": "PRECISAMOS INCORPORAR PARA IMPORTANTE EMPRESA DE COSMETICA Y PERFUMERIA UBICADA EN LA ZONA DE PLAZA CASTILLA UN/A E-COMMERCE SPECIALIST Estamos buscando un/a E-COMMERCE SPECIALIST (SHOPIFY). Si te apasiona elentorno eCommerce, la optimización continua y la mejora de la experiencia de compra online, este puesto puede ser para ti. ¿Cuáles serán tus responsabilidades? Como parte del equipo digital, g",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:f87c081a97446fbab0730def015784",
@@ -1886,7 +2009,8 @@
    "encaje": 55,
    "resumen": "Se selecciona puesto de asistente personal, para Ceo de Empresa Nacional. Se valorará, dedicación, constancia, confidencialidad y disponibilidad. Indispensable, disponibilidad para viajar, carnet de conducir idiomas y experiencia en ámbitos parecidos. Se requiere buena presencia, saber estar y empatía asi como buena imagen.",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:14801bb98a4607958c013deb3dfddc",
@@ -1904,7 +2028,8 @@
    "encaje": 55,
    "resumen": "Buscamos una persona que dé soporte directo a la responsable del centro en la atención comercial y al cliente, la dinamización de la comunidad de coworkers, la gestión de las salas de reuniones y del estudio de podcast, y la apertura diaria del edificio. Funciones principales: Atención comercial y al cliente (coworkers, visitas, clientes potenciales). Dinamización de la comunidad: organización de ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:428bed5dd743a8a6fec36c1df52836",
@@ -1922,7 +2047,8 @@
    "encaje": 55,
    "resumen": "En DTBird desarrollamos, fabricamos e instalamos tecnologías para compatibilizar la energía eólica con la conservación de la fauna. Fuimos la primera empresa a nivel mundial en comercializar sistemas basados en cámaras con Inteligencia Artificial desde 2009. Somos una PYME Innovadora por el Ministerio de Ciencia e Innovación, y certificada en ISO 9001:2015. Nuestros productos sirven para la monito",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:45eccfcb4942c5924e84e0d97d6be3",
@@ -1940,7 +2066,8 @@
    "encaje": 55,
    "resumen": "En Lagardère Travel Retail España & Portugal , somos uno de los líderes mundiales en retail y restauración en entornos de viaje, presentes en más de 40 países. Cada día trabajamos para ofrecer experiencias excepcionales a millones de viajeros a través de nuestras tiendas, restaurantes y espacios comerciales en aeropuertos y estaciones. Actualmente buscamos incorporar un/a Becario/a de Master Data ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4483566597",
@@ -1958,7 +2085,8 @@
    "encaje": 55,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4480627727",
@@ -1976,7 +2104,8 @@
    "encaje": 55,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:3bd2b0ed844afbba615d97dd3c8af5",
@@ -1994,7 +2123,8 @@
    "encaje": 55,
    "resumen": "En Grupo Montalvo creemos que las personas son el centro de todo lo que hacemos, y por eso buscamos a alguien que se una a nuestro equipo de Personas para ayudarnos a cuidar de ellas. ¿Qué harás en tu día a día? Darás soporte administrativo al Área de Personas y Talento y serás una pieza clave en la experiencia de nuestros empleados: Gestión administrativa de personal: mantenimiento y actualizació",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4479424081",
@@ -2012,7 +2142,8 @@
    "encaje": 55,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:3072338222",
@@ -2030,7 +2161,8 @@
    "encaje": 55,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4477075110",
@@ -2048,7 +2180,8 @@
    "encaje": 55,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4477097745",
@@ -2066,7 +2199,8 @@
    "encaje": 55,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4479273869",
@@ -2084,7 +2218,8 @@
    "encaje": 55,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4476457126",
@@ -2102,7 +2237,8 @@
    "encaje": 55,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4469782695",
@@ -2120,7 +2256,8 @@
    "encaje": 55,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4468534887",
@@ -2138,7 +2275,8 @@
    "encaje": 55,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4436073556",
@@ -2156,7 +2294,8 @@
    "encaje": 55,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4484427474",
@@ -2168,13 +2307,14 @@
    "fecha": null,
    "salario": "",
    "modalidad": "",
-   "web": "",
+   "web": "https://bebee.com",
    "emails": [],
    "tipo": "cuentas",
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:7ffdddace644bbbc8c740dc8ad0cac",
@@ -2192,7 +2332,8 @@
    "encaje": 40,
    "resumen": "Funciones • Darás seguimiento y realizarás la justificación técnica y financiera de la cartera de proyectos de medios de vida climáticamente inteligentes en el marco de las iniciativas financiadas por la AECID y la Unión Europea e implementadas por Cruz Roja Española. • Coordinarás el equipo de personal local adscrito a los proyectos. • Elaborarás informes técnicos y de seguimiento dirigidos a la ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:0a39c4e2844b8691156d23a4803506",
@@ -2210,7 +2351,8 @@
    "encaje": 40,
    "resumen": "ASESOR/A INMOBILIARIO/A – ES TU TIEMPO, INGRESOS PARA VIVIR LA VIDA QUE DESEAS Pozuelo de Alarcón–Aravaca TUS HIJOS HAN CRECIDO. AHORA PUEDES CRECER TÚ. Durante años has organizado horarios, resuelto imprevistos, tomado decisiones, negociado, escuchado y creado relaciones de confianza. Has conocido familias, colegios, comercios, profesionales, clubes, asociaciones y actividades de tu entorno. Enti",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:88207dc197445f80f21f379e53f55b",
@@ -2228,7 +2370,8 @@
    "encaje": 40,
    "resumen": "Secretario/a Académico/a En nuestro centro educativo concertado ampliamos nuestro equipo y buscamos incorporar un/a Secretario/a Académico/a para liderar la gestión administrativa y la atención a nuestra comunidad educativa. Requisitos indispensables Titulación: FP de Grado Superior en Administración y Finanzas, Asistencia a la Dirección o Grado Universitario. Dominio acreditado de la plataforma R",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:b8e7b35129465b8545a30819f8c4fa",
@@ -2246,7 +2389,8 @@
    "encaje": 40,
    "resumen": "¿Te apasiona el trato con las personas y te gustaría desarrollarte en el sector inmobiliario? Buscamos personas dinámicas, con ganas de aprender y crecer profesionalmente, para incorporarse a nuestro equipo como Asesor/a Inmobiliario/a. No es necesaria experiencia previa en el sector: ofrecemos formación inicial y acompañamiento continuo. Funciones: Comercial Captación activa de inmuebles (puerta ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:bd435f2a1f47c6a042a5b84dbf447d",
@@ -2264,7 +2408,8 @@
    "encaje": 40,
    "resumen": "En esta empresa trabajamos en la gestión y ejecución de campañas de comunicación Off/convencionales para grandes cuentas de retail. Gestionamos la producción de PLV, artes gráficas, publicidad exterior, buzoneo y distribución de materiales a una amplia red de puntos de venta propios y franquiciados. El departamento de Operaciones trabaja de forma transversal con Marketing, Customer Service, provee",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:6498d3325643bba22200825da394a8",
@@ -2282,7 +2427,8 @@
    "encaje": 40,
    "resumen": "Somos FERCHAU, empresa especializada en servicios de Ingeniería e IT. Contamos actualmente con un equipo de 400 profesionales, con oficinas ubicadas en Madrid, Bilbao, Barcelona y Valencia. Seleccionamos a personas clave que quieran formar parte de una empresa estable, con amplia trayectoria y que además busquen afrontar nuevos retos para crecer junto a nosotros.¿Te animas? Buscamos incorporar un ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:ea39cf118645349da6e743be50f372",
@@ -2300,7 +2446,8 @@
    "encaje": 40,
    "resumen": "¡Únete al Equipo de Éxito de REDPISO! Buscamos Asesores Comerciales Inmobiliarios En REDPISO, empresa pionera en el sector inmobiliario, buscamos incorporar a nuestro equipo nuevos comerciales con talento, ganas de crecer y vocación por el trato con las personas. ¿Quién eres tú? Buscamos profesionales comunicativos, apasionados y con capacidad para conectar con los clientes. La experiencia previa ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:c29698cfe442aa8b4e6cd445174f23",
@@ -2318,7 +2465,8 @@
    "encaje": 40,
    "resumen": "¿ Asesor Comercial Inmobiliario — Segunda Mano y Obra Nueva CONAR Solutions · Madrid · Jornada completa · Presencial Sobre nosotros En CONAR Solutions no somos una inmobiliaria al uso. Somos una compañía especializada en la gestión integral de promociones residenciales, con un enfoque diferencial en proyectos en régimen de cooperativa. Coordinamos suelo, técnicos, constructoras, entidades financie",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:5b9402493d47c98fce41f32cedef91",
@@ -2336,7 +2484,8 @@
    "encaje": 40,
    "resumen": "Buscamos un/a Sales Executive B2B con experiencia en venta consultiva para impulsar la comercialización de programas de formación certificada a medida para las empresas. Funciones: Búsqueda y captación de nuevos clientes en el mercado B2B de formación comercial a medida. Concertar reuniones e Identificar necesidades reuniéndote con responsables de RRHH, Dirección Comercial y Dirección General. Dis",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:1f90311bdf4207bb040be2e6a1b6a3",
@@ -2354,7 +2503,8 @@
    "encaje": 40,
    "resumen": "¡Únete al Grupo Líder en Cuidado Animal! Grupo IskayPet nace de la unión de los ecosistemas de Kiwoko (Tiendas físicas y online, peluquerías Mundo Belleza y Centros Veterinarios Kivet) y Tiendanimal (Tiendas físicas y online, peluquerías Salón de Belleza y Centros Veterinarios Clinicanimal) tras la compra por parte de EMEFIN, grupo empresarial familiar peruano con más de 80 años de experiencia en ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:af95875590442f8cda6eb816099eb2",
@@ -2372,7 +2522,8 @@
    "encaje": 40,
    "resumen": "Asesor/a Inmobiliario/a - Multinacional Líder del Sector ¿Buscas una oportunidad para desarrollar tu carrera en el dinámico mundo de la intermediación inmobiliaria? Nuestra prestigiosa multinacional, líder en el sector, te ofrece la posibilidad de unirte a nuestro equipo de Asesores/as Inmobiliarios/as. En este rol, serás responsable de ofrecer un servicio excepcional a nuestros clientes, tanto en",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:a0ea3dcd274cfda091637c110771d2",
@@ -2390,7 +2541,8 @@
    "encaje": 40,
    "resumen": "1.075 € BRUTOS FIJOS + COMISIONES SIN LÍMITE. 25 HORAS DE MAÑANA, UNA CAUSA QUE IMPORTA Y OPCIÓN DE CRECER DENTRO DE LA EMPRESA. Trabaja para la Fundación CRIS Contra el Cáncer y convierte tus conversaciones en apoyo real para la investigación. ¿QUÉ OFRECEMOS? ·1.075 € brutos fijos al mes ·COMISIONES altas y sin límite, según resultados ·Contrato INDEFINIDO ·Jornada de 25 horas semanales (5h / día",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:384778090e43ff86949479cb278837",
@@ -2408,7 +2560,8 @@
    "encaje": 40,
    "resumen": "Estamos buscando un/a Diseñador/a Gráfico/a para incorporarse de manera inmediata a nuestro equipo en Madrid. La persona seleccionada dará soporte al/la diseñador/a de marca en la creación y ejecución de activos visuales para entornos impresos, digitales y retail, asegurando coherencia con la identidad de marca y los objetivos de campaña. Funciones principales: Apoyo en el desarrollo de material g",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:aded453ff044c2b4e5ebdd67eeba78",
@@ -2426,7 +2579,8 @@
    "encaje": 40,
    "resumen": "Nueva oportunidad profesional | Sales Executive Desde Antal International buscamos un/a Sales Executive Jr. para incorporarse a una compañía referente en el sector del juguete. Buscamos a una persona con visión comercial, orientación a resultados y capacidad para desarrollar relaciones sólidas con clientes, gestionar cuentas estratégicas e identificar nuevas oportunidades de negocio. ¿Cuáles serán",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:9b4cacf6d44c7985978b1f47495ebc",
@@ -2444,7 +2598,8 @@
    "encaje": 40,
    "resumen": "!AZENEA busca liderar la transformación del sector de asesorías en España, a través de nuestros servicios principales de asesoría contable, fiscal y laboral, así como de todos los servicios que el cliente profesional pueda necesitar. Nuestro modelo combina la experiencia tradicional con la innovación para ofrecer un servicio excepcional a nuestros clientes: experiencia, cercanía y tecnología para ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:5d2e4392d0493a8f2235cc09348423",
@@ -2462,7 +2617,8 @@
    "encaje": 40,
    "resumen": "¿Has trabajado anteriormente como encuestador o gestor de atención al cliente? Si es así, desde Randstad te estamos buscando! Buscamos personas con experiencia previa como encuestador/a o en atención al cliente telefónica, con buena dicción, actitud proactiva y ganas de aportar a un equipo que valora la calidad en cada llamada. Si te motiva el trato con las personas y buscas una oportunidad corta ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:8f909492224c92a764131fdfb4571e",
@@ -2480,7 +2636,8 @@
    "encaje": 40,
    "resumen": "¿Te apasiona el cuidado de la piel, la dermocosmética y el trato con el cliente? ¡Esta oportunidad es para ti! Desde GRUPO TEMA, empresa especializada en marketing integral, buscamos **dermoconsejeras con actitud comercial y habilidades de comunicación* para realizar una atractiva acción promocional en diferentes centros de El Corte Inglés de Madrid. Si te gusta asesorar, demostrar la eficacia de ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:c0c876a1f143ffae4274a0bae0b507",
@@ -2498,7 +2655,8 @@
    "encaje": 40,
    "resumen": "Desde grupoSky buscamos Peluqueros/as Profesionales para colaborar en una campaña promocional de una importante marca del sector capilar, realizando diagnósticos capilares. La campaña se desarrollará los días 16, 17, 18, 19 y 20 de noviembre, bajo contrato fijo-discontinuo con turnos disponibles de mañana y tarde. Disponibilidad obligatoria: Fechas: del 16 al 20 de noviembre Turno de mañana: Inici",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:566dff5b364b2faab09f6242d66e95",
@@ -2516,7 +2674,8 @@
    "encaje": 40,
    "resumen": "Buscamos una persona analítica, rápida y orientada a resultados para liderar la operativa de servicio, optimizar procesos mediante inteligencia artificial y maximizar el valor de nuestras cuentas clave. No es un rol de soporte ni de tareas manuales: tu objetivo es operar el negocio con precisión quirúrgica, controlar los KPIs de entrega, exprimir el potencial de agentes de IA y hacer crecer las cu",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:a65ebccad74dc1b2daa719393464c7",
@@ -2534,7 +2693,8 @@
    "encaje": 40,
    "resumen": "Asesor/a Inmobiliario/a - VILLANUEVA DEL PARDILLO (Salario fijo + comisiones 3k-5k) INDEFINIDO Hogares, empresa inmobiliaria de referencia en la zona de VILLANUEVA DEL PARDILLO busca incorporar a su equipo a un/a Asesor/a Inmobiliario/a con una destacada Comunicación eficaz y habilidades de Emprendimiento y Marketing comercial. En este puesto, serás responsable de asesorar a nuestros clientes en t",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:c5c7699dee4afa89a7c1fa3b53b7cd",
@@ -2552,7 +2712,8 @@
    "encaje": 40,
    "resumen": "Asesor/a Inmobiliario/a - LAS TABLAS (Salario fijo + comisiones 3k-5k) INDEFINIDO Hogares, empresa inmobiliaria de referencia en la zona de LAS TABLAS busca incorporar a su equipo a un/a Asesor/a Inmobiliario/a con una destacada Comunicación eficaz y habilidades de Emprendimiento y Marketing comercial. En este puesto, serás responsable de asesorar a nuestros clientes en todo el proceso de compra, ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:018ffa44894d219131576995a4d8d9",
@@ -2570,7 +2731,8 @@
    "encaje": 40,
    "resumen": "Asesor/a Inmobiliario/a - EL ALAMO (Salario fijo + comisiones 3k-5k) INDEFINIDO Hogares, empresa inmobiliaria de referencia en la zona de EL ALAMO busca incorporar a su equipo a un/a Asesor/a Inmobiliario/a con una destacada Comunicación eficaz y habilidades de Emprendimiento y Marketing comercial. En este puesto, serás responsable de asesorar a nuestros clientes en todo el proceso de compra, vent",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:ebc80d399a4cdcac0ae3200ff3a0d6",
@@ -2588,7 +2750,8 @@
    "encaje": 40,
    "resumen": "Asesor/a Inmobiliario/a - POZUELO (Salario fijo + comisiones 3k-5k) INDEFINIDO Hogares, empresa inmobiliaria de referencia en la zona de POZUELO busca incorporar a su equipo a un/a Asesor/a Inmobiliario/a con una destacada Comunicación eficaz y habilidades de Emprendimiento y Marketing comercial. En este puesto, serás responsable de asesorar a nuestros clientes en todo el proceso de compra, venta ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:3b1201be6a4af6bb88508c5e42a2a3",
@@ -2606,7 +2769,8 @@
    "encaje": 40,
    "resumen": "CONSULTOR INMOBILIARIO – POZUELO DE ALARCÓN Buscamos experiencia. Ofrecemos un proyecto para crecer. En InmoElite Propiedades queremos incorporar un nuevo consultor a nuestro equipo de Pozuelo de Alarcón. No buscamos incorporar agentes para aumentar una red. Buscamos un profesional inmobiliario con experiencia que quiera desarrollar su carrera dentro de un equipo estable y especializado. REQUISITO",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:e8c83fb4ec4d71b6dc023996c06e89",
@@ -2624,7 +2788,8 @@
    "encaje": 40,
    "resumen": "Captador/a de socios para ONG ¿Te apasiona la captación de socios y tienes una personalidad extrovertida? ¿Disfrutas del face to face y el marketing directo? Nuestra empresa está buscando a un/a profesional con comunicación persuasiva, gestión emocional e inteligencia emocional para unirse a nuestro equipo de captación de socios tanto en horario de TARDES como de MAÑANAS. Requisitos: Personalidad ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:d81032f94f48eeabc2ae4b1d8d2f3b",
@@ -2642,7 +2807,8 @@
    "encaje": 40,
    "resumen": "Como Dependiente/a de Administración de Lotería, serás el punto de contacto clave entre los clientes y la gestión diaria del establecimiento. Trabajarás en un entorno dinámico, apoyando en la venta de productos de lotería, la atención al público y la gestión de cobros y pagos. Formarás parte de un equipo pequeño y cohesionado, donde tu precisión y organización impactarán directamente en la eficien",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:614d3e320b423e989921cf6a9ef0ad",
@@ -2660,7 +2826,8 @@
    "encaje": 40,
    "resumen": "Trabajo sencillo, turno corto, pago semanal y equipo joven y formado. ¿Te gustaría ayudar a refugiados y víctimas de guerras con atención médica urgente? ¿Te gustaría garantizar atención a mujeres, madres y bebés en comunidades vulnerables? ¿Te gustaría defender el acceso a la salud para migrantes y personas sin hogar en España? Habla claro, con rigor, y explica nuestros proyectos a las personas q",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:8ec96604f54e379a9541e47ddaec44",
@@ -2678,7 +2845,8 @@
    "encaje": 40,
    "resumen": "¿Te gustaría tener tu propio negocio inmobiliario con el respaldo de un grupo internacional? En CENTURY 21 Calidade estamos buscando socios de negocio, nuevos consultores inmobiliarios que se unan a nuestro equipo, agencia inmobiliaria ubicada desde hace más de 10 años. en Boadilla del Monte, municipio del Noroeste de Madrid. Qué te ofrecemos: Flexibilidad horaria. Libertad de zonas de trabajo. Fo",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:af64d57e814bb9a5c1d92f95a8bac8",
@@ -2696,7 +2864,8 @@
    "encaje": 40,
    "resumen": "Descripción del puesto Buscamos una persona con perfil comercial para la promoción de herramientas y productos de styling capilar en el corner de una reconocida marca internacional ECI Sanchinarro. Funciones principales Atención y asesoramiento personalizado al cliente en punto de venta. Presentación, demostración y explicación de las características y beneficios del producto. Venta directa con or",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:a607e9a63946deb0265905f08c4f1f",
@@ -2714,7 +2883,8 @@
    "encaje": 40,
    "resumen": "Acerca de Vente-unique : Pioneros del e-commerce de mobiliario y decoración desde 2006, Vente-unique.com se ha consolidado como una referencia en 20 países gracias a su espíritu visionario y a su exigencia de rendimiento. Año tras año, ampliamos nuestro universo para convertirnos en un grupo en constante expansión en el equipamiento del hogar: Con la adquisición de la marca Habitat en 2024, un ico",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:2ac8207d09413b8849696e21e1ab3b",
@@ -2732,7 +2902,8 @@
    "encaje": 40,
    "resumen": "Buscamos secretario/a para sede Autoescuela en Madrid capital. Se valora experiencia en atención al público y ventas. El puesto esta enfocado a personas que les guste el trato con el público, que den información sobre nuestros servicios de modo comprensible y con ganas de trabajar. Imprescindible buena presencia y buen nivel office. Requisitos mínimos: - Buscamos gente con experiencia en ventas y ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:0de156091b4d0e8b87743fcb8e32c3",
@@ -2750,7 +2921,8 @@
    "encaje": 40,
    "resumen": "En CONTACTICA, buscamos un/a Técnico/a de Explotación de Proyectos / business developer para apoyar las actividades estratégicas y de análisis económico dentro de nuestros proyectos de innovación. El puesto ofrece la oportunidad de trabajar en proyectos europeos, especialmente en tareas relacionadas con planes de explotación, technology watch, elaboración de planes de negocio y análisis financiero",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:95751b27bc4ecd8572abaa23290a86",
@@ -2768,7 +2940,8 @@
    "encaje": 40,
    "resumen": "Somos una productora audiovisual líder en eventos deportivos de primer nivel, donde cada evento es un mundo distinto: estadios, exteriores, equipos técnicos, localizaciones que cambian de un día para otro... y en medio de todo eso, necesitamos a alguien que se asegure de que cada persona del equipo vuelve a casa sana y salva, que para nosotros es lo más importante ¿Eres tú? Si te gusta el deporte ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:05e4fa80ba4098aa96fdba79d90e4e",
@@ -2786,7 +2959,8 @@
    "encaje": 40,
    "resumen": "ASESOR INMOBILIARIO: Gran oportunidad para crecer en una gran empresa y recibir la mejor formación de un equipo líder en el sector. Buscamos personas jóvenes que quieran iniciarse en el mundo COMERCIAL y de VENTAS con iniciativa, motivación y compromiso. Se ofrece - Contrato laboral con alta en la Seguridad Social - SUELDO FIJO + ALTAS COMISIONES - Incentivos mensuales - Formación continua a cargo",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:121851a57640f9954c2bdf4909d11d",
@@ -2804,7 +2978,8 @@
    "encaje": 40,
    "resumen": "¿Te gustaría formar parte de un grupo empresarial en constante evolución? En Alquiler Seguro Grupo llevamos más de 18 años impulsando proyectos que transforman sectores y mejoran la vida de miles de personas. Lo que comenzó como una compañía pionera en la profesionalización del alquiler residencial se ha convertido en un grupo empresarial formado por diferentes compañías especializadas en sectores",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:3a4d32ceaa4c768a0e7501c4726e54",
@@ -2822,7 +2997,8 @@
    "encaje": 40,
    "resumen": "buscamos gente dinámica con ambición y espíritu de trabajo en equipo. Garantizamos buen ambiente de trabajo la formación que necesitarás para empezar a producir desde el primer días. Altas comisiones, flexibilidad horaria así como de zonas. somos una agencia especializada en captación de fondos para ong con larga trayectoria en el sector . se busca gente con proyección y que en un momento dado pud",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:37c99af2d044f8b6de28c5ec053096",
@@ -2840,7 +3016,8 @@
    "encaje": 40,
    "resumen": "Tipo de contrato: Jornada 6 horas Incorporación: Inmediata Imprescindible carnet de conducir B1 Somos una empresa de Catering y organización de eventos de alto nivel, con más de 30 años de experiencia. Buscamos incorporar un/a Ayudante de Cocina para dar apoyo a nuestro equipo de cocina, con ganas de aprender, buena actitud y capacidad para trabajar en un entorno dinámico ligado a eventos, producc",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:790f31a9de4ed198dca420b6201fcb",
@@ -2858,7 +3035,8 @@
    "encaje": 40,
    "resumen": "¿Te gustaría tener un trabajo estable con el que poder crecer profesionalmente y ganar altas comisiones para tus gastos y/o hobbies? Si te motiva el sector inmobiliario, tienes aptitud comercial y valoras la orientación al cliente, esta es tu oferta. En Tecnocasa Estudio Palacio de la Justicia SL estamos buscando asesores/as inmobiliarios/as para nuestra oficina de Móstoles. ¿Qué ofrecemos? -Una c",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:65d24ea2d442d68c0a580aa351636a",
@@ -2876,7 +3054,8 @@
    "encaje": 40,
    "resumen": "Seleccionamos Agentes Inmobiliarios/as sin experiencia previa para la zona de Carabanchel - Vista Alegre Se ofrece: - Contrato indefinido, sueldo fijo + comisiones. - Jornada completa. - Formación a cargo de la empresa - No es necesaria experiencia en el sector. - Plan de desarrollo personal con posibilidades de gestionar un equipo propio de trabajo. Si quieres aprender un OFICIO con un desarrollo",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:3634e7baf04fa28e77920bca7f344c",
@@ -2894,7 +3073,8 @@
    "encaje": 40,
    "resumen": "¿Quieres desarrollar tu carrera profesional en el sector inmobiliario? En Redpiso Villa de Vallecas buscamos incorporar una persona con iniciativa, ambición y ganas de crecer profesionalmente para formar parte de nuestro equipo. Si te gusta trabajar con personas, tienes facilidad para comunicarte y quieres aprender una profesión con posibilidades reales de desarrollo, queremos conocerte. No es imp",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:ae1e7ed4474638b1db8c8599fe7407",
@@ -2912,7 +3092,8 @@
    "encaje": 40,
    "resumen": "DO & CO es uno de los referentes internacionales en catering aeroportuario y hospitality premium. Garantizamos calidad y excelencia gastronómica para las aerolíneas más prestigiosas del mundo y desarrollamos servicios de alta gama en Salas VIP de aeropuertos internacionales y eventos deportivos. Nos centramos en crear una experiencia única que resulte atractiva incluso para los pasajeros más exige",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:c0d83147e54b54ba25f9e4714c31ab",
@@ -2930,7 +3111,8 @@
    "encaje": 40,
    "resumen": "¿Y si tu talento comercial tuviera el potencial de llevar tus ingresos mucho más lejos? Buscamos personas con iniciativa, visión comercial y ambición por crecer en un mercado donde las relaciones, la confianza y la excelencia marcan la diferencia. Si te motiva el mundo de las ventas, te atrae el mercado inmobiliario de lujo y quieres que tu capacidad comercial marque la diferencia, queremos conoce",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:8a2dfac1ad4808b1d5f1f4ab59bef1",
@@ -2948,7 +3130,8 @@
    "encaje": 40,
    "resumen": "En Ilunion, espacio de tolerancia, respeto y diversidad, nos encontramos en búsqueda de personal CON DISCAPACIDAD/IPT para un puesto de Supervisor/a gestor de cuenta a nivel nacional, como apoyo para un cliente en concreto. Las funciones principales serían las siguientes: • Gestión de tareas. • Revisión de facturación. • Apoyo a las delegaciones. • Auditorías internas • Realización de visitas a to",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:ee1c0b225d435588a093029bd11caa",
@@ -2966,7 +3149,8 @@
    "encaje": 40,
    "resumen": "ZENVIDA FOOT & BODY (zenvida.es) Masajista-reflexólogo/a – Contrato a tiempo parcial (32 horas) – Madrid Centro (Sol) Detalles del puesto Tipo de contrato: Indefinido o temporal por circunstancias de la producción Jornada: Tiempo parcial, 32 horas semanales Horario: Turnos rotativos de lunes a domingo, según cuadrante trimestral Convenio colectivo: V Convenio Colectivo Estatal de Instalaciones Dep",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:14c8676a8d42d090168c045d7167fe",
@@ -2984,7 +3168,8 @@
    "encaje": 40,
    "resumen": "En Josanz Audiovisuales no solo hacemos eventos: creamos experiencias que se viven, se sienten y se recuerdan. Somos una empresa especializada en soluciones audiovisuales para eventos, donde la tecnología, la creatividad y el trabajo en equipo son la base de todo lo que hacemos. Si te apasiona el mundo audiovisual, disfrutas del ritmo del directo y te motiva formar parte de un equipo que combina p",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:729ee8fa164851a480f4ab379e673a",
@@ -3002,7 +3187,8 @@
    "encaje": 40,
    "resumen": "¡Lidera la experiencia Pause&Play! Cada día trabajamos para ofrecer a nuestros clientes la mejor experiencia de ocio, y detrás de cada resultado hay equipos comprometidos y personas que inspiran, acompañan y hacen que las cosas sucedan. Si te apasiona liderar personas, desarrollar equipos y asumir nuevos retos, nos encantará conocerte. ¿Por qué el Programa de Desarrollo de Pause&Play? Creemos que ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:5e8297a83f4e55ba2ac12d6d6ff1e4",
@@ -3020,7 +3206,8 @@
    "encaje": 40,
    "resumen": "Endivo Consulting, consultora especializada en selección de personal para el sector sanitario, busca incorporar una Secretaria Administrativa / Asistente de Dirección para dar soporte directo a la Dirección. Buscamos una persona organizada, resolutiva y con iniciativa, capaz de gestionar tareas administrativas y contables, así como de aportar apoyo en la organización y coordinación del día a día d",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:30d1f08a464682ad66e67677e1fb46",
@@ -3038,7 +3225,8 @@
    "encaje": 40,
    "resumen": "¿Te motiva abrir mercado, generar nuevas oportunidades de negocio y formar parte del crecimiento de una empresa internacional en plena expansión? Nuestro cliente, STEP2FIT, necesita un/a Sales Executive para impulsar el desarrollo del mercado español. Es una compañía tecnológica especializada en el sector fitness y wellness, que ya opera con éxito en varios países europeos y continúa expandiendo s",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:112c019e03497a851fc1fd8f83d2f5",
@@ -3056,7 +3244,8 @@
    "encaje": 40,
    "resumen": "Somos la sede del Grupo IMA en España y Portugal. Nos especializamos en prestar servicios de asistencia a nuestros más de 45 millones de clientes en todo el mundo desde hace más de 40 años. Somos solucionadores, personas que ayudan a personas. Estamos reforzando nuestro equipo con nuevos perfiles que quieran formar parte de un gran grupo, sentirse partícipes de una compañía en crecimiento que esta",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:93bdbb946a4d109d04123ca296772d",
@@ -3074,7 +3263,8 @@
    "encaje": 40,
    "resumen": "En BETWEEN te ofrecemos las oportunidades que necesitas para alcanzar tus objetivos profesionales. Si quieres desarrollar tus capacidades en IT e Ingeniería ¡este es tu próximo destino! Damos soporte en una gran variedad de áreas como Firmware, Software, BI, Diseño, Project Management y muchas más. Además, desarrollamos soluciones tecnológicas a medida desde nuestros BETWEEN Labs. Estamos buscando",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:3e49d880b945d99b441132a7482ded",
@@ -3092,7 +3282,8 @@
    "encaje": 40,
    "resumen": "El Centro de Innovación de Despachos Profesionales es una comunidad formada por gestores, asesores y abogados que buscan un aprendizaje continuo en procesos y tecnología para mejorar la eficacia, la calidad y la rentabilidad de sus despachos. Actualmente buscamos un/a Técnico/a Audiovisual. Funciones: -Producción audiovisual: guion, grabación y edición de vídeo. -Diseño audiovisual: creación de im",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:54c1b85d424e7ba5193c0d1848257d",
@@ -3110,7 +3301,8 @@
    "encaje": 40,
    "resumen": "MGI AUDICON & PARTNERS | Madrid (Príncipe de Vergara) ¿Quiénes somos? MGI Audicon & Partners es una firma de servicios profesionales especializada en auditoría, asesoramiento fiscal, jurídico, contable y consultoría empresarial, con presencia nacional e internacional. Buscamos incorporar a nuestro equipo de Madrid una persona organizada, resolutiva y polivalente que asuma las funciones de secretar",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:02d18c4df04b5ba20298c74a358ca0",
@@ -3128,7 +3320,8 @@
    "encaje": 40,
    "resumen": "En HANDS FOR EVENTS, empresa especializada en la gestión de personal y la fabricación de elementos para grandes eventos, buscamos un/a CARPINTERO/A DE MADERA OFICIAL DE 1.ª, con experiencia en carpintería industrial y dominio de maquinaria, especialmente de TUPI, para incorporarse a nuestro taller de Móstoles (Madrid). Buscamos una persona que sepa trabajar de forma autónoma, con experiencia real ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:652292dda94c7e8f7dbd6f99c49992",
@@ -3146,7 +3339,8 @@
    "encaje": 40,
    "resumen": "Desde InfoJobs Assistance, estamos buscando un/a Asesor/a inmobiliario para incorporarse en la empresa Ari Home Inmobiliaria, ubicada en Madrid. Funciones: - Captación de inmuebles para venta y alquiler, captación telefónica y puerta fría. - Atención y asesoramiento personalizado a clientes. - Realización de visitas a propiedades. - Gestión de operaciones de compraventa y alquiler. - Seguimiento c",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4481658949",
@@ -3164,7 +3358,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4481657940",
@@ -3182,7 +3377,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:2ca8ef2f2245c3a687f6245bd0b095",
@@ -3200,7 +3396,8 @@
    "encaje": 40,
    "resumen": "En OCLOVA buscamos un/a Inside Sales Representative para liderar el desarrollo comercial de nuestros mercados internacionales, con un foco principal (90%) en Estados Unidos y, en menor medida, en Reino Unido y Alemania. Esta persona será la responsable de identificar, contactar y cerrar acuerdos comerciales con clínicas dentales, ortodoncistas y distribuidores en estos mercados, representando nues",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:51c12d5d3f40b893a5791d81800074",
@@ -3218,7 +3415,8 @@
    "encaje": 40,
    "resumen": "En SOTOMORA buscamos una persona alegre, proactiva, organizada y con ganas de crecer para incorporarse a nuestro equipo. Muy importante que tenga coche proipio sino vive cerca de Alcobendas. Será una figura clave dentro de la oficina y uno de los primeros puntos de contacto con nuestros clientes. Buscamos a alguien con muy buen trato personal, resolutiva, dinámica y capaz de coordinar distintas ta",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:8ed5bd2ba84b8a94da8b6c6a3320d5",
@@ -3236,7 +3434,8 @@
    "encaje": 40,
    "resumen": "Funciones ¿Te apasiona la cocina y buscas una oportunidad estable en un entorno dinámico? Buscamos cocineros/as para incorporarse a una reconocida empresa de catering aéreo, especializada en la elaboración de menús para importantes compañías aéreas nacionales e internacionales. Funciones +Elaboración de desayunos, almuerzos, meriendas y cenas para servicio a bordo. +Preparación de snacks, sándwich",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4481368853",
@@ -3254,7 +3453,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:9aeb5d7a2c48d68e42b6444dccac7c",
@@ -3272,7 +3472,8 @@
    "encaje": 40,
    "resumen": "Field Sales Somos una empresa en crecimiento dedicada a ofrecer soluciones de software. Buscamos incorporar a un profesional de la venta en Madrid con gran iniciativa, energía y experiencia en venta, que disfruten del contacto directo con la clientela a pie de calle y nos ayuden a abrir mercado de forma presencial. Tipo de contrato: Indefinido a tiempo completo Jornada: De Lunes a Viernes Funcione",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:c49d4491114c7aaa656d039f9913cb",
@@ -3290,7 +3491,8 @@
    "encaje": 40,
    "resumen": "En Sundisa estamos buscando un perfil de rotulista / instalador para el equipo de Madrid. Sundisa es una empresa dedicada a la impresión digital a gran formato oftreciendo un servicio integral desde la producción hasta la instalación/retirada de los elementos (lonas, estructuras, rígidos, vinilos etc). Ya sea para campañas publicitarias, señalética, eventos, rotulación de flotas y demás. Para este",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:bca21487ce4ade9636eff7d61594cd",
@@ -3308,7 +3510,8 @@
    "encaje": 40,
    "resumen": "¿Tienes experiencia trabajando de cara al público y un nivel alto de inglés? ¿estás buscando un puesto dinámico en una entidad referente en el sector educativo? Si tu respuesta es afirmativa, ¡sigue leyendo! Desde la Universidad Europea de Madrid estamos en búsqueda de un/a Conserje ubicado en nuestro Campus de Alcobendas cuya misión será controlar y asegurar el correcto uso de las instalaciones, ",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "infojobs:bc6f231d834b8893dcf236e36d02c2",
@@ -3326,7 +3529,8 @@
    "encaje": 40,
    "resumen": "¿¡Quieres ser parte de la fiesta en Madrid?!...Si? pues esta oferta es para ti ! Somos Mandala Group y te presentamos Provenza! Nueva apertura en Madrid. Si quieres ser parte de nuestro equipo y de la apertura de una de las mejores discotecas. Acompáñanos a ver lo que necesitamos...Estamos en búsqueda de un LIGHT JOCKEY (TÉCNICO DE LUCES) con experiencia en montaje, operación y supervisión de sist",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4478996489",
@@ -3344,7 +3548,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4480968880",
@@ -3362,7 +3567,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4479818137",
@@ -3380,7 +3586,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4479804593",
@@ -3398,7 +3605,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4478432334",
@@ -3416,7 +3624,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4475822244",
@@ -3434,7 +3643,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4473322498",
@@ -3452,7 +3662,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4472815290",
@@ -3470,7 +3681,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4473221553",
@@ -3488,7 +3700,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4478538325",
@@ -3506,7 +3719,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4465962963",
@@ -3524,7 +3738,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4458224427",
@@ -3542,7 +3757,8 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   },
   {
    "id": "linkedin:4425887088",
@@ -3560,7 +3776,9 @@
    "encaje": 40,
    "resumen": "",
    "first_seen": "2026-10-28T08:36:05.967Z",
-   "last_seen": "2026-10-28T08:36:05.967Z"
+   "last_seen": "2026-10-28T08:36:05.967Z",
+   "emailsWeb": []
   }
- ]
+ ],
+ "enriched": "2026-10-28T09:35:19.942Z"
 }
