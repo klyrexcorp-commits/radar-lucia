@@ -79,6 +79,11 @@
   .offbar label.chk{display:flex;align-items:center;gap:6px;margin:0;font-size:13px;color:var(--text)}
   .offbar label.chk input{width:auto}
   .offmeta{font-size:12px;color:var(--muted);margin-bottom:12px}
+  .blist{max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:6px 10px;margin-top:6px}
+  .blist label{display:flex;gap:8px;align-items:center;margin:0;padding:4px 0;color:var(--text);font-size:13px}
+  .blist input{width:auto}
+  .srow{font-size:13px;padding:5px 0;border-bottom:1px solid var(--line)}
+  .srow.ok{color:var(--ok)} .srow.err{color:var(--bad)}
   .empty{text-align:center;color:var(--muted);padding:48px 16px}
   .overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:flex-start;justify-content:center;padding:24px 12px;overflow:auto;z-index:10}
   .overlay[hidden]{display:none}
@@ -178,7 +183,7 @@
   var PRESETS = ['ejecutivo de cuentas junior','asistente de cuentas agencia publicidad','coordinador de eventos','producción de eventos','asistente de marketing','marketing junior','comunicación y marketing'];
 
   var DEFAULT_SETTINGS = {
-    gmail:'', cv:'', telefono:'', ghToken:'', diasSeguimiento:6,
+    gmail:'', cv:'', telefono:'', ghToken:'', gClientId:'', diasSeguimiento:6,
     tpl:{
       cuentas:{
         asunto:'Candidatura a cuentas junior · Lucía Gómez',
@@ -214,6 +219,11 @@
   var offState = load(LS_OFF, {});
   var oF = {portal:'', sector:'', q:'', soloEmail:false, ocultas:true, min:50};
   var fSector = '', firstLoad = true;
+  // Gmail: el CV adjunto vive solo en este navegador; el permiso de envío, solo en memoria
+  var LS_CV = 'radarLucia.cv.v1';
+  var cvData = load(LS_CV, null);
+  var gToken = null, gEmail = '', gsiPromise = null;
+  var bSel = {}, batchRun = {stop:false, ids:[], tpl:'auto'};
   var qState = {active:false, ids:[], i:0, tpl:'auto', sent:0, skipped:0};
 
   var el = {
@@ -312,7 +322,9 @@
     return nombre ? 'Hola '+nombre+',' : 'Hola, equipo de '+l.empresa.trim()+',';
   }
   function render_tpl(txt, l){
-    var cvLinea = settings.cv ? 'Te dejo mi CV aquí: '+settings.cv : 'Te adjunto mi CV.';
+    var cvLinea = cvData
+      ? (settings.cv ? 'Te adjunto mi CV, que también puedes ver aquí: '+settings.cv : 'Te adjunto mi CV.')
+      : (settings.cv ? 'Te dejo mi CV aquí: '+settings.cv : 'Te adjunto mi CV.');
     return txt.replace(/\{saludo\}/g, saludo(l)).replace(/\{empresa\}/g, l.empresa.trim())
       .replace(/\{puesto\}/g, (l.puesto_oferta||'').trim() || 'este puesto')
       .replace(/\{portal\}/g, l.portal || 'vuestra web')
@@ -520,7 +532,7 @@
 
   // ---------- modales ----------
   function openModal(html){ el.modal.innerHTML = html; el.overlay.hidden = false; }
-  function closeModal(){ qState.active = false; el.overlay.hidden = true; el.modal.innerHTML = ''; }
+  function closeModal(){ qState.active = false; batchRun.stop = true; el.overlay.hidden = true; el.modal.innerHTML = ''; }
   function byId(id){ return leads.filter(function(l){return l.id===id;})[0]; }
   function $(id){ return document.getElementById(id); }
 
@@ -578,25 +590,128 @@
         '<div class="foot"><button data-act="close">Cerrar</button><button class="primary" data-act="edit" data-id="'+l.id+'">Corregir datos</button></div>');
       return;
     }
-    var key = esSeguimiento ? 'seguimiento'
-      : (qState.active && qState.tpl!=='auto' ? qState.tpl : ((l.oferta_url || l.puesto_oferta) ? 'oferta' : l.tipo));
-    var t = settings.tpl[key];
+    var cf = composeFor(l, esSeguimiento, qState.active ? qState.tpl : 'auto');
+    var puedeEnviar = !!settings.gClientId;
     var warn = '';
     if(!settings.gmail) warn += '<div class="alert warn">Falta el Gmail de Lucía en Ajustes: Gmail podría abrirse con otra cuenta.</div>';
-    if(!settings.cv) warn += '<div class="alert warn">No hay enlace al CV en Ajustes. El email dirá "Te adjunto mi CV": acuérdate de adjuntar el PDF.</div>';
+    if(!settings.cv && !cvData) warn += '<div class="alert warn">No hay CV en Ajustes (ni PDF adjunto ni enlace). El email dirá "Te adjunto mi CV": acuérdate de adjuntarlo.</div>';
+    else if(!cvData && puedeEnviar) warn += '<div class="alert warn">No hay PDF adjunto en Ajustes: «Enviar ahora» mandaría solo el enlace al CV.</div>';
     if(!settings.telefono) warn += '<div class="alert warn">Falta el teléfono en Ajustes: la firma saldrá sin él.</div>';
     if(!esSeguimiento && l.enviado_at) warn += '<div class="alert warn">Ya se envió un email a esta empresa el '+fmt(l.enviado_at)+'.</div>';
     openModal((qState.active ? '<div class="hint">Cola de envío: '+(qState.i+1)+' de '+qState.ids.length+'</div>' : '')+
       '<h2>'+(esSeguimiento?'Seguimiento a ':'Email para ')+esc(l.empresa)+'</h2>'+
-      '<div class="hint">Revisa el texto antes de enviar. Se abre en Gmail como borrador y lo envías tú.</div>'+warn+
+      '<div class="hint">'+(puedeEnviar ? 'Revisa el texto. «Enviar ahora» lo manda desde Gmail'+(cvData?' con el CV adjunto':'')+'; «Abrir en Gmail» lo deja como borrador.' : 'Revisa el texto antes de enviar. Se abre en Gmail como borrador y lo envías tú.')+'</div>'+warn+
       '<label>Para</label><input id="c_to" value="'+esc(l.email)+'" readonly>'+
-      '<label>Asunto</label><input id="c_asunto" value="'+esc(render_tpl(t.asunto,l))+'">'+
-      '<label>Mensaje</label><textarea id="c_cuerpo" rows="16">'+esc(render_tpl(t.cuerpo,l))+'</textarea>'+
+      '<label>Asunto</label><input id="c_asunto" value="'+esc(cf.subject)+'">'+
+      '<label>Mensaje</label><textarea id="c_cuerpo" rows="16">'+esc(cf.body)+'</textarea>'+
       '<div id="c_after"></div>'+
       '<div class="foot">'+(qState.active
         ? '<button data-act="qquit">Salir de la cola</button><button data-act="qskip">Saltar</button>'
         : '<button data-act="close">Cerrar</button>')+'<button data-act="copy">Copiar texto</button>'+
-      '<button class="primary" data-act="gmail" data-id="'+l.id+'" data-seg="'+(esSeguimiento?1:0)+'">Abrir en Gmail</button></div>');
+      '<button'+(puedeEnviar?'':' class="primary"')+' data-act="gmail" data-id="'+l.id+'" data-seg="'+(esSeguimiento?1:0)+'">Abrir en Gmail</button>'+
+      (puedeEnviar ? '<button class="primary" data-act="sendNow" data-id="'+l.id+'" data-seg="'+(esSeguimiento?1:0)+'">Enviar ahora</button>' : '')+'</div>');
+  }
+
+  // asunto y mensaje de un correo: plantilla elegida, o la que toca según la empresa
+  function composeFor(l, esSeg, tplOverride){
+    var key = esSeg ? 'seguimiento'
+      : (tplOverride && tplOverride!=='auto' ? tplOverride : ((l.oferta_url || l.puesto_oferta) ? 'oferta' : l.tipo));
+    var t = settings.tpl[key];
+    return {subject: render_tpl(t.asunto, l), body: render_tpl(t.cuerpo, l)};
+  }
+  function markSent(l){ l.estado = 'enviado'; l.enviado_at = nowISO(); l.seguimiento_at = null; }
+
+  // ---------- Gmail: conexión (OAuth), CV adjunto y envío ----------
+  var SEND_SCOPE = 'https://www.googleapis.com/auth/gmail.send openid email';
+
+  function loadGsi(){
+    if(window.google && google.accounts && google.accounts.oauth2) return Promise.resolve();
+    if(!gsiPromise) gsiPromise = new Promise(function(res, rej){
+      var s = document.createElement('script');
+      s.src = 'https://accounts.google.com/gsi/client'; s.async = true; s.onload = res;
+      s.onerror = function(){ gsiPromise = null; rej(new Error('No se pudo cargar el acceso de Google.')); };
+      document.head.appendChild(s);
+    });
+    return gsiPromise;
+  }
+  function gValid(){ return !!(gToken && Date.now() < gToken.exp); }
+
+  // Hay que llamarla desde un clic: abre la ventana de Google para dar permiso de envío
+  function gConnect(){
+    if(!settings.gClientId) return Promise.reject(new Error('Falta el ID de cliente de Google en Ajustes.'));
+    return loadGsi().then(function(){
+      return new Promise(function(res, rej){
+        google.accounts.oauth2.initTokenClient({
+          client_id: settings.gClientId, scope: SEND_SCOPE, hint: settings.gmail || undefined,
+          callback: function(r){
+            if(r.error){ rej(new Error(r.error_description || r.error)); return; }
+            gToken = {t:r.access_token, exp:Date.now() + (Number(r.expires_in)||3600)*1000 - 60000};
+            res();
+          },
+          error_callback: function(e){
+            rej(new Error(e && e.type==='popup_closed' ? 'Cerraste la ventana de Google sin dar permiso.' : 'No se pudo abrir la ventana de Google (¿bloqueador de ventanas?).'));
+          }
+        }).requestAccessToken();
+      });
+    }).then(function(){
+      return fetch('https://www.googleapis.com/oauth2/v3/userinfo', {headers:{Authorization:'Bearer '+gToken.t}}).then(function(r){ return r.json(); });
+    }).then(function(u){ gEmail = String(u.email||'').toLowerCase(); return gEmail; });
+  }
+  function ensureGmail(){ return gValid() ? Promise.resolve(gEmail) : gConnect(); }
+
+  function b64(bytes){
+    var s = '';
+    for(var i=0; i<bytes.length; i+=0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i+0x8000));
+    return btoa(s);
+  }
+  function utf8(str){ return new TextEncoder().encode(str); }
+  function wrap76(s){ return s.replace(/(.{76})/g, '$1\r\n'); }
+  function mimeSubject(s){ return /^[\x20-\x7e]*$/.test(s) ? s : '=?UTF-8?B?'+b64(utf8(s))+'?='; }
+
+  // mensaje MIME (texto + PDF opcional) codificado para la API de Gmail
+  function buildRaw(to, subject, body, attach){
+    var nl = '\r\n', bd = 'radar'+Math.random().toString(36).slice(2)+Date.now().toString(36);
+    var head = 'To: '+to+nl+'Subject: '+mimeSubject(subject)+nl+'MIME-Version: 1.0'+nl;
+    var text = 'Content-Type: text/plain; charset="UTF-8"'+nl+'Content-Transfer-Encoding: base64'+nl+nl+
+      wrap76(b64(utf8(body.replace(/\r?\n/g, nl))))+nl;
+    var msg = !attach ? head+text
+      : head+'Content-Type: multipart/mixed; boundary="'+bd+'"'+nl+nl+
+        '--'+bd+nl+text+
+        '--'+bd+nl+'Content-Type: application/pdf; name="'+attach.name+'"'+nl+
+        'Content-Disposition: attachment; filename="'+attach.name+'"'+nl+'Content-Transfer-Encoding: base64'+nl+nl+
+        wrap76(attach.b64)+nl+'--'+bd+'--'+nl;
+    return b64(utf8(msg)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+
+  function sendMail(to, subject, body){
+    return fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
+      method:'POST',
+      headers:{Authorization:'Bearer '+gToken.t, 'Content-Type':'application/json'},
+      body: JSON.stringify({raw: buildRaw(to, subject, body, cvData)})
+    }).then(function(r){
+      if(r.ok) return r.json();
+      return r.json().catch(function(){ return {}; }).then(function(j){
+        var e = new Error((j.error && j.error.message) || ('Error '+r.status)); e.status = r.status; throw e;
+      });
+    });
+  }
+
+  function gStatus(){
+    var s = $('g_status'), c = $('s_cvinfo');
+    if(s) s.textContent = gValid() ? 'Conectado como '+gEmail+'.' : (settings.gClientId ? 'Sin conectar.' : 'Falta el ID de cliente de Google.');
+    if(c) c.textContent = cvData ? cvData.name+' · '+Math.round(cvData.size/1024)+' KB. Se adjunta a cada correo enviado desde la app.' : 'Sin PDF adjunto.';
+  }
+  function readCv(file){
+    if(!file) return;
+    if(file.size > 3*1024*1024){ alert('El PDF pesa más de 3 MB. Comprímelo antes de adjuntarlo.'); return; }
+    var r = new FileReader();
+    r.onload = function(){
+      var name = file.name.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9._ -]/g, '_');
+      cvData = {name:name, size:file.size, b64:b64(new Uint8Array(r.result))};
+      try{ localStorage.setItem(LS_CV, JSON.stringify(cvData)); }catch(e){ alert('No se pudo guardar el PDF en este navegador.'); }
+      gStatus();
+    };
+    r.readAsArrayBuffer(file);
   }
 
   function gmailUrl(l){
@@ -616,6 +731,13 @@
       '<label>Enlace al CV (Drive, público con enlace)</label><input id="s_cv" value="'+esc(settings.cv)+'">'+
       '<div class="row"><div><label>Teléfono en la firma</label><input id="s_tel" value="'+esc(settings.telefono)+'"></div>'+
       '<div><label>Días hasta el seguimiento</label><input id="s_dias" type="number" min="2" max="30" value="'+esc(settings.diasSeguimiento)+'"></div></div>'+
+      '<h3 style="margin:20px 0 2px;font-size:15px">Envío desde Gmail</h3>'+
+      '<div class="hint">La app envía por la API de Gmail desde la cuenta que conectes, con el CV adjunto. El permiso se pide a Google y no se guarda en ningún servidor. Necesita un «ID de cliente» de Google (guía en el README del repositorio).</div>'+
+      '<label>ID de cliente de Google (OAuth)</label><input id="s_gcid" autocomplete="off" placeholder="1234567890-abc….apps.googleusercontent.com" value="'+esc(settings.gClientId)+'">'+
+      '<div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><button data-act="gConnect">Conectar con Gmail</button><button data-act="gTest">Enviarme un email de prueba</button></div>'+
+      '<div class="hint" id="g_status"></div>'+
+      '<label>CV adjunto (PDF)</label><input type="file" id="s_cvfile" accept="application/pdf,.pdf">'+
+      '<div class="hint" id="s_cvinfo"></div>'+
       '<label>Token de GitHub (opcional: para lanzar «Actualizar ofertas» desde aquí)</label>'+
       '<input id="s_gh" type="password" autocomplete="off" value="'+esc(settings.ghToken)+'">'+
       '<div class="hint">Token «fine-grained» solo de este repositorio, con permiso Actions de lectura y escritura. Se guarda únicamente en este navegador y no entra en las copias de seguridad.</div>'+
@@ -626,6 +748,7 @@
       '<div class="foot"><button data-act="export">Exportar copia</button><button data-act="importJson">Restaurar copia</button>'+
       '<button data-act="close">Cancelar</button><button class="primary" data-act="saveSettings">Guardar</button></div>'+
       '<input type="file" id="s_file" accept=".json" hidden>');
+    gStatus();
     $('s_bm').setAttribute('href', bookmarkletCode());
     $('s_bm_hint').textContent = location.protocol==='file:'
       ? 'Arrastra el botón a la barra de marcadores; en una oferta, púlsalo y se añade aquí. OJO: solo funciona si esta app está publicada en una web; abierta como archivo local, los navegadores lo bloquean. Mientras tanto, pega el enlace de la oferta en «Añadir oferta».'
@@ -637,6 +760,7 @@
     settings.cv = $('s_cv').value.trim();
     settings.telefono = $('s_tel').value.trim();
     settings.ghToken = $('s_gh').value.trim();
+    settings.gClientId = $('s_gcid').value.trim();
     settings.diasSeguimiento = Math.max(2, Number($('s_dias').value)||6);
     TPL_KEYS.forEach(function(k){
       settings.tpl[k] = {asunto:$('s_'+k+'_a').value, cuerpo:$('s_'+k+'_c').value};
@@ -745,25 +869,107 @@
     var tOpts = '<option value="">Todos los puestos</option>'+Object.keys(TIPOS).map(function(k){return '<option value="'+k+'">'+TIPOS[k]+'</option>';}).join('');
     var pOpts = '<option value="auto">Automática (según cada empresa)</option>'+
       TPL_KEYS.filter(function(k){return k!=='seguimiento';}).map(function(k){return '<option value="'+k+'">'+TPL_LABEL[k]+'</option>';}).join('');
+    var auto = !!settings.gClientId;
     openModal('<h2>Envío por lotes</h2>'+
-      '<div class="hint">Prepara una cola con las empresas en «Pendiente» que ya tienen email. Revisas y envías cada correo desde Gmail, uno tras otro: no sale nada sin que tú pulses.</div>'+
+      '<div class="hint">Elige las empresas en «Pendiente» que ya tienen email'+(auto ? ': se envían desde Gmail, una cada 3 segundos' : '')+'. Antes de enviar verás una vista previa.</div>'+
       '<div class="row"><div><label>Sector</label><select id="b_sector">'+sOpts+'</select></div>'+
       '<div><label>Puesto</label><select id="b_tipo">'+tOpts+'</select></div></div>'+
-      '<div class="row"><div><label>Plantilla</label><select id="b_tpl">'+pOpts+'</select></div>'+
-      '<div><label>Cuántos correos</label><input id="b_n" type="number" min="1" max="30" value="10"></div></div>'+
+      '<label>Plantilla</label><select id="b_tpl">'+pOpts+'</select>'+
+      '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="small" data-act="bAll">Seleccionar todas</button><button class="small" data-act="bNone">Quitar selección</button></div>'+
+      '<div class="blist" id="b_list"></div>'+
       '<div id="b_info"></div>'+
-      '<div class="foot"><button data-act="close">Cancelar</button><button class="primary" id="b_go" data-act="qstart">Preparar cola</button></div>');
+      '<div class="foot"><button data-act="close">Cancelar</button>'+
+      '<button id="b_manual" data-act="qstart">Revisar una a una</button>'+
+      (auto ? '<button class="primary" id="b_auto" data-act="autoPrep">Enviar por Gmail…</button>' : '')+'</div>');
+    batchRender();
+  }
+  function batchFiltered(){ return batchCandidates($('b_sector').value, $('b_tipo').value); }
+  function selectedLeads(){ return batchFiltered().filter(function(l){ return bSel[l.id]; }); }
+  function batchRender(){
+    if(!$('b_list')) return;
+    var c = batchFiltered();
+    $('b_list').innerHTML = c.length ? c.map(function(l){
+      return '<label><input type="checkbox" data-bid="'+esc(l.id)+'"'+(bSel[l.id]?' checked':'')+'> <span><strong>'+esc(l.empresa)+'</strong> · '+esc(l.email)+' · '+esc(leadSector(l))+'</span></label>';
+    }).join('') : '<div class="hint" style="padding:8px 0">No hay empresas pendientes con email para estos filtros.</div>';
     batchInfo();
   }
   function batchInfo(){
     if(!$('b_info')) return;
     var sector = $('b_sector').value, tipo = $('b_tipo').value;
-    var c = batchCandidates(sector, tipo), n = Math.max(1, Number($('b_n').value) || 10);
+    var c = batchFiltered(), n = selectedLeads().length;
     var sin = leads.filter(function(l){ return l.estado==='contacto' && (!sector || leadSector(l)===sector) && (!tipo || l.tipo===tipo); }).length;
-    $('b_info').innerHTML = '<div class="alert '+(c.length?'ok':'warn')+'">'+c.length+' empresas listas para enviar'+(c.length?' (se prepararán '+Math.min(n,c.length)+')':'')+
-      '. '+sin+' sin email, en «Falta contacto».</div>'+
+    $('b_info').innerHTML = '<div class="alert '+(n?'ok':'warn')+'">'+n+' seleccionadas de '+c.length+' con email. '+sin+' sin email, en «Falta contacto».</div>'+
       (n>20 ? '<div class="alert warn">Más de 20 correos al día aumenta el riesgo de que Gmail los marque como spam.</div>' : '');
-    $('b_go').disabled = !c.length;
+    if($('b_manual')) $('b_manual').disabled = !n;
+    if($('b_auto')) $('b_auto').disabled = !n;
+  }
+
+  // paso 2 del envío automático: resumen y vista previa del primer correo
+  function autoPrepare(){
+    var sel = selectedLeads();
+    if(!sel.length) return;
+    if(sel.length > 40){ alert('Como máximo 40 correos por envío. Quita algunos de la selección.'); return; }
+    var tpl = $('b_tpl').value;
+    batchRun = {stop:false, ids:sel.map(function(l){return l.id;}), tpl:tpl};
+    var m = composeFor(sel[0], false, tpl), warn = '';
+    if(!cvData) warn += '<div class="alert warn">No hay PDF adjunto en Ajustes: los correos saldrán sin CV adjunto'+(settings.cv?' (solo con el enlace)':'')+'.</div>';
+    if(!settings.telefono) warn += '<div class="alert warn">Falta el teléfono en Ajustes: la firma saldrá sin él.</div>';
+    if(sel.length > 20) warn += '<div class="alert warn">Más de 20 correos en un día aumenta el riesgo de spam.</div>';
+    openModal('<h2>Enviar '+sel.length+' correos por Gmail</h2>'+
+      '<div class="hint">Salen uno cada 3 segundos desde la cuenta de Gmail que conectes'+(cvData?', con el CV adjunto':'')+'. Puedes parar cuando quieras; los ya enviados quedan marcados.</div>'+warn+
+      '<label>Vista previa del primero ('+esc(sel[0].empresa)+')</label>'+
+      '<input readonly value="'+esc(m.subject)+'"><textarea readonly rows="11" style="margin-top:6px">'+esc(m.body)+'</textarea>'+
+      '<label class="chk" style="display:flex;gap:8px;align-items:center;color:var(--text);margin-top:12px"><input type="checkbox" id="b_ok" style="width:auto"> He revisado la vista previa y quiero enviar '+sel.length+' correos</label>'+
+      '<div id="b_err"></div>'+
+      '<div class="foot"><button data-act="batch">Atrás</button><button class="primary" id="b_go" data-act="autoGo" disabled>Enviar ahora</button></div>');
+  }
+  function autoStart(){
+    ensureGmail().then(function(email){
+      if(settings.gmail && email && email !== settings.gmail.toLowerCase() &&
+         !confirm('Has conectado '+email+' pero en Ajustes el Gmail es '+settings.gmail+'. Se enviará desde '+email+'. ¿Seguir?')) return;
+      sendSequence();
+    }).catch(function(e){ if($('b_err')) $('b_err').innerHTML = '<div class="alert bad">'+esc(e.message)+'</div>'; });
+  }
+  function sendSequence(){
+    var run = batchRun, ids = run.ids.slice(), i = 0, sent = 0, failed = 0, reason = '';
+    var delay = window.RADAR_SEND_DELAY != null ? window.RADAR_SEND_DELAY : 3000;
+    run.stop = false;
+    openModal('<h2>Enviando…</h2><div class="hint" id="s_prog"></div>'+
+      '<div class="blist" style="max-height:320px" id="s_rows">'+ids.map(function(id){
+        var l = byId(id); return '<div class="srow" id="sr_'+esc(id)+'">○ '+esc(l ? l.empresa : '?')+'</div>';
+      }).join('')+'</div>'+
+      '<div class="foot"><button id="s_stop" data-act="autoStop">Parar</button></div>');
+    function row(id, cls, txt){ var r = $('sr_'+id); if(r){ r.className = 'srow '+cls; r.textContent = txt; } }
+    function finish(){
+      var left = ids.length - i;
+      if(sent) tab = 'enviado';
+      save(); render();
+      openModal('<h2>Envío terminado</h2><div class="alert '+(failed||reason?'warn':'ok')+'">'+sent+' enviados, '+failed+' con error'+(left>0?', '+left+' sin enviar':'')+'.</div>'+
+        (reason ? '<div class="alert bad">'+esc(reason)+'</div>' : '')+
+        '<div class="foot"><button class="primary" data-act="close">Cerrar</button></div>');
+    }
+    function step(){
+      if(run.stop){ if(!reason) reason = 'Envío parado.'; return finish(); }
+      if(i >= ids.length) return finish();
+      var id = ids[i++], l = byId(id);
+      if(!l || l.estado !== 'pendiente'){ row(id, '', '– '+(l ? l.empresa : '?')+' (omitida: ya no está pendiente)'); return step(); }
+      var m = composeFor(l, false, run.tpl);
+      if($('s_prog')) $('s_prog').textContent = 'Enviando '+i+' de '+ids.length+'…';
+      row(id, '', '… '+l.empresa+' (enviando)');
+      sendMail(l.email, m.subject, m.body).then(function(){
+        markSent(l); save(); sent++; row(id, 'ok', '✓ '+l.empresa+' · '+l.email);
+      }).catch(function(e){
+        failed++; row(id, 'err', '✗ '+l.empresa+' · '+e.message);
+        if(e.status===401 || e.status===403 || e.status===429){
+          reason = e.status===401 ? 'Google ha cerrado la conexión: vuelve a conectar Gmail en Ajustes y reanuda con las que falten.' : 'Gmail ha rechazado el envío ('+e.message+'). Se ha parado para no empeorarlo.';
+          run.stop = true; gToken = null;
+        }
+      }).then(function(){
+        if(run.stop || i >= ids.length) return finish();
+        setTimeout(step, delay);
+      });
+    }
+    step();
   }
   function qNext(){
     qState.i++;
@@ -795,8 +1001,13 @@
   document.getElementById('btnBatch').onclick = batchModal;
   SECTORES.forEach(function(s){ var o = document.createElement('option'); o.textContent = s; document.getElementById('fSector').appendChild(o); });
   document.getElementById('fSector').onchange = function(e){ fSector = e.target.value; renderList(); };
-  function onBatchField(e){ if(/^b_/.test(e.target.id)) batchInfo(); }
-  document.addEventListener('input', onBatchField);
+  function onBatchField(e){
+    var t = e.target;
+    if(/^b_(sector|tipo|tpl)$/.test(t.id)) batchRender();
+    else if(t.dataset && t.dataset.bid){ bSel[t.dataset.bid] = t.checked; batchInfo(); }
+    else if(t.id==='b_ok') $('b_go').disabled = !t.checked;
+    else if(t.id==='s_cvfile') readCv(t.files[0]);
+  }
   document.addEventListener('change', onBatchField);
   el.search.oninput = function(){ q = el.search.value; renderList(); };
   el.fTipo.onchange = function(){ fTipo = el.fTipo.value; renderList(); };
@@ -864,11 +1075,45 @@
     else if(act==='offEmails') runWorkflow('buscar-emails.yml', 'Esto busca la web y el email de contacto de hasta 60 empresas con Apify (unos 0,1 $). ¿Seguir?', {max:'60'});
     else if(act==='goOfertas') setView('ofertas');
     else if(act==='qstart'){
-      var qc = batchCandidates($('b_sector').value, $('b_tipo').value);
-      var qn = Math.max(1, Math.min(30, Number($('b_n').value) || 10));
-      if(qn>20 && !confirm('Más de 20 correos en un día puede acabar en spam. ¿Seguir?')) return;
-      qState = {active:true, ids:qc.slice(0,qn).map(function(x){return x.id;}), i:0, tpl:$('b_tpl').value, sent:0, skipped:0};
+      var qc = selectedLeads();
+      if(!qc.length) return;
+      if(qc.length>30){ alert('Para revisarlas una a una, como máximo 30. Quita algunas de la selección.'); return; }
+      qState = {active:true, ids:qc.map(function(x){return x.id;}), i:0, tpl:$('b_tpl').value, sent:0, skipped:0};
       composeModal(byId(qState.ids[0]), false);
+    }
+    else if(act==='bAll'){ batchFiltered().forEach(function(x){ bSel[x.id] = true; }); batchRender(); }
+    else if(act==='bNone'){ bSel = {}; batchRender(); }
+    else if(act==='batch') batchModal();
+    else if(act==='autoPrep') autoPrepare();
+    else if(act==='autoGo') autoStart();
+    else if(act==='autoStop'){ batchRun.stop = true; b.disabled = true; b.textContent = 'Parando…'; }
+    else if(act==='gConnect'){
+      settings.gClientId = $('s_gcid').value.trim(); settings.gmail = $('s_gmail').value.trim(); save();
+      $('g_status').textContent = 'Abriendo la ventana de Google…';
+      gConnect().then(function(email){
+        gStatus();
+        if(settings.gmail && email !== settings.gmail.toLowerCase()) $('g_status').textContent += ' Ojo: en Ajustes el Gmail es '+settings.gmail+'.';
+      }).catch(function(err){ $('g_status').textContent = 'No se pudo conectar: '+err.message; });
+    }
+    else if(act==='gTest'){
+      settings.gClientId = $('s_gcid').value.trim(); settings.gmail = $('s_gmail').value.trim(); save();
+      $('g_status').textContent = 'Enviando prueba…';
+      ensureGmail().then(function(email){
+        var m = composeFor({empresa:'Empresa de prueba', contacto:'Ana', puesto_oferta:'Puesto de prueba', portal:'LinkedIn', tipo:'cuentas', oferta_url:'x'}, false, 'oferta');
+        return sendMail(email, '[PRUEBA] '+m.subject, m.body).then(function(){
+          $('g_status').textContent = 'Prueba enviada a '+email+(cvData ? ' con el CV adjunto.' : ' (sin CV adjunto).');
+        });
+      }).catch(function(err){ $('g_status').textContent = 'No se pudo enviar la prueba: '+err.message; });
+    }
+    else if(act==='sendNow' && l){
+      var seg2 = b.dataset.seg==='1', subj = $('c_asunto').value, body = $('c_cuerpo').value;
+      if(!confirm('¿Enviar este email a '+l.email+' ahora desde Gmail'+(cvData ? ' con el CV adjunto' : '')+'?')) return;
+      b.disabled = true; $('c_after').innerHTML = '<div class="alert warn">Enviando…</div>';
+      ensureGmail().then(function(){ return sendMail(l.email, subj, body); }).then(function(){
+        if(seg2) l.seguimiento_at = nowISO(); else { markSent(l); tab = 'enviado'; }
+        save();
+        if(qState.active && !seg2){ qState.sent++; render(); qNext(); } else { closeModal(); render(); }
+      }).catch(function(err){ b.disabled = false; $('c_after').innerHTML = '<div class="alert bad">No se pudo enviar: '+esc(err.message)+'</div>'; });
     }
     else if(act==='qskip'){ qState.skipped++; qNext(); }
     else if(act==='qquit'){ closeModal(); render(); }
