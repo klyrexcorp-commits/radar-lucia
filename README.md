@@ -48,6 +48,18 @@ Hace falta un ID de cliente de Google (se crea una vez, es gratis):
 En modo «Prueba» Google avisa de que la app no está verificada (Avanzado → Ir a Radar Lucía) y el permiso
 caduca a los 7 días: hay que volver a pulsar «Conectar con Gmail».
 
+## Buscar ofertas desde la app
+
+En la pestaña **Ofertas** hay un buscador: se escribe como se hablaría («coordinador de eventos junior en
+Madrid, última semana»), la app entiende puesto, ciudad y antigüedad, lanza InfoJobs, LinkedIn e Indeed en
+Apify y suma los resultados a la lista. Muestra el coste estimado antes de buscar, el coste real después y el
+uso de Apify del mes (`GET /v2/users/me/limits`).
+
+Necesita un token de Apify: crear uno solo para la app (Apify → Settings → API & integrations), ponerle un
+límite de gasto mensual (Settings → Limits) y pegarlo en Ajustes. El token se guarda solo en el navegador de
+quien lo pega (nunca en el repositorio ni en las copias de seguridad). Si se pierde, se revoca en Apify.
+Las ofertas encontradas así se guardan en el navegador (`radarLucia.mine.v1`).
+
 ## Coste
 
 Actores de pago por resultado: InfoJobs `scrapesage/infojobs-scraper`, Indeed
