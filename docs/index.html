@@ -133,6 +133,18 @@
   .chk-item.ok .dot{background:var(--ok-bg);color:var(--ok)}
   .chk-item.no .dot{background:var(--warn-bg);color:var(--warn)}
   .chk-item span:nth-child(2){flex:1}
+  .searchrow{display:flex;gap:10px;margin-top:12px}
+  .searchrow input{flex:1;font-size:15px;padding:12px 18px;border-radius:999px}
+  .sugs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .chipbtn{font-size:12.5px;font-weight:600;padding:4px 12px;border-radius:999px;background:var(--bg2);color:var(--accent);border:1px solid var(--line2)}
+  .aopts{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:12px;font-size:13px}
+  .aopts label{margin:0;display:flex;align-items:center;gap:6px;color:var(--text);font-weight:500}
+  .aopts input{width:auto}
+  .aopts select{width:auto;padding:5px 12px;border-radius:999px}
+  .usage{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+  .usage .ut{display:flex;justify-content:space-between;gap:10px;font-size:13px;margin-bottom:6px}
+  .usage .track{height:8px;background:var(--bg2);border-radius:999px;overflow:hidden}
+  .usage .fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent-2),var(--accent))}
   .empty{text-align:center;color:var(--muted);padding:52px 20px}
   .empty strong{color:var(--text);font-size:16px}
 
@@ -188,6 +200,7 @@
     aside{position:static}
   }
   @media (max-width:640px){
+    .searchrow{flex-direction:column}
     .stats{grid-template-columns:repeat(2,1fr)}
     .stat{padding:14px}
     .stat .n{font-size:26px}
@@ -304,13 +317,17 @@
   var LS_OFF = 'radarLucia.offers.v1';
   var view = 'empresas', offers = [], offersMeta = null, offersErr = '';
   var offState = load(LS_OFF, {});
-  var oF = {portal:'', sector:'', q:'', soloEmail:false, ocultas:true, min:50};
+  var oF = {portal:'', sector:'', q:'', soloEmail:false, ocultas:true, min:50, fresh:false};
   var fSector = '', firstLoad = true;
   // Gmail: el CV adjunto vive solo en este navegador; el permiso de envío, solo en memoria
   var LS_CV = 'radarLucia.cv.v1';
   var cvData = load(LS_CV, null);
   var gToken = null, gEmail = '', gsiPromise = null;
   var bSel = {}, batchRun = {stop:false, ids:[]}, mailTimer = null;
+  // Apify: el token vive solo en este navegador; las ofertas de búsquedas propias se guardan aparte
+  var LS_APIFY = 'radarLucia.apify.v1', LS_MINE = 'radarLucia.mine.v1';
+  var apifyToken = (function(){ try{ return localStorage.getItem(LS_APIFY) || ''; }catch(e){ return ''; } })();
+  var mine = load(LS_MINE, []), usage = null, usageAt = 0;
 
   var el = {
     stats:document.getElementById('stats'), tabs:document.getElementById('tabs'),
@@ -417,17 +434,16 @@
   function loadOffers(){
     return fetch('offers.json', {cache:'no-cache'})
       .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-      .then(function(d){
-        offers = d.offers || []; offersMeta = d; offersErr = '';
-        offers.forEach(function(o){ o.sector = guessSector([o.empresa,o.puesto,o.resumen].join(' ')); });
-      })
+      .then(function(d){ offers = d.offers || []; offersMeta = d; offersErr = ''; })
       .catch(function(){
-        offers = [];
+        offers = []; offersMeta = null;
         offersErr = location.protocol==='file:'
           ? 'Las ofertas se leen desde la web publicada; abierta como archivo local no se pueden cargar.'
           : 'No se pudo cargar la lista de ofertas.';
       })
       .then(function(){
+        mergeMine(); offers.forEach(prepOffer);
+        if(offers.length) offersErr = '';
         if(firstLoad && !leads.length && offers.length) setView('ofertas');
         firstLoad = false;
         if(view==='ofertas') renderOfList();
@@ -445,10 +461,11 @@
       if(oF.portal && o.portal!==oF.portal) return false;
       if(oF.sector && o.sector!==oF.sector) return false;
       if(oF.soloEmail && !offerEmails(o).length) return false;
+      if(oF.fresh && !o.fresh) return false;
       if(o.encaje < oF.min) return false;
       if(!s) return true;
       return [o.puesto,o.empresa,o.ciudad].join(' ').toLowerCase().indexOf(s)!==-1;
-    });
+    }).sort(function(a,b){ return b.encaje - a.encaje || String(b.fecha||'').localeCompare(String(a.fecha||'')); });
   }
 
   function updateOffBadge(){
@@ -462,7 +479,7 @@
     document.getElementById('viewOfertas').hidden = v!=='ofertas';
     document.getElementById('viewEmail').hidden = v!=='email';
     Array.prototype.forEach.call(document.querySelectorAll('#views button'), function(b){ b.classList.toggle('active', b.dataset.view===v); });
-    if(v==='ofertas') renderOfertas();
+    if(v==='ofertas'){ renderOfertas(); refreshUsage(); }
     if(v==='email') renderEmailView();
   }
 
@@ -507,10 +524,221 @@
     mailTimer = setTimeout(function(){ save(); $('m_saved').textContent = 'Guardado'; renderMailPreview(); }, 500);
   }
 
+  // ---------- buscar ofertas con Apify desde la app ----------
+  function cleanTxt(s){ return String(s==null ? '' : s).replace(/\s+/g, ' ').trim(); }
+  function money(n){ return isFinite(n) ? '$'+Number(n).toFixed(2).replace('.', ',') : '—'; }
+  var MAIL_RE = /[a-z0-9._%+-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,}/gi;
+  function extractMails(text){
+    var ok = (String(text||'').match(MAIL_RE) || []).map(function(e){ return e.toLowerCase().replace(/[.,;]+$/, ''); })
+      .filter(function(e){ return !/\.(png|jpe?g|gif|svg|webp)$/.test(e) && !/(no-?reply|example\.|sentry|wixpress)/.test(e); });
+    return ok.filter(function(e, i){ return ok.indexOf(e)===i; }).slice(0, 3);
+  }
+  // encaje con el perfil de Lucía (marketing, cuentas y eventos, nivel junior) y por qué
+  function scoreOffer(puesto, desc){
+    var t = String(puesto||'').toLowerCase(), d = String(desc||'').toLowerCase(), n = 40, why = [];
+    if(/cuentas|account|event|marketing|comunicaci|publicidad|brand|social media|community/.test(t)){ n += 25; why.push('encaja con cuentas, eventos o marketing'); }
+    if(/junior|jr\b|pr[aá]cticas|becari|asistente|auxiliar|trainee|coordinador/.test(t)){ n += 15; why.push('nivel junior o de entrada'); }
+    if(/senior|sr\b|director|jefe|responsable|manager|head|l[ií]der|gerente/.test(t)){ n -= 40; why.push('puesto sénior o de dirección'); }
+    if(/desarrollador|developer|ingenier|programador|contable|contabilidad|financ|log[ií]stic|conductor|enfermer|comercial|ventas|electric/.test(t)){ n -= 50; why.push('área distinta a la tuya'); }
+    if(/payable|receivable|facturaci|auditor|tesorer|fiscal|n[oó]min|recursos humanos|rrhh/.test(t)){ n -= 50; why.push('contabilidad o administración'); }
+    if(/(\+|m[aá]s de|m[ií]nimo|minimo)\s*[3-9]\s*a[nñ]os/.test(d)){ n -= 20; why.push('pide varios años de experiencia'); }
+    return {n: Math.max(0, Math.min(100, n)), why: why};
+  }
+  function prepOffer(o){
+    o.sector = guessSector([o.empresa, o.puesto, o.resumen].join(' '));
+    o.why = scoreOffer(o.puesto, o.resumen).why;
+  }
+  function mergeMine(){
+    var ids = {}; offers.forEach(function(o){ ids[o.id] = 1; });
+    mine.forEach(function(o){ if(!ids[o.id]){ o.mine = true; offers.push(o); } });
+  }
+  function saveMine(){
+    try{ localStorage.setItem(LS_MINE, JSON.stringify(offers.filter(function(o){ return o.mine; }).slice(-600).map(function(o){ var c = Object.assign({}, o); delete c.fresh; return c; }))); }catch(e){}
+  }
+
+  // qué actores se usan y cuánto cuesta cada resultado (precios publicados por sus autores)
+  var APIFY_SRC = {
+    infojobs:{label:'InfoJobs', actor:'scrapesage~infojobs-scraper', price:0.00165,
+      input:function(s){
+        var i = {searchQueries:[s.query], sortBy:'PUBLICATION_DATE', includeDescription:true, maxDaysOld:s.days, maxResults:s.n};
+        if(/madrid/i.test(s.location)) i.provinces = ['33']; else i.cities = [s.location];
+        if(s.days <= 7) i.postedWithin = '_7_DAYS';
+        return i;
+      },
+      norm:function(it){
+        if(it.recordType && it.recordType!=='jobOffer') return null;
+        return {id:'infojobs:'+it.offerId, puesto:it.title, empresa:it.companyName, ciudad:it.city, url:it.url, fecha:it.publishedAt, salario:it.salaryText, modalidad:it.teleworking, desc:it.description};
+      }},
+    indeed:{label:'Indeed', actor:'unfenced-group~indeed-es-scraper', price:0.0007,
+      input:function(s){
+        var f = [1,3,7,14].filter(function(x){ return x >= s.days; })[0] || 14;
+        return {query:s.query, location:s.location, radius:25, sort:'date', fromDays:String(f), maxItems:s.n};
+      },
+      norm:function(it){
+        var loc = it.location || {};
+        return {id:'indeed:'+it.jobKey, puesto:it.title, empresa:it.companyName, ciudad:loc.city || loc.raw, url:it.jobUrl, fecha:it.datePublished, salario:it.salary && it.salary.salaryText, modalidad:loc.isRemote ? 'Remoto' : '', desc:it.descriptionText};
+      }},
+    linkedin:{label:'LinkedIn', actor:'gopalakrishnan~linkedin-jobs', price:0.00035,
+      input:function(s){ return {keywords:s.query, location:s.location+', Spain', maxResults:s.n}; },
+      norm:function(it){
+        var url = String(it.jobUrl||'').split('?')[0], num = (url.match(/(\d{6,})\/?$/) || [])[1];
+        return {id:'linkedin:'+(num || url), puesto:it.title, empresa:it.company, ciudad:it.location, url:url, fecha:it.postedDate, salario:'', modalidad:'', desc:''};
+      }}
+  };
+  function toOffer(o, portal){
+    var desc = cleanTxt(o.desc), puesto = cleanTxt(o.puesto), sc = scoreOffer(puesto, desc);
+    return {id:o.id, portal:portal, puesto:puesto, empresa:cleanTxt(o.empresa), ciudad:cleanTxt(o.ciudad), url:o.url, fecha:o.fecha || null,
+      salario:cleanTxt(o.salario), modalidad:cleanTxt(o.modalidad), web:'', webFuente:'', emails:extractMails(o.desc), emailsWeb:[],
+      tipo:guessTipo(puesto), encaje:sc.n, resumen:desc.slice(0, 400), mine:true, first_seen:nowISO()};
+  }
+
+  // entiende lo que escribe: puesto, ciudad («en Madrid») y antigüedad («última semana»)
+  var CIUDADES = ['madrid','barcelona','valencia','sevilla','zaragoza','malaga','bilbao','alicante','murcia','palma','a coruna','vigo','valladolid','granada','pozuelo de alarcon','alcobendas','las rozas','getafe','mostoles','alcala de henares','leganes','majadahonda','boadilla del monte','torrejon de ardoz','san sebastian','santander','oviedo','gijon','cordoba','toledo'];
+  function parseSearch(text){
+    var t = ' '+cleanTxt(text)+' ', days = 7;
+    // \b de JavaScript no entiende acentos: se usan lookarounds con letras españolas
+    var WHEN = /[,;]?\s*(?<![\wáéíóúñÁÉÍÓÚÑ])(hoy|ayer|[uú]ltimas? 24 ?h(?:oras)?|24 ?h|[uú]ltimos? 3 d[ií]as|(?:[uú]ltima|esta) semana|7 d[ií]as|15 d[ií]as|14 d[ií]as|quincena|[uú]ltimas? dos semanas|(?:[uú]ltimo|este) mes|30 d[ií]as)(?![\wáéíóúñÁÉÍÓÚÑ])/ig;
+    var w = t.match(WHEN);
+    if(w){
+      var x = w.join(' ').toLowerCase();
+      days = /hoy|ayer|24/.test(x) ? 1 : /3 d/.test(x) ? 3 : /semana|7 d/.test(x) && !/dos/.test(x) ? 7 : /mes|30/.test(x) ? 30 : 14;
+      t = t.replace(WHEN, ' ');
+    }
+    var loc = 'Madrid';
+    var m = t.match(/\s(?:en|por)\s+([A-Za-zÁÉÍÓÚÜÑáéíóúüñ][A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]{1,40}?)\s*(?:[,.]|$)/);
+    if(m){
+      var cand = cleanTxt(m[1]), plain = cand.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      if(CIUDADES.indexOf(plain) >= 0 || /^[A-ZÁÉÍÓÚÑ]/.test(cand)){ loc = cand; t = t.replace(m[0], ' '); }
+    }
+    var query = cleanTxt(t.replace(/\b(busco|buscar|buscame|ofertas? de|trabajo de|empleo de)\b/ig, ' ').replace(/[,;.]+/g, ' '));
+    return {query:query, location:loc, days:days};
+  }
+  function daysText(d){ return d<=1 ? 'de las últimas 24 horas' : d===3 ? 'de los últimos 3 días' : d===7 ? 'de la última semana' : d===14 ? 'de las últimas dos semanas' : 'del último mes'; }
+  function pickedSources(){ return Object.keys(APIFY_SRC).filter(function(k){ var c = $('a_p_'+k); return c && c.checked; }); }
+  function estimateCost(picks, n){ return Math.max(0.01, picks.reduce(function(a, k){ return a + APIFY_SRC[k].price*n; }, 0)); }
+
+  function searchBoxHtml(){
+    return '<div class="mailbox" id="o_search"><h2>Buscar ofertas</h2>'+
+      '<div class="hint">Escribe lo que buscas como lo dirías: puesto, ciudad y desde cuándo. Busco en InfoJobs, LinkedIn e Indeed con tu cuenta de Apify y las sumo a la lista.</div>'+
+      '<div class="searchrow"><input id="a_q" type="search" autocomplete="off" placeholder="Ej.: coordinadora de eventos junior en Madrid, última semana">'+
+      '<button class="primary" id="a_go" data-act="aSearch">Buscar</button></div>'+
+      '<div class="sugs" id="a_sug"></div>'+
+      '<div class="hint" id="a_interp" style="margin-top:12px"></div>'+
+      '<div class="aopts"><label><input type="checkbox" id="a_p_infojobs" checked> InfoJobs</label>'+
+      '<label><input type="checkbox" id="a_p_linkedin" checked> LinkedIn</label>'+
+      '<label><input type="checkbox" id="a_p_indeed" checked> Indeed</label>'+
+      '<label>Ofertas por portal <select id="a_n"><option>20</option><option selected>30</option><option>50</option></select></label></div>'+
+      '<div id="a_prog" aria-live="polite"></div><div id="a_usage"></div></div>';
+  }
+  function initSearch(){
+    $('a_sug').innerHTML = PRESETS.map(function(p){ return '<button class="chipbtn" data-act="aSug" data-q="'+esc(p+' en Madrid')+'">'+esc(p)+'</button>'; }).join('');
+    updateInterp(); renderUsage();
+  }
+  function updateInterp(){
+    var box = $('a_interp'); if(!box) return;
+    var s = parseSearch($('a_q').value), picks = pickedSources(), n = Number($('a_n').value);
+    if(!s.query){ box.textContent = 'Prueba con un puesto, y si quieres la ciudad y cuándo: «coordinador de eventos junior en Madrid, última semana».'; return; }
+    box.innerHTML = 'Buscaré <strong>«'+esc(s.query)+'»</strong> en <strong>'+esc(s.location)+'</strong>, '+daysText(s.days)+', en '+picks.length+' '+plural(picks.length,'portal','portales')+
+      ' (hasta '+n+' ofertas en cada uno). Coste estimado: <strong>'+money(estimateCost(picks, n))+'</strong>.';
+  }
+
+  function renderUsage(){
+    var u = $('a_usage'); if(!u) return;
+    if(!apifyToken){ u.innerHTML = '<div class="alert warn">Para buscar desde aquí, añade tu token de Apify. <button class="small" data-act="openSettings">Abrir Ajustes</button></div>'; return; }
+    if(!usage){ u.innerHTML = '<div class="hint" style="margin-top:12px">Consultando el uso de Apify…</div>'; return; }
+    if(usage.err){ u.innerHTML = '<div class="alert bad">'+esc(usage.err)+'</div>'; return; }
+    var pct = usage.max > 0 ? Math.min(100, Math.round(usage.cur/usage.max*100)) : 0;
+    u.innerHTML = '<div class="usage"><div class="ut"><span>Uso de Apify este mes</span><span><strong>'+money(usage.cur)+'</strong> de '+money(usage.max)+'</span></div>'+
+      '<div class="track"><div class="fill" style="width:'+pct+'%"></div></div>'+
+      '<div class="hint">Te quedan '+money(Math.max(0, usage.max-usage.cur))+(usage.end ? ' hasta el '+fmt(usage.end) : '')+'. <button class="small" data-act="aUsage">Actualizar</button></div></div>';
+  }
+  function fetchUsage(){
+    if(!apifyToken){ usage = null; renderUsage(); return Promise.resolve(); }
+    return fetch('https://api.apify.com/v2/users/me/limits', {headers:{Authorization:'Bearer '+apifyToken}})
+      .then(function(r){ if(!r.ok){ var e = new Error('Error '+r.status); e.status = r.status; throw e; } return r.json(); })
+      .then(function(j){
+        var d = j.data || {};
+        usage = {cur:Number(d.current && d.current.monthlyUsageUsd), max:Number(d.limits && d.limits.maxMonthlyUsageUsd), end:d.monthlyUsageCycle && d.monthlyUsageCycle.endAt, err:''};
+        usageAt = Date.now(); renderUsage();
+      })
+      .catch(function(e){
+        usage = {err: e.status===401 ? 'El token de Apify no es válido. Revísalo en Ajustes.' : 'No se pudo consultar el uso de Apify.'};
+        renderUsage();
+      });
+  }
+  function refreshUsage(){ if(apifyToken && (!usage || Date.now()-usageAt > 60000)) fetchUsage(); else renderUsage(); }
+  function setApifyToken(t){
+    apifyToken = t; usage = null;
+    try{ if(t) localStorage.setItem(LS_APIFY, t); else localStorage.removeItem(LS_APIFY); }catch(e){}
+  }
+
+  function runActorBrowser(src, s){
+    var ctl = new AbortController(), timer = setTimeout(function(){ ctl.abort(); }, 285000);
+    return fetch('https://api.apify.com/v2/acts/'+src.actor+'/run-sync-get-dataset-items?format=json&clean=true', {
+      method:'POST', headers:{'Content-Type':'application/json', Authorization:'Bearer '+apifyToken}, body:JSON.stringify(src.input(s)), signal:ctl.signal
+    }).then(function(r){
+      clearTimeout(timer);
+      if(r.ok) return r.json();
+      return r.json().catch(function(){ return {}; }).then(function(j){
+        var msg = r.status===401 ? 'El token de Apify no es válido.' : r.status===402 ? 'No queda crédito en Apify.' :
+          r.status===403 ? 'Apify ha rechazado la petición (permisos o límite de uso).' : ((j.error && j.error.message) || ('Error '+r.status));
+        var e = new Error(msg); e.status = r.status; throw e;
+      });
+    }, function(err){
+      clearTimeout(timer);
+      throw new Error(err && err.name==='AbortError' ? 'Tardó más de 4 minutos y se canceló.' : 'No se pudo conectar con Apify.');
+    });
+  }
+
+  function runSearch(){
+    if(!apifyToken){ settingsModal(); return; }
+    var s = parseSearch($('a_q').value), picks = pickedSources(), prog = $('a_prog');
+    if(!s.query){ prog.innerHTML = '<div class="alert warn">Escribe qué puesto buscas.</div>'; return; }
+    if(!picks.length){ prog.innerHTML = '<div class="alert warn">Marca al menos un portal.</div>'; return; }
+    s.n = Number($('a_n').value);
+    var est = estimateCost(picks, s.n);
+    if(usage && !usage.err && usage.max - usage.cur < est &&
+       !confirm('Te quedan '+money(Math.max(0, usage.max-usage.cur))+' en Apify y esta búsqueda cuesta unos '+money(est)+'. ¿Probar igualmente?')) return;
+    var before = usage && !usage.err ? usage.cur : null;
+    $('a_go').disabled = true;
+    prog.innerHTML = picks.map(function(k){ return '<div class="srow" id="ap_'+k+'">… '+esc(APIFY_SRC[k].label)+' (buscando)</div>'; }).join('');
+    offers.forEach(function(o){ delete o.fresh; });
+    Promise.all(picks.map(function(k){
+      var src = APIFY_SRC[k];
+      return runActorBrowser(src, s).then(function(items){ return {k:k, items:items}; }, function(err){ return {k:k, err:err}; });
+    })).then(function(res){
+      var found = 0, added = 0, good = 0, fails = 0;
+      res.forEach(function(r){
+        var src = APIFY_SRC[r.k], row = $('ap_'+r.k);
+        if(r.err){ fails++; if(row){ row.className = 'srow err'; row.textContent = '✗ '+src.label+': '+r.err.message; } return; }
+        var n = 0;
+        (r.items || []).forEach(function(it){
+          var raw = src.norm(it);
+          if(!raw || !raw.id || !raw.url || !cleanTxt(raw.puesto) || !cleanTxt(raw.empresa)) return;
+          n++; found++;
+          var o = toOffer(raw, src.label);
+          if(offers.some(function(x){ return x.id===o.id; })) return;
+          prepOffer(o); o.fresh = true; offers.push(o); added++; if(o.encaje >= 50) good++;
+        });
+        if(row){ row.className = 'srow ok'; row.textContent = '✓ '+src.label+': '+n+' ofertas'; }
+      });
+      saveMine();
+      if(added){ oF.fresh = true; oF.min = 0; var mn = $('o_min'); if(mn) mn.value = '0'; }
+      $('a_go').disabled = false;
+      return fetchUsage().then(function(){
+        var cost = before!=null && usage && !usage.err ? Math.max(0, usage.cur - before) : null;
+        prog.insertAdjacentHTML('beforeend', '<div class="alert '+(fails && !added ? 'bad' : 'ok')+'">'+
+          (found ? found+' ofertas encontradas, '+added+' nuevas para ti ('+good+' con buen encaje).' : 'No encontré ofertas con esa búsqueda.')+
+          (cost!=null ? ' Coste real: '+money(cost)+'.' : '')+'</div>');
+        renderOfList(); updateOffBadge(); renderSide();
+      });
+    });
+  }
+
   function renderOfertas(){
     var v = document.getElementById('viewOfertas');
     if(!v.dataset.ready){
-      v.innerHTML = '<div class="offbar">'+
+      v.innerHTML = searchBoxHtml()+'<div class="offbar">'+
         '<input type="search" id="o_q" placeholder="Buscar puesto o empresa…">'+
         '<select id="o_portal"><option value="">Todos los portales</option><option>InfoJobs</option><option>Indeed</option><option>LinkedIn</option></select>'+
         '<select id="o_sector"><option value="">Todos los sectores</option>'+SECTORES.map(function(s){return '<option>'+s+'</option>';}).join('')+'</select>'+
@@ -519,6 +747,7 @@
         '<label class="chk"><input type="checkbox" id="o_hide" checked> Ocultar ya vistas</label></div>'+
         '<div class="offmeta" id="o_meta"></div><div id="offList"></div>';
       v.dataset.ready = '1';
+      initSearch();
     }
     renderOfList();
   }
@@ -533,20 +762,21 @@
     }
     var list = offerList();
     var conMail = list.filter(function(o){ return offerEmails(o).length; });
-    var st = offersMeta.status || {};
+    var st = (offersMeta && offersMeta.status) || {};
     var vacias = Object.keys(st).filter(function(k){ return !st[k].ok || st[k].ofertas===0; });
-    meta.innerHTML = 'Actualizadas el '+fmt(offersMeta.updated)+' · '+list.length+' ofertas visibles'+
+    meta.innerHTML = (offersMeta && offersMeta.updated ? 'Actualizadas el '+fmt(offersMeta.updated)+' · ' : '')+list.length+' ofertas visibles'+
       (vacias.length ? ' · <span style="color:var(--warn)">sin resultados de: '+esc(vacias.join(', '))+'</span>' : '')+
       '<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px">'+
       '<button class="small primary" data-act="offImport50"'+(list.length?'':' disabled')+'>Importar 50 más</button>'+
       (conMail.length ? '<button class="small" data-act="offSaveMail">Guardar las '+conMail.length+' que traen email</button>' : '')+
+      (oF.fresh ? '<button class="small" data-act="aAll">Ver todas las ofertas</button>' : '')+
       '</div>';
     box.innerHTML = list.length ? list.slice(0,150).map(offerCard).join('') : '<div class="empty">Ninguna oferta con estos filtros.</div>';
   }
 
   function offerCard(o){
     var href = /^https?:\/\//i.test(o.url) ? o.url : '#';
-    var chips = '<span class="chip '+esc(o.tipo)+'">'+esc(TIPOS[o.tipo]||o.tipo)+'</span>'+(o.sector===(TIPOS[o.tipo]||'') ? '' : '<span class="chip">'+esc(o.sector)+'</span>')+'<span class="chip">'+esc(o.portal)+'</span>';
+    var chips = '<span class="chip '+esc(o.tipo)+'">'+esc(TIPOS[o.tipo]||o.tipo)+'</span>'+(o.sector===(TIPOS[o.tipo]||'') ? '' : '<span class="chip">'+esc(o.sector)+'</span>')+'<span class="chip">'+esc(o.portal)+'</span>'+(o.fresh ? '<span class="chip ok">Nueva</span>' : (o.mine ? '<span class="chip">Tu búsqueda</span>' : ''));
     if(o.emails && o.emails.length) chips += '<span class="chip ok">Email en la oferta</span>';
     else if(o.emailsWeb && o.emailsWeb.length) chips += '<span class="chip ok">Email de contacto de la web</span>';
     if(o.web) chips += '<a class="chip" style="text-decoration:none" href="'+esc(o.web)+'" target="_blank" rel="noopener">Web de la empresa</a>';
@@ -554,7 +784,7 @@
     if(o.modalidad) chips += '<span class="chip">'+esc(o.modalidad)+'</span>';
     var meta = [o.empresa, o.ciudad, o.fecha ? fmt(o.fecha) : ''].filter(Boolean).join(' · ');
     var res = o.resumen || '';
-    return '<div class="lead"><div class="av ring" style="--p:'+esc(o.encaje)+'" title="Encaje con tu perfil: '+esc(o.encaje)+' de 100"><span>'+esc(o.encaje)+'</span></div><div><h3>'+esc(o.puesto)+'</h3><div class="meta">'+esc(meta)+'</div>'+
+    return '<div class="lead"><div class="av ring" style="--p:'+esc(o.encaje)+'" title="Encaje con tu perfil: '+esc(o.encaje)+' de 100'+(o.why && o.why.length ? '. '+esc(o.why.join('; ')) : '')+'"><span>'+esc(o.encaje)+'</span></div><div><h3>'+esc(o.puesto)+'</h3><div class="meta">'+esc(meta)+'</div>'+
       (res ? '<div class="notes">'+esc(res.slice(0,180))+(res.length>180?'…':'')+'</div>' : '')+
       '<div class="chips">'+chips+'</div></div>'+
       '<div class="btns"><a class="btn small" href="'+esc(href)+'" target="_blank" rel="noopener">Ver oferta</a>'+
@@ -885,6 +1115,11 @@
         '<label>ID de cliente de Google</label><input id="s_gcid" autocomplete="off" placeholder="1234567890-abc….apps.googleusercontent.com" value="'+esc(settings.gClientId)+'">'+
         '<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="small" data-act="gConnect">Conectar con Gmail</button><button class="small" data-act="gTest">Enviarme un email de prueba</button></div>'+
         '<div class="hint" id="g_status"></div></div>'+
+      '<div class="sec"><h3>Buscar ofertas con Apify</h3>'+
+        '<div class="hint">Para buscar desde la pestaña Ofertas, la app usa tu cuenta de Apify. Crea un token solo para esta app (Apify → Settings → API & integrations) y pon un límite de gasto mensual (Settings → Limits). El token se guarda solo en este navegador y no entra en las copias de seguridad.</div>'+
+        '<label>Token de Apify</label><input id="s_apify" type="password" autocomplete="off" value="'+esc(apifyToken)+'">'+
+        '<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="small" data-act="aTest">Comprobar y ver uso</button><button class="small" data-act="aClear">Quitar token</button></div>'+
+        '<div class="hint" id="a_status"></div></div>'+
       '<div class="sec"><details><summary>Opciones avanzadas</summary>'+
         '<h3>Captura de ofertas</h3><div class="hint" id="s_bm_hint"></div>'+
         '<div style="margin-top:10px"><a id="s_bm" class="btn small" style="display:inline-block;text-decoration:none;color:var(--accent);border-color:var(--accent)" draggable="true">+ Añadir a Radar Lucía</a></div>'+
@@ -904,7 +1139,10 @@
   function saveSettings(){
     settings.gmail = $('s_gmail').value.trim();
     settings.gClientId = $('s_gcid').value.trim();
+    var tk = $('s_apify').value.trim();
+    if(tk !== apifyToken){ setApifyToken(tk); }
     save(); closeModal(); render();
+    if(view==='ofertas') refreshUsage();
   }
 
   function importModal(msg){
@@ -1107,6 +1345,10 @@
   SECTORES.forEach(function(s){ var o = document.createElement('option'); o.textContent = s; document.getElementById('fSector').appendChild(o); });
   document.getElementById('fSector').onchange = function(e){ fSector = e.target.value; renderList(); };
   document.addEventListener('input', onMailInput);
+  function onSearchField(e){ var id = e.target.id; if(id==='a_q' || id==='a_n' || /^a_p_/.test(id)) updateInterp(); }
+  document.addEventListener('input', onSearchField);
+  document.addEventListener('change', onSearchField);
+  document.addEventListener('keydown', function(e){ if(e.key==='Enter' && e.target.id==='a_q'){ e.preventDefault(); runSearch(); } });
   function onBatchField(e){
     var t = e.target;
     if(/^b_(sector|tipo)$/.test(t.id)) batchRender();
@@ -1174,6 +1416,18 @@
     else if(act==='offEmails') runWorkflow('buscar-emails.yml', 'Esto busca la web y el email de contacto de hasta 60 empresas con Apify (unos 0,1 $). ¿Seguir?', {max:'60'});
     else if(act==='goOfertas') setView('ofertas');
     else if(act==='batchOpen') batchModal();
+    else if(act==='aSearch') runSearch();
+    else if(act==='aSug'){ $('a_q').value = b.dataset.q; updateInterp(); $('a_q').focus(); }
+    else if(act==='aUsage'){ usage = null; renderUsage(); fetchUsage(); }
+    else if(act==='aAll'){ oF.fresh = false; renderOfList(); }
+    else if(act==='aTest'){
+      setApifyToken($('s_apify').value.trim());
+      $('a_status').textContent = 'Comprobando…';
+      fetchUsage().then(function(){
+        $('a_status').textContent = !apifyToken ? 'Pega primero tu token.' : (usage && !usage.err ? 'Conectado. Uso este mes: '+money(usage.cur)+' de '+money(usage.max)+'.' : (usage ? usage.err : ''));
+      });
+    }
+    else if(act==='aClear'){ setApifyToken(''); $('s_apify').value = ''; $('a_status').textContent = 'Token quitado de este navegador.'; }
     else if(act==='goContacto'){ tab = 'contacto'; setView('empresas'); render(); }
     else if(act==='bAll'){ batchFiltered().forEach(function(x){ bSel[x.id] = true; }); batchRender(); }
     else if(act==='bNone'){ bSel = {}; batchRender(); }
