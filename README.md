@@ -28,8 +28,9 @@ las puntúa según su perfil y las muestra en una app estática (GitHub Pages). 
 
 ## Envío desde Gmail (sin servidor)
 
-La app envía por la API de Gmail desde el navegador de Lucía, con el CV en PDF adjunto y 3 segundos
-entre un correo y el siguiente. No guarda contraseñas: pide permiso a Google (OAuth, solo `gmail.send`)
+Lucía escribe su email una sola vez en la pestaña **Mi email** (se guarda solo; `{empresa}` se sustituye
+por el nombre de cada empresa), elige las empresas y pulsa Enviar. La app lo manda por la API de Gmail
+desde su navegador, con el CV en PDF adjunto y 3 segundos entre un correo y el siguiente. No guarda contraseñas: pide permiso a Google (OAuth, solo `gmail.send`)
 y el permiso vive únicamente en memoria. El PDF del CV se guarda solo en el navegador de Lucía.
 
 Hace falta un ID de cliente de Google (se crea una vez, es gratis):
