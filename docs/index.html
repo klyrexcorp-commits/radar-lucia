@@ -135,6 +135,8 @@
         <option value="eventos">Eventos</option>
         <option value="marketing">Marketing en empresa</option>
       </select>
+      <select id="fSector"><option value="">Todos los sectores</option></select>
+      <button id="btnBatch">Envío por lotes</button>
     </div>
     <div class="tabs" id="tabs"></div>
     <div id="list"></div>
@@ -159,12 +161,24 @@
     {key:'descartado', label:'Descartado'}
   ];
   var TIPOS = {cuentas:'Cuentas', eventos:'Eventos', marketing:'Marketing en empresa'};
+  var SECTORES = ['Agencia y publicidad','Eventos','Moda y retail','Tecnología','Consultoría','Otros'];
+  function guessSector(txt){
+    var t = String(txt||'').toLowerCase();
+    if(/event|congres|incentive|\bmice\b|feria/.test(t)) return 'Eventos';
+    if(/agenc|publicid|advertis|creativ|branding|comunicaci[oó]n|relaciones p[uú]blicas|social media|medios/.test(t)) return 'Agencia y publicidad';
+    if(/moda|fashion|retail|lujo|textil|cosm[eé]tic|belleza/.test(t)) return 'Moda y retail';
+    if(/tecnolog|software|digital|saas|startup|fintech/.test(t)) return 'Tecnología';
+    if(/consult|auditor|asesor/.test(t)) return 'Consultoría';
+    return 'Otros';
+  }
+  function leadSector(l){ return l.sector || guessSector([l.empresa,l.puesto_oferta,l.notas].join(' ')); }
+  var GH_REPO = 'klyrexcorp-commits/radar-lucia';
   var TPL_LABEL = {cuentas:'Cuentas', eventos:'Eventos', marketing:'Marketing en empresa', oferta:'Respuesta a una oferta', seguimiento:'Seguimiento'};
   var TPL_KEYS = ['oferta','cuentas','eventos','marketing','seguimiento'];
   var PRESETS = ['ejecutivo de cuentas junior','asistente de cuentas agencia publicidad','coordinador de eventos','producción de eventos','asistente de marketing','marketing junior','comunicación y marketing'];
 
   var DEFAULT_SETTINGS = {
-    gmail:'', cv:'', telefono:'', diasSeguimiento:6,
+    gmail:'', cv:'', telefono:'', ghToken:'', diasSeguimiento:6,
     tpl:{
       cuentas:{
         asunto:'Candidatura a cuentas junior · Lucía Gómez',
@@ -198,7 +212,9 @@
   var LS_OFF = 'radarLucia.offers.v1';
   var view = 'empresas', offers = [], offersMeta = null, offersErr = '';
   var offState = load(LS_OFF, {});
-  var oF = {portal:'', q:'', soloEmail:false, ocultas:true, min:50};
+  var oF = {portal:'', sector:'', q:'', soloEmail:false, ocultas:true, min:50};
+  var fSector = '', firstLoad = true;
+  var qState = {active:false, ids:[], i:0, tpl:'auto', sent:0, skipped:0};
 
   var el = {
     stats:document.getElementById('stats'), tabs:document.getElementById('tabs'),
@@ -313,22 +329,34 @@
   function loadOffers(){
     return fetch('offers.json', {cache:'no-cache'})
       .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-      .then(function(d){ offers = d.offers || []; offersMeta = d; offersErr = ''; })
+      .then(function(d){
+        offers = d.offers || []; offersMeta = d; offersErr = '';
+        offers.forEach(function(o){ o.sector = guessSector([o.empresa,o.puesto,o.resumen].join(' ')); });
+      })
       .catch(function(){
         offers = [];
         offersErr = location.protocol==='file:'
           ? 'Las ofertas se leen desde la web publicada; abierta como archivo local no se pueden cargar.'
           : 'No se pudo cargar la lista de ofertas.';
       })
-      .then(function(){ if(view==='ofertas') renderOfList(); updateOffBadge(); });
+      .then(function(){
+        if(firstLoad && !leads.length && offers.length) setView('ofertas');
+        firstLoad = false;
+        if(view==='ofertas') renderOfList();
+        updateOffBadge(); renderList();
+      });
   }
+
+  // emails de la propia oferta primero, y después los de contacto general de la web de la empresa
+  function offerEmails(o){ return (o.emails || []).concat(o.emailsWeb || []); }
 
   function offerList(){
     var s = oF.q.trim().toLowerCase();
     return offers.filter(function(o){
       if(oF.ocultas && (offState[o.id] || isLeadUrl(o.url))) return false;
       if(oF.portal && o.portal!==oF.portal) return false;
-      if(oF.soloEmail && !(o.emails && o.emails.length)) return false;
+      if(oF.sector && o.sector!==oF.sector) return false;
+      if(oF.soloEmail && !offerEmails(o).length) return false;
       if(o.encaje < oF.min) return false;
       if(!s) return true;
       return [o.puesto,o.empresa,o.ciudad].join(' ').toLowerCase().indexOf(s)!==-1;
@@ -354,6 +382,7 @@
       v.innerHTML = '<div class="offbar">'+
         '<input type="search" id="o_q" placeholder="Buscar puesto o empresa…">'+
         '<select id="o_portal"><option value="">Todos los portales</option><option>InfoJobs</option><option>Indeed</option><option>LinkedIn</option></select>'+
+        '<select id="o_sector"><option value="">Todos los sectores</option>'+SECTORES.map(function(s){return '<option>'+s+'</option>';}).join('')+'</select>'+
         '<select id="o_min"><option value="0">Cualquier encaje</option><option value="50" selected>Encaje medio o más</option><option value="70">Encaje alto</option></select>'+
         '<label class="chk"><input type="checkbox" id="o_email"> Solo con email</label>'+
         '<label class="chk"><input type="checkbox" id="o_hide" checked> Ocultar ya vistas</label></div>'+
@@ -368,21 +397,30 @@
     if(!box) return;
     if(offersErr){ box.innerHTML = '<div class="empty">'+esc(offersErr)+'</div>'; meta.textContent = ''; return; }
     if(!offers.length){
-      box.innerHTML = '<div class="empty"><strong>Todavía no hay ofertas recogidas.</strong><br>Se actualizan solas cada lunes, o lanzando «Recoger ofertas» en GitHub Actions.</div>';
+      box.innerHTML = '<div class="empty"><strong>Todavía no hay ofertas recogidas.</strong><br>Se actualizan solas cada lunes.<br><br><button class="primary" data-act="offRun">Actualizar ofertas ahora</button></div>';
       meta.textContent = ''; return;
     }
     var list = offerList();
-    var conMail = list.filter(function(o){ return o.emails && o.emails.length; });
+    var conMail = list.filter(function(o){ return offerEmails(o).length; });
+    var st = offersMeta.status || {};
+    var vacias = Object.keys(st).filter(function(k){ return !st[k].ok || st[k].ofertas===0; });
     meta.innerHTML = 'Actualizadas el '+fmt(offersMeta.updated)+' · '+list.length+' ofertas visibles'+
-      (conMail.length ? ' · <button class="small" data-act="offSaveMail">Guardar las '+conMail.length+' que traen email</button>' : '');
+      (vacias.length ? ' · <span style="color:var(--warn)">sin resultados de: '+esc(vacias.join(', '))+'</span>' : '')+
+      '<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px">'+
+      '<button class="small primary" data-act="offImport50"'+(list.length?'':' disabled')+'>Importar 50 más</button>'+
+      (conMail.length ? '<button class="small" data-act="offSaveMail">Guardar las '+conMail.length+' que traen email</button>' : '')+
+      '<button class="small" data-act="offEmails">Buscar emails de empresas</button>'+
+      '<button class="small" data-act="offRun">Actualizar ofertas</button></div>';
     box.innerHTML = list.length ? list.slice(0,150).map(offerCard).join('') : '<div class="empty">Ninguna oferta con estos filtros.</div>';
   }
 
   function offerCard(o){
     var href = /^https?:\/\//i.test(o.url) ? o.url : '#';
-    var chips = '<span class="chip '+esc(o.tipo)+'">'+esc(TIPOS[o.tipo]||o.tipo)+'</span><span class="chip">'+esc(o.portal)+'</span>'+
+    var chips = '<span class="chip '+esc(o.tipo)+'">'+esc(TIPOS[o.tipo]||o.tipo)+'</span><span class="chip">'+esc(o.sector)+'</span><span class="chip">'+esc(o.portal)+'</span>'+
       '<span class="chip '+(o.encaje>=70?'ok':'')+'">Encaje '+esc(o.encaje)+'</span>';
     if(o.emails && o.emails.length) chips += '<span class="chip ok">Email en la oferta</span>';
+    else if(o.emailsWeb && o.emailsWeb.length) chips += '<span class="chip ok">Email de contacto de la web</span>';
+    if(o.web) chips += '<a class="chip" style="text-decoration:none" href="'+esc(o.web)+'" target="_blank" rel="noopener">Web de la empresa</a>';
     if(o.salario) chips += '<span class="chip">'+esc(o.salario)+'</span>';
     if(o.modalidad) chips += '<span class="chip">'+esc(o.modalidad)+'</span>';
     var meta = [o.empresa, o.ciudad, o.fecha ? fmt(o.fecha) : ''].filter(Boolean).join(' · ');
@@ -398,9 +436,9 @@
   // devuelve 'ok', 'dup' (mismo email que otra empresa) o 'bad' (datos no válidos)
   function saveOffer(o){
     if(isLeadUrl(o.url)){ offState[o.id] = 'guardada'; return 'ok'; }
-    var email = (o.emails && o.emails[0]) || '';
+    var email = offerEmails(o)[0] || '';
     var l = {id:uid(), estado:email?'pendiente':'contacto', created_at:nowISO(), empresa:o.empresa, contacto:'', cargo:'',
-      email:email, tipo:o.tipo, web:o.web||'', fuente:'Ofertas', notas:'', oferta_url:o.url, puesto_oferta:o.puesto, portal:o.portal};
+      email:email, tipo:o.tipo, sector:o.sector, web:o.web||'', fuente:'Ofertas', notas:'', oferta_url:o.url, puesto_oferta:o.puesto, portal:o.portal};
     if(problemasBase(l).length) return 'bad';
     if(email && leads.some(function(x){ return x.email===email; })) return 'dup';
     leads.unshift(l); offState[o.id] = 'guardada';
@@ -432,6 +470,7 @@
     return leads.filter(function(l){
       if(l.estado!==tab) return false;
       if(fTipo && l.tipo!==fTipo) return false;
+      if(fSector && leadSector(l)!==fSector) return false;
       if(!s) return true;
       return [l.empresa,l.contacto,l.email,l.cargo,l.puesto_oferta].join(' ').toLowerCase().indexOf(s)!==-1;
     }).sort(function(a,b){
@@ -441,7 +480,8 @@
 
   function renderList(){
     if(!leads.length){
-      el.list.innerHTML = '<div class="empty"><strong>Todavía no hay empresas.</strong><br>Añade la primera a mano o impórtalas pegando una lista.</div>';
+      el.list.innerHTML = '<div class="empty"><strong>Todavía no hay empresas.</strong><br>Impórtalas desde las ofertas recogidas, o añade una a mano.<br><br>'+
+        '<button class="primary" data-act="goOfertas">Ir a Ofertas'+(offers.length?' ('+offers.length+')':'')+'</button></div>';
       return;
     }
     var list = visible();
@@ -450,7 +490,7 @@
   }
 
   function cardHtml(l){
-    var chips = '<span class="chip '+esc(l.tipo)+'">'+esc(TIPOS[l.tipo]||l.tipo)+'</span>';
+    var chips = '<span class="chip '+esc(l.tipo)+'">'+esc(TIPOS[l.tipo]||l.tipo)+'</span><span class="chip">'+esc(leadSector(l))+'</span>';
     if(l.enviado_at) chips += '<span class="chip">Enviado '+fmt(l.enviado_at)+'</span>';
     if(l.seguimiento_at) chips += '<span class="chip ok">Seguimiento '+fmt(l.seguimiento_at)+'</span>';
     if(followupDue(l)) chips += '<span class="chip due">Toca seguimiento ('+daysSince(l.enviado_at)+' días)</span>';
@@ -480,7 +520,7 @@
 
   // ---------- modales ----------
   function openModal(html){ el.modal.innerHTML = html; el.overlay.hidden = false; }
-  function closeModal(){ el.overlay.hidden = true; el.modal.innerHTML = ''; }
+  function closeModal(){ qState.active = false; el.overlay.hidden = true; el.modal.innerHTML = ''; }
   function byId(id){ return leads.filter(function(l){return l.id===id;})[0]; }
   function $(id){ return document.getElementById(id); }
 
@@ -497,6 +537,8 @@
       '<div><label>Puesto al que aplica</label><select id="f_tipo">'+tipos+'</select></div></div>'+
       '<div class="row"><div><label>Web</label><input id="f_web" value="'+esc(l.web)+'"></div>'+
       '<div><label>Fuente</label><input id="f_fuente" placeholder="LinkedIn, oferta, contacto…" value="'+esc(l.fuente)+'"></div></div>'+
+      '<div class="row"><div><label>Sector de la empresa</label><select id="f_sector">'+
+        SECTORES.map(function(s){return '<option'+(leadSector(l)===s?' selected':'')+'>'+s+'</option>';}).join('')+'</select></div><div></div></div>'+
       '<label>Notas</label><textarea id="f_notas" rows="3">'+esc(l.notas)+'</textarea>'+
       '<div class="hint">Sin email, la empresa queda en «Falta contacto» con atajos para encontrar a la persona de RRHH.</div>'+
       '<div id="f_err"></div>'+
@@ -508,7 +550,7 @@
       empresa:$('f_empresa').value.trim(), contacto:$('f_contacto').value.trim(), cargo:$('f_cargo').value.trim(),
       email:$('f_email').value.trim().toLowerCase(), tipo:$('f_tipo').value, web:$('f_web').value.trim(),
       fuente:$('f_fuente').value.trim(), notas:$('f_notas').value.trim(),
-      oferta_url:$('f_url').value.trim(), puesto_oferta:$('f_puesto').value.trim()
+      oferta_url:$('f_url').value.trim(), puesto_oferta:$('f_puesto').value.trim(), sector:$('f_sector').value
     };
     data.portal = detectPortal(data.oferta_url);
     var p = problemasBase(data);
@@ -536,19 +578,24 @@
         '<div class="foot"><button data-act="close">Cerrar</button><button class="primary" data-act="edit" data-id="'+l.id+'">Corregir datos</button></div>');
       return;
     }
-    var t = settings.tpl[esSeguimiento ? 'seguimiento' : ((l.oferta_url || l.puesto_oferta) ? 'oferta' : l.tipo)];
+    var key = esSeguimiento ? 'seguimiento'
+      : (qState.active && qState.tpl!=='auto' ? qState.tpl : ((l.oferta_url || l.puesto_oferta) ? 'oferta' : l.tipo));
+    var t = settings.tpl[key];
     var warn = '';
     if(!settings.gmail) warn += '<div class="alert warn">Falta el Gmail de Lucía en Ajustes: Gmail podría abrirse con otra cuenta.</div>';
     if(!settings.cv) warn += '<div class="alert warn">No hay enlace al CV en Ajustes. El email dirá "Te adjunto mi CV": acuérdate de adjuntar el PDF.</div>';
     if(!settings.telefono) warn += '<div class="alert warn">Falta el teléfono en Ajustes: la firma saldrá sin él.</div>';
     if(!esSeguimiento && l.enviado_at) warn += '<div class="alert warn">Ya se envió un email a esta empresa el '+fmt(l.enviado_at)+'.</div>';
-    openModal('<h2>'+(esSeguimiento?'Seguimiento a ':'Email para ')+esc(l.empresa)+'</h2>'+
+    openModal((qState.active ? '<div class="hint">Cola de envío: '+(qState.i+1)+' de '+qState.ids.length+'</div>' : '')+
+      '<h2>'+(esSeguimiento?'Seguimiento a ':'Email para ')+esc(l.empresa)+'</h2>'+
       '<div class="hint">Revisa el texto antes de enviar. Se abre en Gmail como borrador y lo envías tú.</div>'+warn+
       '<label>Para</label><input id="c_to" value="'+esc(l.email)+'" readonly>'+
       '<label>Asunto</label><input id="c_asunto" value="'+esc(render_tpl(t.asunto,l))+'">'+
       '<label>Mensaje</label><textarea id="c_cuerpo" rows="16">'+esc(render_tpl(t.cuerpo,l))+'</textarea>'+
       '<div id="c_after"></div>'+
-      '<div class="foot"><button data-act="close">Cerrar</button><button data-act="copy">Copiar texto</button>'+
+      '<div class="foot">'+(qState.active
+        ? '<button data-act="qquit">Salir de la cola</button><button data-act="qskip">Saltar</button>'
+        : '<button data-act="close">Cerrar</button>')+'<button data-act="copy">Copiar texto</button>'+
       '<button class="primary" data-act="gmail" data-id="'+l.id+'" data-seg="'+(esSeguimiento?1:0)+'">Abrir en Gmail</button></div>');
   }
 
@@ -569,6 +616,9 @@
       '<label>Enlace al CV (Drive, público con enlace)</label><input id="s_cv" value="'+esc(settings.cv)+'">'+
       '<div class="row"><div><label>Teléfono en la firma</label><input id="s_tel" value="'+esc(settings.telefono)+'"></div>'+
       '<div><label>Días hasta el seguimiento</label><input id="s_dias" type="number" min="2" max="30" value="'+esc(settings.diasSeguimiento)+'"></div></div>'+
+      '<label>Token de GitHub (opcional: para lanzar «Actualizar ofertas» desde aquí)</label>'+
+      '<input id="s_gh" type="password" autocomplete="off" value="'+esc(settings.ghToken)+'">'+
+      '<div class="hint">Token «fine-grained» solo de este repositorio, con permiso Actions de lectura y escritura. Se guarda únicamente en este navegador y no entra en las copias de seguridad.</div>'+
       '<label>Marcador para capturar ofertas</label>'+
       '<div class="hint" id="s_bm_hint"></div>'+
       '<div style="margin-top:8px"><a id="s_bm" class="btn small" style="display:inline-block;text-decoration:none;color:var(--accent);border-color:var(--accent)" draggable="true">+ Añadir a Radar Lucía</a></div>'+
@@ -586,6 +636,7 @@
     settings.gmail = $('s_gmail').value.trim();
     settings.cv = $('s_cv').value.trim();
     settings.telefono = $('s_tel').value.trim();
+    settings.ghToken = $('s_gh').value.trim();
     settings.diasSeguimiento = Math.max(2, Number($('s_dias').value)||6);
     TPL_KEYS.forEach(function(k){
       settings.tpl[k] = {asunto:$('s_'+k+'_a').value, cuerpo:$('s_'+k+'_c').value};
@@ -652,6 +703,84 @@
       '<div class="foot"><button data-act="close">Cerrar</button></div>');
   }
 
+  // ---------- actualizar ofertas (lanza el workflow de GitHub) ----------
+  function runWorkflow(file, aviso, inputs){
+    if(!confirm(aviso)) return;
+    if(!settings.ghToken){
+      window.open('https://github.com/'+GH_REPO+'/actions/workflows/'+file, '_blank', 'noopener');
+      alert('Se abre GitHub: pulsa «Run workflow» y confírmalo. Para lanzarlo desde aquí, añade un token de GitHub en Ajustes.');
+      return;
+    }
+    fetch('https://api.github.com/repos/'+GH_REPO+'/actions/workflows/'+file+'/dispatches', {
+      method:'POST',
+      headers:{Accept:'application/vnd.github+json', Authorization:'Bearer '+settings.ghToken, 'Content-Type':'application/json'},
+      body: JSON.stringify(inputs ? {ref:'main', inputs:inputs} : {ref:'main'})
+    }).then(function(r){
+      alert(r.status===204
+        ? 'Lanzado. Tarda unos 5 minutos; después recarga la página.'
+        : 'GitHub respondió '+r.status+'. Revisa el token en Ajustes (permiso Actions de lectura y escritura sobre el repositorio).');
+    }).catch(function(){ alert('No se pudo contactar con GitHub.'); });
+  }
+
+  // ---------- importar 50 ofertas más ----------
+  function importMore(n){
+    var cand = offerList().filter(function(o){ return !offState[o.id] && !isLeadUrl(o.url); }).slice(0, n);
+    if(!cand.length) return;
+    var ok = 0, skip = 0;
+    cand.forEach(function(o){ if(saveOffer(o)==='ok') ok++; else skip++; });
+    save(); saveOff(); render();
+    var quedan = offerList().filter(function(o){ return !offState[o.id] && !isLeadUrl(o.url); }).length;
+    alert(ok+' empresas importadas'+(skip?' ('+skip+' omitidas por email repetido o datos no válidos)':'')+'. Quedan '+quedan+' ofertas por importar.');
+  }
+
+  // ---------- envío por lotes: cola de correos, uno a uno ----------
+  function batchCandidates(sector, tipo){
+    return leads.filter(function(l){
+      return l.estado==='pendiente' && l.email && problemasEnvio(l).length===0 &&
+        (!sector || leadSector(l)===sector) && (!tipo || l.tipo===tipo);
+    });
+  }
+  function batchModal(){
+    var sOpts = '<option value="">Todos los sectores</option>'+SECTORES.map(function(s){return '<option>'+s+'</option>';}).join('');
+    var tOpts = '<option value="">Todos los puestos</option>'+Object.keys(TIPOS).map(function(k){return '<option value="'+k+'">'+TIPOS[k]+'</option>';}).join('');
+    var pOpts = '<option value="auto">Automática (según cada empresa)</option>'+
+      TPL_KEYS.filter(function(k){return k!=='seguimiento';}).map(function(k){return '<option value="'+k+'">'+TPL_LABEL[k]+'</option>';}).join('');
+    openModal('<h2>Envío por lotes</h2>'+
+      '<div class="hint">Prepara una cola con las empresas en «Pendiente» que ya tienen email. Revisas y envías cada correo desde Gmail, uno tras otro: no sale nada sin que tú pulses.</div>'+
+      '<div class="row"><div><label>Sector</label><select id="b_sector">'+sOpts+'</select></div>'+
+      '<div><label>Puesto</label><select id="b_tipo">'+tOpts+'</select></div></div>'+
+      '<div class="row"><div><label>Plantilla</label><select id="b_tpl">'+pOpts+'</select></div>'+
+      '<div><label>Cuántos correos</label><input id="b_n" type="number" min="1" max="30" value="10"></div></div>'+
+      '<div id="b_info"></div>'+
+      '<div class="foot"><button data-act="close">Cancelar</button><button class="primary" id="b_go" data-act="qstart">Preparar cola</button></div>');
+    batchInfo();
+  }
+  function batchInfo(){
+    if(!$('b_info')) return;
+    var sector = $('b_sector').value, tipo = $('b_tipo').value;
+    var c = batchCandidates(sector, tipo), n = Math.max(1, Number($('b_n').value) || 10);
+    var sin = leads.filter(function(l){ return l.estado==='contacto' && (!sector || leadSector(l)===sector) && (!tipo || l.tipo===tipo); }).length;
+    $('b_info').innerHTML = '<div class="alert '+(c.length?'ok':'warn')+'">'+c.length+' empresas listas para enviar'+(c.length?' (se prepararán '+Math.min(n,c.length)+')':'')+
+      '. '+sin+' sin email, en «Falta contacto».</div>'+
+      (n>20 ? '<div class="alert warn">Más de 20 correos al día aumenta el riesgo de que Gmail los marque como spam.</div>' : '');
+    $('b_go').disabled = !c.length;
+  }
+  function qNext(){
+    qState.i++;
+    while(qState.i < qState.ids.length){
+      var nl = byId(qState.ids[qState.i]);
+      if(nl && nl.estado==='pendiente') break;
+      qState.i++;
+    }
+    if(qState.i >= qState.ids.length){
+      qState.active = false;
+      openModal('<h2>Cola terminada</h2><div class="alert ok">'+qState.sent+' enviados, '+qState.skipped+' saltados.</div>'+
+        '<div class="foot"><button class="primary" data-act="close">Cerrar</button></div>');
+      render(); return;
+    }
+    composeModal(byId(qState.ids[qState.i]), false);
+  }
+
   function download(name, text){
     var a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([text],{type:'application/json'}));
@@ -663,6 +792,12 @@
   document.getElementById('btnSettings').onclick = settingsModal;
   document.getElementById('btnImport').onclick = function(){ pendingImport = []; importModal(); };
   document.getElementById('btnSearch').onclick = searchModal;
+  document.getElementById('btnBatch').onclick = batchModal;
+  SECTORES.forEach(function(s){ var o = document.createElement('option'); o.textContent = s; document.getElementById('fSector').appendChild(o); });
+  document.getElementById('fSector').onchange = function(e){ fSector = e.target.value; renderList(); };
+  function onBatchField(e){ if(/^b_/.test(e.target.id)) batchInfo(); }
+  document.addEventListener('input', onBatchField);
+  document.addEventListener('change', onBatchField);
   el.search.oninput = function(){ q = el.search.value; renderList(); };
   el.fTipo.onchange = function(){ fTipo = el.fTipo.value; renderList(); };
   el.overlay.addEventListener('mousedown', function(e){ if(e.target===el.overlay) closeModal(); });
@@ -703,14 +838,16 @@
     else if(act==='gmail' && l){
       window.open(gmailUrl(l), '_blank', 'noopener');
       var seg = b.dataset.seg==='1';
-      $('c_after').innerHTML = '<div class="alert warn">Cuando lo hayas enviado desde Gmail, márcalo aquí: <button class="small primary" data-act="sent" data-id="'+l.id+'" data-seg="'+(seg?1:0)+'">Ya lo he enviado</button></div>';
+      $('c_after').innerHTML = '<div class="alert warn">Cuando lo hayas enviado desde Gmail, márcalo aquí: <button class="small primary" data-act="sent" data-id="'+l.id+'" data-seg="'+(seg?1:0)+'">'+(qState.active ? 'Ya enviado, siguiente' : 'Ya lo he enviado')+'</button></div>';
     }
     else if(act==='sent' && l){
       if(b.dataset.seg==='1') l.seguimiento_at = nowISO();
       else { l.estado = 'enviado'; l.enviado_at = nowISO(); l.seguimiento_at = null; tab = 'enviado'; }
-      save(); closeModal(); render();
+      save();
+      if(qState.active && b.dataset.seg!=='1'){ qState.sent++; render(); qNext(); }
+      else { closeModal(); render(); }
     }
-    else if(act==='export') download('radar-lucia-'+new Date().toISOString().slice(0,10)+'.json', JSON.stringify({leads:leads,settings:settings},null,2));
+    else if(act==='export') download('radar-lucia-'+new Date().toISOString().slice(0,10)+'.json', JSON.stringify({leads:leads,settings:Object.assign({}, settings, {ghToken:''})},null,2));
     else if(act==='importJson') $('s_file').click();
     else if(act==='portal'){
       var kw = $('q_custom').value.trim() || $('q_pre').value, loc = $('q_loc').value.trim() || 'Madrid';
@@ -722,9 +859,22 @@
       if(r==='ok'){ save(); saveOff(); render(); }
       else alert(r==='dup' ? 'Ya tienes otra empresa con ese mismo email. Revísala en «Mis empresas».' : 'Los datos de esta oferta no son válidos para guardarla.');
     }
+    else if(act==='offImport50') importMore(50);
+    else if(act==='offRun') runWorkflow('fetch-offers.yml', 'Esto vuelve a recoger ofertas con Apify y gasta crédito (unos 0,5 $). ¿Seguir?');
+    else if(act==='offEmails') runWorkflow('buscar-emails.yml', 'Esto busca la web y el email de contacto de hasta 60 empresas con Apify (unos 0,1 $). ¿Seguir?', {max:'60'});
+    else if(act==='goOfertas') setView('ofertas');
+    else if(act==='qstart'){
+      var qc = batchCandidates($('b_sector').value, $('b_tipo').value);
+      var qn = Math.max(1, Math.min(30, Number($('b_n').value) || 10));
+      if(qn>20 && !confirm('Más de 20 correos en un día puede acabar en spam. ¿Seguir?')) return;
+      qState = {active:true, ids:qc.slice(0,qn).map(function(x){return x.id;}), i:0, tpl:$('b_tpl').value, sent:0, skipped:0};
+      composeModal(byId(qState.ids[0]), false);
+    }
+    else if(act==='qskip'){ qState.skipped++; qNext(); }
+    else if(act==='qquit'){ closeModal(); render(); }
     else if(act==='offHide'){ offState[id] = 'descartada'; saveOff(); renderOfList(); updateOffBadge(); }
     else if(act==='offSaveMail'){
-      var cand = offerList().filter(function(x){ return x.emails && x.emails.length; });
+      var cand = offerList().filter(function(x){ return offerEmails(x).length && !offState[x.id] && !isLeadUrl(x.url); });
       if(!cand.length || !confirm('Guardar '+cand.length+' ofertas con email en «Pendiente»? No se envía nada: tú revisas y envías cada una.')) return;
       var okN = 0, skipN = 0;
       cand.forEach(function(x){ if(saveOffer(x)==='ok') okN++; else skipN++; });
@@ -742,6 +892,7 @@
     var id = e.target.id;
     if(id==='o_q') oF.q = e.target.value;
     else if(id==='o_portal') oF.portal = e.target.value;
+    else if(id==='o_sector') oF.sector = e.target.value;
     else if(id==='o_min') oF.min = Number(e.target.value);
     else if(id==='o_email') oF.soloEmail = e.target.checked;
     else if(id==='o_hide') oF.ocultas = e.target.checked;
@@ -760,7 +911,8 @@
         var d = JSON.parse(r.result);
         if(!Array.isArray(d.leads)) throw new Error();
         if(!confirm('Esto reemplaza los datos actuales por la copia ('+d.leads.length+' empresas). ¿Seguir?')) return;
-        leads = d.leads; settings = mergeSettings(d.settings); save(); closeModal(); render();
+        var tokenActual = settings.ghToken;
+        leads = d.leads; settings = mergeSettings(d.settings); settings.ghToken = tokenActual; save(); closeModal(); render();
       }catch(err){ alert('El archivo no es una copia válida.'); }
     };
     r.readAsText(f);
