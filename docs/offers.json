@@ -1,17 +1,17 @@
 {
- "updated": "2026-11-02T14:36:28.130Z",
+ "updated": "2026-11-09T14:57:50.293Z",
  "status": {
   "infojobs": {
-   "ok": true,
-   "ofertas": 136
+   "ok": false,
+   "error": "scrapesage/infojobs-scraper: HTTP 400 {\n  \"error\": {\n    \"type\": \"run-failed\",\n    \"message\": \"Actor run did not succeed (run ID: o0cfOsCBgxdbZv8Mn, status: ABORTED).\"\n  }\n}"
   },
   "indeed": {
    "ok": true,
    "ofertas": 0
   },
   "linkedin": {
-   "ok": true,
-   "ofertas": 148
+   "ok": false,
+   "error": "gopalakrishnan/linkedin-jobs: HTTP 403 {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"You've used the $5.00 of monthly usage included in the Free plan, so Actor runs and other Apify services are blocked until your "
   }
  },
  "total": 221,
